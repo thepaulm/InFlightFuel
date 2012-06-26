@@ -9,5 +9,20 @@
 #import <UIKit/UIKit.h>
 
 @interface iffViewController : UIViewController
+- (IBAction)sliderLeftTank:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *textLeftTank;
+@property (weak, nonatomic) IBOutlet UISlider *sliderLeftTank;
 
+- (IBAction)sliderRightTank:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *textRightTank;
+@property (weak, nonatomic) IBOutlet UISlider *sliderRightTank;
+
+@property (weak, nonatomic) IBOutlet UITextField *textBothTanks;
+- (IBAction)sliderBothTanks:(id)sender;
+@property (weak, nonatomic) IBOutlet UISlider *sliderBothTanks;
+
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *leftRightTank;
+- (IBAction)switchOn:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *textUsedFuel;
 @end

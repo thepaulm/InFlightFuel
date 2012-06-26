@@ -16,6 +16,7 @@
 		1ABEC03215982B3C00806748 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEC03015982B3C00806748 /* MainStoryboard_iPhone.storyboard */; };
 		1ABEC03515982B3C00806748 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEC03315982B3C00806748 /* MainStoryboard_iPad.storyboard */; };
 		1ABEC03815982B3C00806748 /* iffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEC03715982B3C00806748 /* iffViewController.m */; };
+		1AC67019159975B9006939B5 /* DiamondPlate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1AC67018159975B9006939B5 /* DiamondPlate.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,16 +24,17 @@
 		1ABEC01E15982B3C00806748 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1ABEC02015982B3C00806748 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1ABEC02215982B3C00806748 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		1ABEC02615982B3C00806748 /* InFlightFuel-Info.plist */ = {isa = PBXFileReference; path = "InFlightFuel-Info.plist"; sourceTree = "<group>"; };
+		1ABEC02615982B3C00806748 /* InFlightFuel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InFlightFuel-Info.plist"; sourceTree = "<group>"; };
 		1ABEC02815982B3C00806748 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1ABEC02A15982B3C00806748 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1ABEC02C15982B3C00806748 /* InFlightFuel-Prefix.pch */ = {isa = PBXFileReference; path = "InFlightFuel-Prefix.pch"; sourceTree = "<group>"; };
-		1ABEC02D15982B3C00806748 /* iffAppDelegate.h */ = {isa = PBXFileReference; path = iffAppDelegate.h; sourceTree = "<group>"; };
+		1ABEC02C15982B3C00806748 /* InFlightFuel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InFlightFuel-Prefix.pch"; sourceTree = "<group>"; };
+		1ABEC02D15982B3C00806748 /* iffAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iffAppDelegate.h; sourceTree = "<group>"; };
 		1ABEC02E15982B3C00806748 /* iffAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iffAppDelegate.m; sourceTree = "<group>"; };
 		1ABEC03115982B3C00806748 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		1ABEC03415982B3C00806748 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		1ABEC03615982B3C00806748 /* iffViewController.h */ = {isa = PBXFileReference; path = iffViewController.h; sourceTree = "<group>"; };
+		1ABEC03615982B3C00806748 /* iffViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iffViewController.h; sourceTree = "<group>"; };
 		1ABEC03715982B3C00806748 /* iffViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iffViewController.m; sourceTree = "<group>"; };
+		1AC67018159975B9006939B5 /* DiamondPlate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = DiamondPlate.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 		1ABEC02515982B3C00806748 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1AC67018159975B9006939B5 /* DiamondPlate.gif */,
 				1ABEC02615982B3C00806748 /* InFlightFuel-Info.plist */,
 				1ABEC02715982B3C00806748 /* InfoPlist.strings */,
 				1ABEC02A15982B3C00806748 /* main.m */,
@@ -156,6 +159,7 @@
 				1ABEC02915982B3C00806748 /* InfoPlist.strings in Resources */,
 				1ABEC03215982B3C00806748 /* MainStoryboard_iPhone.storyboard in Resources */,
 				1ABEC03515982B3C00806748 /* MainStoryboard_iPad.storyboard in Resources */,
+				1AC67019159975B9006939B5 /* DiamondPlate.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +294,7 @@
 				1ABEC03D15982B3C00806748 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
