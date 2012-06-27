@@ -23,19 +23,19 @@
                                 </connections>
                             </switch>
                             <imageView userInteractionEnabled="NO" alpha="0.60000000000000009" contentMode="scaleToFill" image="DiamondPlate.gif" id="UOx-yd-ckV">
-                                <rect key="frame" x="105" y="705" width="559" height="212"/>
+                                <rect key="frame" x="39" y="705" width="690" height="212"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                             </imageView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="46" id="Cch-V1-xhv">
-                                <rect key="frame" x="162" y="868" width="444" height="23"/>
+                                <rect key="frame" x="221" y="868" width="444" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="sliderRightTank:" destination="2" eventType="valueChanged" id="xqD-8q-5M5"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="46" id="JDk-sw-W6j">
-                                <rect key="frame" x="162" y="781" width="444" height="23"/>
+                                <rect key="frame" x="221" y="781" width="444" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="sliderLeftTank:" destination="2" eventType="valueChanged" id="dUE-ey-kaQ"/>
@@ -48,6 +48,24 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="sliderLeftTank:" destination="2" eventType="editingDidEnd" id="npj-gE-v3w"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ego-U9-UbT">
+                                <rect key="frame" x="458" y="742" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="sliderLeftTank:" destination="2" eventType="editingDidEnd" id="Wtp-eQ-EEm"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="0Bv-Ag-nUh">
+                                <rect key="frame" x="458" y="829" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="sliderLeftTank:" destination="2" eventType="editingDidEnd" id="TZk-bP-apQ"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="tyi-gp-Rc3">
@@ -115,20 +133,46 @@
                                 </segments>
                             </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="0.0" maxValue="92" id="0ga-bD-Suk">
-                                <rect key="frame" x="18" y="626" width="732" height="23"/>
+                                <rect key="frame" x="37" y="626" width="713" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="sliderBothTanks:" destination="2" eventType="valueChanged" id="gei-cO-RDx"/>
                                 </connections>
                             </slider>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="46" stepValue="0.10000000000000001" id="XT1-SH-T5U">
+                                <rect key="frame" x="112" y="778" width="94" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="stepperLeftTank:" destination="2" eventType="valueChanged" id="J2W-OK-Wyi"/>
+                                </connections>
+                            </stepper>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="92" stepValue="0.10000000000000001" id="y8C-Pv-Tea">
+                                <rect key="frame" x="337" y="648" width="94" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="stepperBothTanks:" destination="2" eventType="valueChanged" id="AKk-Nx-g0I"/>
+                                </connections>
+                            </stepper>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="46" stepValue="0.10000000000000001" id="9yR-sh-rW9">
+                                <rect key="frame" x="112" y="865" width="94" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="stepperRightTank:" destination="2" eventType="valueChanged" id="B5Z-MT-q3a"/>
+                                </connections>
+                            </stepper>
                         </subviews>
                         <color key="backgroundColor" red="0.48688009510869568" green="0.48688009510869568" blue="0.48688009510869568" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="leftRightTank" destination="E0u-hI-pCo" id="U7X-rn-zTf"/>
+                        <outlet property="leftTankDiff" destination="ego-U9-UbT" id="P4N-d9-q5m"/>
+                        <outlet property="rightTankDiff" destination="0Bv-Ag-nUh" id="d8d-QK-AVi"/>
                         <outlet property="sliderBothTanks" destination="0ga-bD-Suk" id="3Pz-Tl-aLA"/>
                         <outlet property="sliderLeftTank" destination="JDk-sw-W6j" id="FPo-lH-WvI"/>
                         <outlet property="sliderRightTank" destination="Cch-V1-xhv" id="PBe-lf-sm2"/>
+                        <outlet property="stepperBothTanks" destination="y8C-Pv-Tea" id="0cn-Rj-LwU"/>
+                        <outlet property="stepperLeftTank" destination="XT1-SH-T5U" id="cK2-Cq-6Cx"/>
+                        <outlet property="stepperRightTank" destination="9yR-sh-rW9" id="swc-pR-stB"/>
                         <outlet property="textBothTanks" destination="wMD-7B-Mk5" id="MlO-IP-AhB"/>
                         <outlet property="textLeftTank" destination="o4F-zW-dea" id="Bpd-Kb-INN"/>
                         <outlet property="textRightTank" destination="tyi-gp-Rc3" id="hNt-Gy-SL2"/>
@@ -141,25 +185,6 @@
     <resources>
         <image name="DiamondPlate.gif" width="480" height="326"/>
     </resources>
-    <classes>
-        <class className="iffViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/iffViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="sliderBothTanks:"/>
-                <relationship kind="action" name="sliderLeftTank:"/>
-                <relationship kind="action" name="sliderRightTank:"/>
-                <relationship kind="action" name="switchOn:"/>
-                <relationship kind="outlet" name="leftRightTank" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="sliderBothTanks" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="sliderLeftTank" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="sliderRightTank" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="textBothTanks" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textLeftTank" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textRightTank" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textUsedFuel" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

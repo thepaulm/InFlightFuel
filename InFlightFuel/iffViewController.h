@@ -25,4 +25,13 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *leftRightTank;
 - (IBAction)switchOn:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *textUsedFuel;
+- (IBAction)stepperBothTanks:(id)sender;
+@property (weak, nonatomic) IBOutlet UIStepper *stepperBothTanks;
+- (IBAction)stepperLeftTank:(id)sender;
+@property (weak, nonatomic) IBOutlet UIStepper *stepperLeftTank;
+- (IBAction)stepperRightTank:(id)sender;
+@property (weak, nonatomic) IBOutlet UIStepper *stepperRightTank;
+@property (weak, nonatomic) IBOutlet UITextField *leftTankDiff;
+@property (weak, nonatomic) IBOutlet UITextField *rightTankDiff;
+
 @end

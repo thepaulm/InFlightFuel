@@ -13,6 +13,11 @@
 @end
 
 @implementation iffViewController
+@synthesize stepperRightTank;
+@synthesize leftTankDiff;
+@synthesize rightTankDiff;
+@synthesize stepperLeftTank;
+@synthesize stepperBothTanks;
 @synthesize textUsedFuel;
 
 @synthesize textRightTank;
@@ -32,6 +37,12 @@ float rightTankFuel = 30;
 BOOL ison = FALSE;
 float startedFuel = 0;
 
+- (void)updateTankDiffs
+{
+    leftTankDiff.text = [[NSString alloc]initWithFormat:@"%.1f gals", leftTankFuel - rightTankFuel];
+    rightTankDiff.text = [[NSString alloc]initWithFormat:@"%.1f gals", rightTankFuel - leftTankFuel];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -41,6 +52,11 @@ float startedFuel = 0;
     textRightTank.text = [self getTankString:sliderRightTank];
     textBothTanks.text = [self getValueString:leftTankFuel + rightTankFuel];
     sliderBothTanks.value = leftTankFuel + rightTankFuel;
+    stepperBothTanks.value = leftTankFuel + rightTankFuel;
+    stepperLeftTank.value = leftTankFuel;
+    stepperRightTank.value = rightTankFuel;
+    
+    [self updateTankDiffs];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -54,6 +70,11 @@ float startedFuel = 0;
     [self setLeftRightTank:nil];
     [self setSliderBothTanks:nil];
     [self setTextUsedFuel:nil];
+    [self setStepperBothTanks:nil];
+    [self setStepperLeftTank:nil];
+    [self setStepperRightTank:nil];
+    [self setLeftTankDiff:nil];
+    [self setRightTankDiff:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -92,6 +113,8 @@ float startedFuel = 0;
     textLeftTank.text = [self getTankString:(UISlider*)sender];
     textBothTanks.text = [self getValueString:leftTankFuel + rightTankFuel];
     sliderBothTanks.value = leftTankFuel + rightTankFuel;
+    stepperLeftTank.value = leftTankFuel;
+    [self updateTankDiffs];
 }
 
 - (IBAction)sliderRightTank:(id)sender
@@ -104,6 +127,8 @@ float startedFuel = 0;
     textRightTank.text = [self getTankString:(UISlider*)sender];
     textBothTanks.text = [self getValueString:leftTankFuel + rightTankFuel];
     sliderBothTanks.value = leftTankFuel + rightTankFuel;
+    stepperRightTank.value = rightTankFuel;
+    [self updateTankDiffs];
 }
 
 - (IBAction)sliderBothTanks:(id)sender
@@ -125,6 +150,7 @@ float startedFuel = 0;
         }
         textLeftTank.text = [self getValueString:leftTankFuel];
         sliderLeftTank.value = leftTankFuel;
+        stepperLeftTank.value = leftTankFuel;
     } else {
         // underflow
         if (rightTankFuel < diff) {
@@ -139,9 +165,12 @@ float startedFuel = 0;
         }
         textRightTank.text = [self getValueString:rightTankFuel];
         sliderRightTank.value = rightTankFuel;
+        stepperRightTank.value = rightTankFuel;
     }
     textBothTanks.text = [self getValueString:leftTankFuel + rightTankFuel];
     textUsedFuel.text = [self getValueString:startedFuel - (leftTankFuel + rightTankFuel)];
+    stepperBothTanks.value = v;
+    [self updateTankDiffs];
 }
 - (IBAction)switchOn:(id)sender {
     if (ison) {
@@ -151,5 +180,26 @@ float startedFuel = 0;
         startedFuel = leftTankFuel + rightTankFuel;
         textUsedFuel.text = [self getValueString:0];
     }
+}
+
+- (IBAction)stepperBothTanks:(id)sender {
+    sliderBothTanks.value = ((UIStepper*)sender).value;
+    [self sliderBothTanks:sliderBothTanks];
+}
+- (IBAction)stepperLeftTank:(id)sender {
+    if (ison) {
+        stepperLeftTank.value = leftTankFuel;
+        return;
+    }
+    sliderLeftTank.value = ((UIStepper*)sender).value;
+    [self sliderLeftTank:sliderLeftTank];
+}
+- (IBAction)stepperRightTank:(id)sender {
+    if (ison) {
+        stepperRightTank.value = rightTankFuel;
+        return;
+    }
+    sliderRightTank.value = ((UIStepper*)sender).value;
+    [self sliderRightTank:sliderRightTank];
 }
 @end
