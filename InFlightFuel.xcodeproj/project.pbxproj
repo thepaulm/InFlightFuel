@@ -17,6 +17,8 @@
 		1ABEC03515982B3C00806748 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEC03315982B3C00806748 /* MainStoryboard_iPad.storyboard */; };
 		1ABEC03815982B3C00806748 /* iffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEC03715982B3C00806748 /* iffViewController.m */; };
 		1AC67019159975B9006939B5 /* DiamondPlate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1AC67018159975B9006939B5 /* DiamondPlate.gif */; };
+		1AD115BC159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */; };
+		1AD115C1159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		1ABEC03615982B3C00806748 /* iffViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iffViewController.h; sourceTree = "<group>"; };
 		1ABEC03715982B3C00806748 /* iffViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iffViewController.m; sourceTree = "<group>"; };
 		1AC67018159975B9006939B5 /* DiamondPlate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = DiamondPlate.gif; sourceTree = "<group>"; };
+		1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg; sourceTree = "<group>"; };
+		1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dark_Brushed_Metal_by_halfthelaw.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,8 @@
 		1ABEC02515982B3C00806748 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */,
+				1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */,
 				1AC67018159975B9006939B5 /* DiamondPlate.gif */,
 				1ABEC02615982B3C00806748 /* InFlightFuel-Info.plist */,
 				1ABEC02715982B3C00806748 /* InfoPlist.strings */,
@@ -160,6 +166,8 @@
 				1ABEC03215982B3C00806748 /* MainStoryboard_iPhone.storyboard in Resources */,
 				1ABEC03515982B3C00806748 /* MainStoryboard_iPad.storyboard in Resources */,
 				1AC67019159975B9006939B5 /* DiamondPlate.gif in Resources */,
+				1AD115BC159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg in Resources */,
+				1AD115C1159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

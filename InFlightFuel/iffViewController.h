@@ -33,5 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIStepper *stepperRightTank;
 @property (weak, nonatomic) IBOutlet UITextField *leftTankDiff;
 @property (weak, nonatomic) IBOutlet UITextField *rightTankDiff;
+- (IBAction)fuelTabs:(id)sender;
+- (IBAction)fuelFull:(id)sender;
 
 @end

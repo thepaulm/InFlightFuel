@@ -15,34 +15,42 @@
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Dark_Brushed_Metal_by_halfthelaw.jpg" id="G2V-08-ymd">
+                                <rect key="frame" x="-8" y="0.0" width="792" height="1004"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="redraw" image="Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg" id="PLJ-B5-26c">
+                                <rect key="frame" x="71" y="60" width="622" height="877"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.60000000000000009" contentMode="scaleToFill" image="DiamondPlate.gif" id="UOx-yd-ckV">
+                                <rect key="frame" x="81" y="558" width="598" height="212"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                            </imageView>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="BOZ-P4-cDW">
-                                <rect key="frame" x="669" y="957" width="79" height="27"/>
+                                <rect key="frame" x="596" y="878" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="switchOn:" destination="2" eventType="valueChanged" id="tW8-tC-kOq"/>
                                 </connections>
                             </switch>
-                            <imageView userInteractionEnabled="NO" alpha="0.60000000000000009" contentMode="scaleToFill" image="DiamondPlate.gif" id="UOx-yd-ckV">
-                                <rect key="frame" x="39" y="705" width="690" height="212"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
-                            </imageView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="46" id="Cch-V1-xhv">
-                                <rect key="frame" x="221" y="868" width="444" height="23"/>
+                                <rect key="frame" x="213" y="727" width="444" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="sliderRightTank:" destination="2" eventType="valueChanged" id="xqD-8q-5M5"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="46" id="JDk-sw-W6j">
-                                <rect key="frame" x="221" y="781" width="444" height="23"/>
+                                <rect key="frame" x="213" y="643" width="444" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="sliderLeftTank:" destination="2" eventType="valueChanged" id="dUE-ey-kaQ"/>
                                 </connections>
                             </slider>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="o4F-zW-dea">
-                                <rect key="frame" x="336" y="742" width="97" height="31"/>
+                                <rect key="frame" x="336" y="594" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -51,7 +59,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ego-U9-UbT">
-                                <rect key="frame" x="458" y="742" width="97" height="31"/>
+                                <rect key="frame" x="458" y="594" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -60,7 +68,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="0Bv-Ag-nUh">
-                                <rect key="frame" x="458" y="829" width="97" height="31"/>
+                                <rect key="frame" x="458" y="683" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -69,29 +77,13 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="tyi-gp-Rc3">
-                                <rect key="frame" x="336" y="829" width="97" height="31"/>
+                                <rect key="frame" x="336" y="683" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Left Tank" borderStyle="roundedRect" minimumFontSize="17" id="n50-lf-VLr">
-                                <rect key="frame" x="164" y="742" width="97" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" red="0.49178413722826086" green="0.12942730453229526" blue="0.18180703582247129" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Right Tank" borderStyle="roundedRect" minimumFontSize="17" id="Pp2-3h-sbD">
-                                <rect key="frame" x="164" y="829" width="97" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" red="0.49178413720000003" green="0.12942730450000001" blue="0.18180703579999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total" borderStyle="roundedRect" minimumFontSize="17" id="YRS-AU-BEv">
-                                <rect key="frame" x="105" y="581" width="97" height="31"/>
+                                <rect key="frame" x="140" y="417" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.21742630278472563" green="0.37809163808359464" blue="0.49178413720000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -99,7 +91,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Used" borderStyle="roundedRect" minimumFontSize="17" id="nLs-9m-gb5">
-                                <rect key="frame" x="105" y="535" width="97" height="31"/>
+                                <rect key="frame" x="140" y="362" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.2174263028" green="0.37809163810000002" blue="0.49178413720000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -107,7 +99,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="wMD-7B-Mk5">
-                                <rect key="frame" x="336" y="581" width="97" height="31"/>
+                                <rect key="frame" x="331" y="417" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -116,7 +108,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" minimumFontSize="17" id="n4h-6T-qsw">
-                                <rect key="frame" x="336" y="535" width="97" height="31"/>
+                                <rect key="frame" x="331" y="362" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -125,7 +117,7 @@
                                 </connections>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="E0u-hI-pCo">
-                                <rect key="frame" x="281" y="445" width="207" height="44"/>
+                                <rect key="frame" x="276" y="269" width="207" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Left"/>
@@ -133,33 +125,77 @@
                                 </segments>
                             </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="0.0" maxValue="92" id="0ga-bD-Suk">
-                                <rect key="frame" x="37" y="626" width="713" height="23"/>
+                                <rect key="frame" x="75" y="474" width="608" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="sliderBothTanks:" destination="2" eventType="valueChanged" id="gei-cO-RDx"/>
                                 </connections>
                             </slider>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="46" stepValue="0.10000000000000001" id="XT1-SH-T5U">
-                                <rect key="frame" x="112" y="778" width="94" height="27"/>
+                                <rect key="frame" x="108" y="640" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="stepperLeftTank:" destination="2" eventType="valueChanged" id="J2W-OK-Wyi"/>
                                 </connections>
                             </stepper>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="92" stepValue="0.10000000000000001" id="y8C-Pv-Tea">
-                                <rect key="frame" x="337" y="648" width="94" height="27"/>
+                                <rect key="frame" x="337" y="508" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="stepperBothTanks:" destination="2" eventType="valueChanged" id="AKk-Nx-g0I"/>
                                 </connections>
                             </stepper>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="46" stepValue="0.10000000000000001" id="9yR-sh-rW9">
-                                <rect key="frame" x="112" y="865" width="94" height="27"/>
+                                <rect key="frame" x="108" y="724" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="stepperRightTank:" destination="2" eventType="valueChanged" id="B5Z-MT-q3a"/>
                                 </connections>
                             </stepper>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xfY-JQ-RLg">
+                                <rect key="frame" x="100" y="99" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Tabs">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fuelTabs:" destination="2" eventType="touchUpInside" id="2TI-Pl-8la"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tPW-EV-83J">
+                                <rect key="frame" x="207" y="99" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Full">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fuelFull:" destination="2" eventType="touchUpInside" id="Oz6-Eu-Ouu"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Left Tank" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" id="8ki-2y-NKV">
+                                <rect key="frame" x="167" y="591" width="107" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Right Tank" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" id="YPm-pe-nNo">
+                                <rect key="frame" x="167" y="679" width="107" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.48688009510869568" green="0.48688009510869568" blue="0.48688009510869568" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -183,8 +219,39 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg" width="1344" height="1024"/>
+        <image name="Dark_Brushed_Metal_by_halfthelaw.jpg" width="3000" height="2400"/>
         <image name="DiamondPlate.gif" width="480" height="326"/>
     </resources>
+    <classes>
+        <class className="iffViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iffViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="fuelFull:"/>
+                <relationship kind="action" name="fuelTabs:"/>
+                <relationship kind="action" name="sliderBothTanks:"/>
+                <relationship kind="action" name="sliderLeftTank:"/>
+                <relationship kind="action" name="sliderRightTank:"/>
+                <relationship kind="action" name="stepperBothTanks:"/>
+                <relationship kind="action" name="stepperLeftTank:"/>
+                <relationship kind="action" name="stepperRightTank:"/>
+                <relationship kind="action" name="switchOn:"/>
+                <relationship kind="outlet" name="leftRightTank" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="leftTankDiff" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="rightTankDiff" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="sliderBothTanks" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="sliderLeftTank" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="sliderRightTank" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="stepperBothTanks" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="stepperLeftTank" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="stepperRightTank" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="textBothTanks" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textLeftTank" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textRightTank" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textUsedFuel" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

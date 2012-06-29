@@ -113,6 +113,7 @@ float startedFuel = 0;
     textLeftTank.text = [self getTankString:(UISlider*)sender];
     textBothTanks.text = [self getValueString:leftTankFuel + rightTankFuel];
     sliderBothTanks.value = leftTankFuel + rightTankFuel;
+    stepperBothTanks.value = leftTankFuel + rightTankFuel;
     stepperLeftTank.value = leftTankFuel;
     [self updateTankDiffs];
 }
@@ -127,6 +128,7 @@ float startedFuel = 0;
     textRightTank.text = [self getTankString:(UISlider*)sender];
     textBothTanks.text = [self getValueString:leftTankFuel + rightTankFuel];
     sliderBothTanks.value = leftTankFuel + rightTankFuel;
+    stepperBothTanks.value = leftTankFuel + rightTankFuel;
     stepperRightTank.value = rightTankFuel;
     [self updateTankDiffs];
 }
@@ -140,11 +142,11 @@ float startedFuel = 0;
         // underflow
         if (leftTankFuel < diff) {
             leftTankFuel = 0.0;
-            sliderBothTanks.value = leftTankFuel + rightTankFuel;
+            sliderBothTanks.value = v = leftTankFuel + rightTankFuel;
         // overflow
         } else if (leftTankFuel - diff > 46.0) {
             leftTankFuel = 46.0;
-            sliderBothTanks.value = leftTankFuel + rightTankFuel;
+            sliderBothTanks.value = v = leftTankFuel + rightTankFuel;
         } else {
             leftTankFuel -= diff;
         }
@@ -155,11 +157,11 @@ float startedFuel = 0;
         // underflow
         if (rightTankFuel < diff) {
             rightTankFuel = 0.0;
-            sliderBothTanks.value = leftTankFuel + rightTankFuel;
+            sliderBothTanks.value = v = leftTankFuel + rightTankFuel;
         // overflow
         } else if (rightTankFuel - diff > 46.0) {
             rightTankFuel = 46.0;
-            sliderBothTanks.value = leftTankFuel + rightTankFuel;
+            sliderBothTanks.value = v = leftTankFuel + rightTankFuel;
         } else {
             rightTankFuel -= diff;
         }
@@ -201,5 +203,22 @@ float startedFuel = 0;
     }
     sliderRightTank.value = ((UIStepper*)sender).value;
     [self sliderRightTank:sliderRightTank];
+}
+- (IBAction)fuelTabs:(id)sender {
+    if (ison)
+        return;
+    sliderLeftTank.value = 30;
+    [self sliderLeftTank:(id)sliderLeftTank];
+    sliderRightTank.value = 30;
+    [self sliderRightTank:(id)sliderRightTank];
+}
+
+- (IBAction)fuelFull:(id)sender {
+    if (ison)
+        return;
+    sliderLeftTank.value = 46;
+    [self sliderLeftTank:(id)sliderLeftTank];
+    sliderRightTank.value = 46;
+    [self sliderRightTank:(id)sliderRightTank];
 }
 @end
