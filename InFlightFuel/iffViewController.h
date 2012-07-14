@@ -36,4 +36,6 @@
 - (IBAction)fuelTabs:(id)sender;
 - (IBAction)fuelFull:(id)sender;
 
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
 @end
