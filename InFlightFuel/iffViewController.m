@@ -33,17 +33,19 @@
 @synthesize leftRightTank;
 
 @synthesize managedObjectContext;
-
-
-float leftTankFuel = 30;
-float rightTankFuel = 30;
-BOOL ison = FALSE;
-float startedFuel = 0;
+@synthesize tabsValue;
+@synthesize fullValue;
 
 - (void)updateTankDiffs
 {
     leftTankDiff.text = [[NSString alloc]initWithFormat:@"%.1f gals", leftTankFuel - rightTankFuel];
     rightTankDiff.text = [[NSString alloc]initWithFormat:@"%.1f gals", rightTankFuel - leftTankFuel];
+}
+
+- (void)setValuesDefaults
+{
+    tabsValue.text = [self getValueString:self->valueTabs];
+    fullValue.text = [self getValueString:self->valueFull];    
 }
 
 - (void)setTankDefaults
@@ -58,6 +60,7 @@ float startedFuel = 0;
     stepperBothTanks.value = leftTankFuel + rightTankFuel;
     stepperLeftTank.value = leftTankFuel;
     stepperRightTank.value = rightTankFuel;
+    [self setValuesDefaults];
 }
 
 - (NSMutableArray*)loadLastTankValues
@@ -97,14 +100,21 @@ float startedFuel = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self->leftTankFuel = 30;
+    self->rightTankFuel = 30;
+    self->ison = FALSE;
+    self->startedFuel = 0;
+    self->valueTabs = 60;
+    self->valueFull = 92;
 
     NSMutableArray *mutableFetchResults = [self loadLastTankValues];
     if (mutableFetchResults != nil) {
         for (FuelTank *ftv in mutableFetchResults) {
             if ([ftv.tankNo intValue] == 0) {
-                leftTankFuel = [ftv.level floatValue];
+                self->leftTankFuel = [ftv.level floatValue];
             } else if ([ftv.tankNo intValue] == 1) {
-                rightTankFuel = [ftv.level floatValue];
+                self->rightTankFuel = [ftv.level floatValue];
             }
         }
     }
@@ -129,6 +139,8 @@ float startedFuel = 0;
     [self setLeftTankDiff:nil];
     [self setRightTankDiff:nil];
     // XXXPAM how do we free up the managedObjectContext?
+    [self setTabsValue:nil];
+    [self setFullValue:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -159,32 +171,32 @@ float startedFuel = 0;
 
 - (IBAction)sliderLeftTank:(id)sender
 {
-    if (ison) {
-        sliderLeftTank.value = leftTankFuel;
+    if (self->ison) {
+        sliderLeftTank.value = self->leftTankFuel;
         return;
     }
-    leftTankFuel = [self getTankValue:(UISlider*)sender];
+    self->leftTankFuel = [self getTankValue:(UISlider*)sender];
     textLeftTank.text = [self getTankString:(UISlider*)sender];
-    textBothTanks.text = [self getValueString:leftTankFuel + rightTankFuel];
-    sliderBothTanks.value = leftTankFuel + rightTankFuel;
-    stepperBothTanks.value = leftTankFuel + rightTankFuel;
-    stepperLeftTank.value = leftTankFuel;
+    textBothTanks.text = [self getValueString:self->leftTankFuel + self->rightTankFuel];
+    sliderBothTanks.value = self->leftTankFuel + self->rightTankFuel;
+    stepperBothTanks.value = self->leftTankFuel + self->rightTankFuel;
+    stepperLeftTank.value = self->leftTankFuel;
     [self updateTankDiffs];
     [self saveLastTankValues];
 }
 
 - (IBAction)sliderRightTank:(id)sender
 {
-    if (ison) {
-        sliderRightTank.value = rightTankFuel;
+    if (self->ison) {
+        sliderRightTank.value = self->rightTankFuel;
         return;
     }
-    rightTankFuel = [self getTankValue:(UISlider *)sender];
+    self->rightTankFuel = [self getTankValue:(UISlider *)sender];
     textRightTank.text = [self getTankString:(UISlider*)sender];
-    textBothTanks.text = [self getValueString:leftTankFuel + rightTankFuel];
-    sliderBothTanks.value = leftTankFuel + rightTankFuel;
-    stepperBothTanks.value = leftTankFuel + rightTankFuel;
-    stepperRightTank.value = rightTankFuel;
+    textBothTanks.text = [self getValueString:self->leftTankFuel + self->rightTankFuel];
+    sliderBothTanks.value = self->leftTankFuel + self->rightTankFuel;
+    stepperBothTanks.value = self->leftTankFuel + self->rightTankFuel;
+    stepperRightTank.value = self->rightTankFuel;
     [self updateTankDiffs];
     [self saveLastTankValues];
 }
@@ -192,51 +204,51 @@ float startedFuel = 0;
 - (IBAction)sliderBothTanks:(id)sender
 {
     float v = [self getTankValue:(UISlider *)sender];
-    float oldv = leftTankFuel + rightTankFuel;
+    float oldv = self->leftTankFuel + self->rightTankFuel;
     float diff = oldv - v;
     if (leftRightTank.selectedSegmentIndex == 0) {
         // underflow
-        if (leftTankFuel < diff) {
-            leftTankFuel = 0.0;
-            sliderBothTanks.value = v = leftTankFuel + rightTankFuel;
+        if (self->leftTankFuel < diff) {
+            self->leftTankFuel = 0.0;
+            sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
         // overflow
-        } else if (leftTankFuel - diff > 46.0) {
-            leftTankFuel = 46.0;
-            sliderBothTanks.value = v = leftTankFuel + rightTankFuel;
+        } else if (self->leftTankFuel - diff > 46.0) {
+            self->leftTankFuel = 46.0;
+            sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
         } else {
-            leftTankFuel -= diff;
+            self->leftTankFuel -= diff;
         }
         textLeftTank.text = [self getValueString:leftTankFuel];
-        sliderLeftTank.value = leftTankFuel;
-        stepperLeftTank.value = leftTankFuel;
+        sliderLeftTank.value = self->leftTankFuel;
+        stepperLeftTank.value = self->leftTankFuel;
     } else {
         // underflow
-        if (rightTankFuel < diff) {
-            rightTankFuel = 0.0;
-            sliderBothTanks.value = v = leftTankFuel + rightTankFuel;
+        if (self->rightTankFuel < diff) {
+            self->rightTankFuel = 0.0;
+            sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
         // overflow
-        } else if (rightTankFuel - diff > 46.0) {
-            rightTankFuel = 46.0;
-            sliderBothTanks.value = v = leftTankFuel + rightTankFuel;
+        } else if (self->rightTankFuel - diff > 46.0) {
+            self->rightTankFuel = 46.0;
+            sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
         } else {
-            rightTankFuel -= diff;
+            self->rightTankFuel -= diff;
         }
         textRightTank.text = [self getValueString:rightTankFuel];
-        sliderRightTank.value = rightTankFuel;
-        stepperRightTank.value = rightTankFuel;
+        sliderRightTank.value = self->rightTankFuel;
+        stepperRightTank.value = self->rightTankFuel;
     }
-    textBothTanks.text = [self getValueString:leftTankFuel + rightTankFuel];
-    textUsedFuel.text = [self getValueString:startedFuel - (leftTankFuel + rightTankFuel)];
+    textBothTanks.text = [self getValueString:self->leftTankFuel + self->rightTankFuel];
+    textUsedFuel.text = [self getValueString:self->startedFuel - (self->leftTankFuel + self->rightTankFuel)];
     stepperBothTanks.value = v;
     [self updateTankDiffs];
     [self saveLastTankValues];
 }
 - (IBAction)switchOn:(id)sender {
-    if (ison) {
-        ison = FALSE;
+    if (self->ison) {
+        self->ison = FALSE;
     } else {
-        ison = TRUE;
-        startedFuel = leftTankFuel + rightTankFuel;
+        self->ison = TRUE;
+        self->startedFuel = self->leftTankFuel + self->rightTankFuel;
         textUsedFuel.text = [self getValueString:0];
     }
 }
@@ -246,23 +258,23 @@ float startedFuel = 0;
     [self sliderBothTanks:sliderBothTanks];
 }
 - (IBAction)stepperLeftTank:(id)sender {
-    if (ison) {
-        stepperLeftTank.value = leftTankFuel;
+    if (self->ison) {
+        stepperLeftTank.value = self->leftTankFuel;
         return;
     }
     sliderLeftTank.value = ((UIStepper*)sender).value;
     [self sliderLeftTank:sliderLeftTank];
 }
 - (IBAction)stepperRightTank:(id)sender {
-    if (ison) {
-        stepperRightTank.value = rightTankFuel;
+    if (self->ison) {
+        stepperRightTank.value = self->rightTankFuel;
         return;
     }
     sliderRightTank.value = ((UIStepper*)sender).value;
     [self sliderRightTank:sliderRightTank];
 }
 - (IBAction)fuelTabs:(id)sender {
-    if (ison)
+    if (self->ison)
         return;
     sliderLeftTank.value = 30;
     [self sliderLeftTank:(id)sliderLeftTank];
@@ -271,11 +283,28 @@ float startedFuel = 0;
 }
 
 - (IBAction)fuelFull:(id)sender {
-    if (ison)
+    if (self->ison)
         return;
     sliderLeftTank.value = 46;
     [self sliderLeftTank:(id)sliderLeftTank];
     sliderRightTank.value = 46;
     [self sliderRightTank:(id)sliderRightTank];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"ShowIffOptions"]) {
+        iffOptionsViewController* pOther = [segue destinationViewController];
+        [pOther setDelegate:self];
+        [pOther initializeValues:self->valueTabs valueFull:self->valueFull];
+    }
+}
+
+- (void)iffOptionsViewControllerDidFinish:(iffOptionsViewController *)controller
+{
+    self->valueTabs = controller->valueTabs;
+    self->valueFull = controller->valueFull;
+    [self setValuesDefaults];
+    [controller dismissModalViewControllerAnimated:TRUE];
 }
 @end

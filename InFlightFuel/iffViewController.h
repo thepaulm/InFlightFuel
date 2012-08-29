@@ -7,8 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "iffOptionsViewController.h"
 
-@interface iffViewController : UIViewController
+@interface iffViewController : UIViewController <iffOptionsViewControllerDelegate>
+{
+    float leftTankFuel;
+    float rightTankFuel;
+    BOOL ison;
+    float startedFuel;
+    float valueTabs;
+    float valueFull;
+}
 - (IBAction)sliderLeftTank:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *textLeftTank;
 @property (weak, nonatomic) IBOutlet UISlider *sliderLeftTank;
@@ -37,5 +46,7 @@
 - (IBAction)fuelFull:(id)sender;
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (weak, nonatomic) IBOutlet UITextField *tabsValue;
+@property (weak, nonatomic) IBOutlet UITextField *fullValue;
 
 @end

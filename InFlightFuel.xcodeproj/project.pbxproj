@@ -22,6 +22,7 @@
 		1AD115C1159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */; };
 		1ADD4B3F15B1270A000A083B /* FuelTank.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1ADD4B3D15B1270A000A083B /* FuelTank.xcdatamodeld */; };
 		1ADD4B4315B127A9000A083B /* FuelTank.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADD4B4215B127A9000A083B /* FuelTank.m */; };
+		1AF5F9AD15EDE8FE001AEE83 /* iffOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5F9AC15EDE8FE001AEE83 /* iffOptionsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -58,6 +59,8 @@
 		1ADD4B3E15B1270A000A083B /* FuelTank.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FuelTank.xcdatamodel; sourceTree = "<group>"; };
 		1ADD4B4115B127A9000A083B /* FuelTank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuelTank.h; sourceTree = "<group>"; };
 		1ADD4B4215B127A9000A083B /* FuelTank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuelTank.m; sourceTree = "<group>"; };
+		1AF5F9AB15EDE8FD001AEE83 /* iffOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iffOptionsViewController.h; sourceTree = "<group>"; };
+		1AF5F9AC15EDE8FE001AEE83 /* iffOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iffOptionsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				1ABEC02E15982B3C00806748 /* iffAppDelegate.m */,
 				1ABEC03015982B3C00806748 /* MainStoryboard_iPhone.storyboard */,
 				1ABEC03315982B3C00806748 /* MainStoryboard_iPad.storyboard */,
+				1AF5F9AB15EDE8FD001AEE83 /* iffOptionsViewController.h */,
+				1AF5F9AC15EDE8FE001AEE83 /* iffOptionsViewController.m */,
 				1ABEC03615982B3C00806748 /* iffViewController.h */,
 				1ABEC03715982B3C00806748 /* iffViewController.m */,
 				1ADD4B3D15B1270A000A083B /* FuelTank.xcdatamodeld */,
@@ -208,6 +213,7 @@
 				1ABEC03815982B3C00806748 /* iffViewController.m in Sources */,
 				1ADD4B3F15B1270A000A083B /* FuelTank.xcdatamodeld in Sources */,
 				1ADD4B4315B127A9000A083B /* FuelTank.m in Sources */,
+				1AF5F9AD15EDE8FE001AEE83 /* iffOptionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

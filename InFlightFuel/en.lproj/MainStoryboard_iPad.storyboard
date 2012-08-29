@@ -49,67 +49,99 @@
                                     <action selector="sliderLeftTank:" destination="2" eventType="valueChanged" id="dUE-ey-kaQ"/>
                                 </connections>
                             </slider>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="o4F-zW-dea">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="o4F-zW-dea">
                                 <rect key="frame" x="336" y="594" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="sliderLeftTank:" destination="2" eventType="editingDidEnd" id="npj-gE-v3w"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ego-U9-UbT">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ego-U9-UbT">
                                 <rect key="frame" x="458" y="594" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="sliderLeftTank:" destination="2" eventType="editingDidEnd" id="Wtp-eQ-EEm"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="0Bv-Ag-nUh">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="0Bv-Ag-nUh">
                                 <rect key="frame" x="458" y="683" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="sliderLeftTank:" destination="2" eventType="editingDidEnd" id="TZk-bP-apQ"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="tyi-gp-Rc3">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="tyi-gp-Rc3">
                                 <rect key="frame" x="336" y="683" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total" borderStyle="roundedRect" minimumFontSize="17" id="YRS-AU-BEv">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total" borderStyle="roundedRect" minimumFontSize="17" id="YRS-AU-BEv">
                                 <rect key="frame" x="140" y="417" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <color key="textColor" red="0.21742630278472563" green="0.37809163808359464" blue="0.49178413720000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Used" borderStyle="roundedRect" minimumFontSize="17" id="nLs-9m-gb5">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Used" borderStyle="roundedRect" minimumFontSize="17" id="nLs-9m-gb5">
                                 <rect key="frame" x="140" y="362" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <color key="textColor" red="0.2174263028" green="0.37809163810000002" blue="0.49178413720000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="wMD-7B-Mk5">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="wMD-7B-Mk5">
                                 <rect key="frame" x="331" y="417" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="sliderLeftTank:" destination="2" eventType="editingDidEnd" id="gDB-q4-G0X"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" minimumFontSize="17" id="n4h-6T-qsw">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" minimumFontSize="17" id="n4h-6T-qsw">
                                 <rect key="frame" x="331" y="362" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -196,10 +228,56 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ycv-a9-0fg">
+                                <rect key="frame" x="312" y="99" width="36" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Qdo-9J-Dq2">
+                                <rect key="frame" x="321" y="108" width="18" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="HWa-fL-Fj2" kind="modal" identifier="ShowIffOptions" modalTransitionStyle="flipHorizontal" id="ZBz-kb-xQc"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="eNF-Fa-UwX">
+                                <rect key="frame" x="100" y="149" width="72" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="fle-Wf-bpY">
+                                <rect key="frame" x="207" y="149" width="72" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.48688009510869568" green="0.48688009510869568" blue="0.48688009510869568" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="fullValue" destination="fle-Wf-bpY" id="CD7-5U-MvU"/>
                         <outlet property="leftRightTank" destination="E0u-hI-pCo" id="U7X-rn-zTf"/>
                         <outlet property="leftTankDiff" destination="ego-U9-UbT" id="P4N-d9-q5m"/>
                         <outlet property="rightTankDiff" destination="0Bv-Ag-nUh" id="d8d-QK-AVi"/>
@@ -209,6 +287,7 @@
                         <outlet property="stepperBothTanks" destination="y8C-Pv-Tea" id="0cn-Rj-LwU"/>
                         <outlet property="stepperLeftTank" destination="XT1-SH-T5U" id="cK2-Cq-6Cx"/>
                         <outlet property="stepperRightTank" destination="9yR-sh-rW9" id="swc-pR-stB"/>
+                        <outlet property="tabsValue" destination="eNF-Fa-UwX" id="jic-7O-NjT"/>
                         <outlet property="textBothTanks" destination="wMD-7B-Mk5" id="MlO-IP-AhB"/>
                         <outlet property="textLeftTank" destination="o4F-zW-dea" id="Bpd-Kb-INN"/>
                         <outlet property="textRightTank" destination="tyi-gp-Rc3" id="hNt-Gy-SL2"/>
@@ -217,41 +296,57 @@
                 </viewController>
             </objects>
         </scene>
+        <!--Iff Options View Controller-->
+        <scene sceneID="pZh-pA-fkQ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P7e-Tb-f4y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="HWa-fL-Fj2" customClass="iffOptionsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WN1-tt-RsK">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Fuel Level At Tabs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="pCW-Ed-N76">
+                                <rect key="frame" x="197" y="210" width="153" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Fuel Level At Full" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="RPJ-wH-Pkq">
+                                <rect key="frame" x="400" y="210" width="153" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mfh-EU-Fxu">
+                                <rect key="frame" x="348" y="500" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="All Set">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickDone:" destination="HWa-fL-Fj2" eventType="touchUpInside" id="YYw-Bk-k4l"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1034" y="-127"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg" width="1344" height="1024"/>
         <image name="Dark_Brushed_Metal_by_halfthelaw.jpg" width="3000" height="2400"/>
         <image name="DiamondPlate.gif" width="480" height="326"/>
     </resources>
-    <classes>
-        <class className="iffViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/iffViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="fuelFull:"/>
-                <relationship kind="action" name="fuelTabs:"/>
-                <relationship kind="action" name="sliderBothTanks:"/>
-                <relationship kind="action" name="sliderLeftTank:"/>
-                <relationship kind="action" name="sliderRightTank:"/>
-                <relationship kind="action" name="stepperBothTanks:"/>
-                <relationship kind="action" name="stepperLeftTank:"/>
-                <relationship kind="action" name="stepperRightTank:"/>
-                <relationship kind="action" name="switchOn:"/>
-                <relationship kind="outlet" name="leftRightTank" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="leftTankDiff" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="rightTankDiff" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="sliderBothTanks" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="sliderLeftTank" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="sliderRightTank" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="stepperBothTanks" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="stepperLeftTank" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="stepperRightTank" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="textBothTanks" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textLeftTank" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textRightTank" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textUsedFuel" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
