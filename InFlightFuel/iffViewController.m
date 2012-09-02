@@ -14,10 +14,8 @@
 @end
 
 @implementation iffViewController
-@synthesize stepperRightTank;
 @synthesize leftTankDiff;
 @synthesize rightTankDiff;
-@synthesize stepperLeftTank;
 @synthesize stepperBothTanks;
 @synthesize textUsedFuel;
 
@@ -63,8 +61,6 @@
     textBothTanks.text = [self getValueString:leftTankFuel + rightTankFuel];
     sliderBothTanks.value = leftTankFuel + rightTankFuel;
     stepperBothTanks.value = leftTankFuel + rightTankFuel;
-    stepperLeftTank.value = leftTankFuel;
-    stepperRightTank.value = rightTankFuel;
 
 }
 
@@ -141,8 +137,6 @@
     [self setSliderBothTanks:nil];
     [self setTextUsedFuel:nil];
     [self setStepperBothTanks:nil];
-    [self setStepperLeftTank:nil];
-    [self setStepperRightTank:nil];
     [self setLeftTankDiff:nil];
     [self setRightTankDiff:nil];
     [self setManagedObjectContext:nil];
@@ -187,7 +181,6 @@
     textBothTanks.text = [self getValueString:self->leftTankFuel + self->rightTankFuel];
     sliderBothTanks.value = self->leftTankFuel + self->rightTankFuel;
     stepperBothTanks.value = self->leftTankFuel + self->rightTankFuel;
-    stepperLeftTank.value = self->leftTankFuel;
     [self updateTankDiffs];
     [self saveLastTankValues];
 }
@@ -203,7 +196,6 @@
     textBothTanks.text = [self getValueString:self->leftTankFuel + self->rightTankFuel];
     sliderBothTanks.value = self->leftTankFuel + self->rightTankFuel;
     stepperBothTanks.value = self->leftTankFuel + self->rightTankFuel;
-    stepperRightTank.value = self->rightTankFuel;
     [self updateTankDiffs];
     [self saveLastTankValues];
 }
@@ -227,7 +219,6 @@
         }
         textLeftTank.text = [self getValueString:leftTankFuel];
         sliderLeftTank.value = self->leftTankFuel;
-        stepperLeftTank.value = self->leftTankFuel;
     } else {
         // underflow
         if (self->rightTankFuel < diff) {
@@ -242,7 +233,6 @@
         }
         textRightTank.text = [self getValueString:rightTankFuel];
         sliderRightTank.value = self->rightTankFuel;
-        stepperRightTank.value = self->rightTankFuel;
     }
     textBothTanks.text = [self getValueString:self->leftTankFuel + self->rightTankFuel];
     textUsedFuel.text = [self getValueString:self->startedFuel - (self->leftTankFuel + self->rightTankFuel)];
@@ -263,22 +253,6 @@
 - (IBAction)stepperBothTanks:(id)sender {
     sliderBothTanks.value = ((UIStepper*)sender).value;
     [self sliderBothTanks:sliderBothTanks];
-}
-- (IBAction)stepperLeftTank:(id)sender {
-    if (self->ison) {
-        stepperLeftTank.value = self->leftTankFuel;
-        return;
-    }
-    sliderLeftTank.value = ((UIStepper*)sender).value;
-    [self sliderLeftTank:sliderLeftTank];
-}
-- (IBAction)stepperRightTank:(id)sender {
-    if (self->ison) {
-        stepperRightTank.value = self->rightTankFuel;
-        return;
-    }
-    sliderRightTank.value = ((UIStepper*)sender).value;
-    [self sliderRightTank:sliderRightTank];
 }
 - (IBAction)fuelTabs:(id)sender {
     if (self->ison)

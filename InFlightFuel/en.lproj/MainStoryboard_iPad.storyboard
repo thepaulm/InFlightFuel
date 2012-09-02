@@ -35,16 +35,24 @@
                                     <action selector="switchOn:" destination="2" eventType="valueChanged" id="tW8-tC-kOq"/>
                                 </connections>
                             </switch>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="46" id="Cch-V1-xhv">
-                                <rect key="frame" x="213" y="727" width="444" height="23"/>
+                            <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="46" id="Cch-V1-xhv">
+                                <rect key="frame" x="98" y="727" width="559" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <connections>
                                     <action selector="sliderRightTank:" destination="2" eventType="valueChanged" id="xqD-8q-5M5"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="46" id="JDk-sw-W6j">
-                                <rect key="frame" x="213" y="643" width="444" height="23"/>
+                            <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="46" id="JDk-sw-W6j">
+                                <rect key="frame" x="98" y="643" width="559" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <connections>
                                     <action selector="sliderLeftTank:" destination="2" eventType="valueChanged" id="dUE-ey-kaQ"/>
                                 </connections>
@@ -163,25 +171,11 @@
                                     <action selector="sliderBothTanks:" destination="2" eventType="valueChanged" id="gei-cO-RDx"/>
                                 </connections>
                             </slider>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="46" stepValue="0.10000000000000001" id="XT1-SH-T5U">
-                                <rect key="frame" x="108" y="640" width="94" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="stepperLeftTank:" destination="2" eventType="valueChanged" id="J2W-OK-Wyi"/>
-                                </connections>
-                            </stepper>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="200" stepValue="0.10000000000000001" id="y8C-Pv-Tea">
                                 <rect key="frame" x="337" y="508" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="stepperBothTanks:" destination="2" eventType="valueChanged" id="AKk-Nx-g0I"/>
-                                </connections>
-                            </stepper>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="46" stepValue="0.10000000000000001" id="9yR-sh-rW9">
-                                <rect key="frame" x="108" y="724" width="94" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="stepperRightTank:" destination="2" eventType="valueChanged" id="B5Z-MT-q3a"/>
                                 </connections>
                             </stepper>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xfY-JQ-RLg">
@@ -285,8 +279,6 @@
                         <outlet property="sliderLeftTank" destination="JDk-sw-W6j" id="FPo-lH-WvI"/>
                         <outlet property="sliderRightTank" destination="Cch-V1-xhv" id="PBe-lf-sm2"/>
                         <outlet property="stepperBothTanks" destination="y8C-Pv-Tea" id="0cn-Rj-LwU"/>
-                        <outlet property="stepperLeftTank" destination="XT1-SH-T5U" id="cK2-Cq-6Cx"/>
-                        <outlet property="stepperRightTank" destination="9yR-sh-rW9" id="swc-pR-stB"/>
                         <outlet property="tabsValue" destination="eNF-Fa-UwX" id="jic-7O-NjT"/>
                         <outlet property="textBothTanks" destination="wMD-7B-Mk5" id="MlO-IP-AhB"/>
                         <outlet property="textLeftTank" destination="o4F-zW-dea" id="Bpd-Kb-INN"/>
@@ -387,6 +379,47 @@
         <image name="Dark_Brushed_Metal_by_halfthelaw.jpg" width="3000" height="2400"/>
         <image name="DiamondPlate.gif" width="480" height="326"/>
     </resources>
+    <classes>
+        <class className="iffOptionsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iffOptionsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="clickDone:"/>
+                <relationship kind="action" name="onFullText:"/>
+                <relationship kind="action" name="onStepperFull:"/>
+                <relationship kind="action" name="onStepperTabs:"/>
+                <relationship kind="action" name="onTabsText:"/>
+                <relationship kind="outlet" name="stepperFull" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="stepperTabs" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="textFull" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textTabs" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="iffViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iffViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="fuelFull:"/>
+                <relationship kind="action" name="fuelTabs:"/>
+                <relationship kind="action" name="sliderBothTanks:"/>
+                <relationship kind="action" name="sliderLeftTank:"/>
+                <relationship kind="action" name="sliderRightTank:"/>
+                <relationship kind="action" name="stepperBothTanks:"/>
+                <relationship kind="action" name="switchOn:"/>
+                <relationship kind="outlet" name="fullValue" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="leftRightTank" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="leftTankDiff" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="rightTankDiff" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="sliderBothTanks" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="sliderLeftTank" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="sliderRightTank" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="stepperBothTanks" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="tabsValue" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textBothTanks" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textLeftTank" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textRightTank" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textUsedFuel" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
