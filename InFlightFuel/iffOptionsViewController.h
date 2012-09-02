@@ -14,7 +14,7 @@
 - (void)iffOptionsViewControllerDidFinish:(iffOptionsViewController*)controller;
 @end
 
-@interface iffOptionsViewController : UIViewController
+@interface iffOptionsViewController : UIViewController <UITextFieldDelegate>
 {
     @public
     float valueTabs;
@@ -30,5 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIStepper *stepperFull;
 - (IBAction)onStepperTabs:(id)sender;
 - (IBAction)onStepperFull:(id)sender;
+- (IBAction)onTabsText:(id)sender;
+- (IBAction)onFullText:(id)sender;
 
 @end

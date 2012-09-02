@@ -83,4 +83,22 @@
     self->valueFull = ((UIStepper*)sender).value;
     [self updateTextFull];
 }
+
+- (IBAction)onTabsText:(id)sender {
+    self->valueTabs = [((UITextField*)sender).text floatValue];
+    stepperTabs.value = self->valueTabs;
+}
+
+- (IBAction)onFullText:(id)sender {
+    self->valueFull = [((UITextField*)sender).text floatValue];
+    stepperFull.value = self->valueFull;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)sender
+{
+    if (sender == self.textFull || sender == self.textTabs) {
+        [sender resignFirstResponder];
+    }
+    return TRUE;
+}
 @end

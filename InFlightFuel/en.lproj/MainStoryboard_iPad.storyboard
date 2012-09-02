@@ -338,13 +338,21 @@
                                 <rect key="frame" x="219" y="266" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <action selector="onTabsText:" destination="HWa-fL-Fj2" eventType="editingDidEnd" id="WVu-PM-o7j"/>
+                                    <outlet property="delegate" destination="HWa-fL-Fj2" id="cwn-Zb-hnF"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="YbR-xl-0Xw">
                                 <rect key="frame" x="417" y="266" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <action selector="onFullText:" destination="HWa-fL-Fj2" eventType="editingDidEnd" id="Gwz-yg-e87"/>
+                                    <outlet property="delegate" destination="HWa-fL-Fj2" id="F4e-3B-vTk"/>
+                                </connections>
                             </textField>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="200" stepValue="0.10000000000000001" id="6SK-DW-0em">
                                 <rect key="frame" x="222" y="319" width="94" height="27"/>
