@@ -17,6 +17,7 @@
     float startedFuel;
     float valueTabs;
     float valueFull;
+    float maxEachTank;
 }
 - (IBAction)sliderLeftTank:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *textLeftTank;

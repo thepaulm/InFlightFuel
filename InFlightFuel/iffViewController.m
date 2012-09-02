@@ -45,12 +45,17 @@
 - (void)setValuesDefaults
 {
     tabsValue.text = [self getValueString:self->valueTabs];
-    fullValue.text = [self getValueString:self->valueFull];    
+    fullValue.text = [self getValueString:self->valueFull];
+    self->maxEachTank = self->valueFull / 2;
+    sliderLeftTank.maximumValue = self->maxEachTank;
+    sliderRightTank.maximumValue = self->maxEachTank;
+    sliderBothTanks.maximumValue = self->valueFull;
 }
 
 - (void)setTankDefaults
 {
     // Defaults for non-loaded
+    [self setValuesDefaults];
     sliderLeftTank.value = leftTankFuel;
     sliderRightTank.value = rightTankFuel;
     textLeftTank.text = [self getTankString:sliderLeftTank];
@@ -60,7 +65,7 @@
     stepperBothTanks.value = leftTankFuel + rightTankFuel;
     stepperLeftTank.value = leftTankFuel;
     stepperRightTank.value = rightTankFuel;
-    [self setValuesDefaults];
+
 }
 
 - (NSMutableArray*)loadLastTankValues
@@ -101,12 +106,14 @@
 {
     [super viewDidLoad];
     
+    // XXXPAM - load these values from storage
     self->leftTankFuel = 30;
     self->rightTankFuel = 30;
     self->ison = FALSE;
     self->startedFuel = 0;
     self->valueTabs = 60;
     self->valueFull = 92;
+    self->maxEachTank = self->valueFull / 2;
 
     NSMutableArray *mutableFetchResults = [self loadLastTankValues];
     if (mutableFetchResults != nil) {
@@ -138,7 +145,7 @@
     [self setStepperRightTank:nil];
     [self setLeftTankDiff:nil];
     [self setRightTankDiff:nil];
-    // XXXPAM how do we free up the managedObjectContext?
+    [self setManagedObjectContext:nil];
     [self setTabsValue:nil];
     [self setFullValue:nil];
     [super viewDidUnload];
@@ -212,8 +219,8 @@
             self->leftTankFuel = 0.0;
             sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
         // overflow
-        } else if (self->leftTankFuel - diff > 46.0) {
-            self->leftTankFuel = 46.0;
+        } else if (self->leftTankFuel - diff > self->maxEachTank) {
+            self->leftTankFuel = self->maxEachTank;
             sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
         } else {
             self->leftTankFuel -= diff;
@@ -227,8 +234,8 @@
             self->rightTankFuel = 0.0;
             sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
         // overflow
-        } else if (self->rightTankFuel - diff > 46.0) {
-            self->rightTankFuel = 46.0;
+        } else if (self->rightTankFuel - diff > self->maxEachTank) {
+            self->rightTankFuel = self->maxEachTank;
             sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
         } else {
             self->rightTankFuel -= diff;
@@ -276,18 +283,18 @@
 - (IBAction)fuelTabs:(id)sender {
     if (self->ison)
         return;
-    sliderLeftTank.value = 30;
+    sliderLeftTank.value = self->valueTabs / 2;
     [self sliderLeftTank:(id)sliderLeftTank];
-    sliderRightTank.value = 30;
+    sliderRightTank.value = self->valueTabs / 2;
     [self sliderRightTank:(id)sliderRightTank];
 }
 
 - (IBAction)fuelFull:(id)sender {
     if (self->ison)
         return;
-    sliderLeftTank.value = 46;
+    sliderLeftTank.value = self->valueFull / 2;
     [self sliderLeftTank:(id)sliderLeftTank];
-    sliderRightTank.value = 46;
+    sliderRightTank.value = self->valueFull / 2;
     [self sliderRightTank:(id)sliderRightTank];
 }
 

@@ -24,5 +24,11 @@
 @property (weak, nonatomic) id <iffOptionsViewControllerDelegate> delegate;
 - (void)initializeValues:(float)vt valueFull:(float)vf;
 - (IBAction)clickDone:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *textTabs;
+@property (weak, nonatomic) IBOutlet UITextField *textFull;
+@property (weak, nonatomic) IBOutlet UIStepper *stepperTabs;
+@property (weak, nonatomic) IBOutlet UIStepper *stepperFull;
+- (IBAction)onStepperTabs:(id)sender;
+- (IBAction)onStepperFull:(id)sender;
 
 @end

@@ -156,7 +156,7 @@
                                     <segment title="Right"/>
                                 </segments>
                             </segmentedControl>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="0.0" maxValue="92" id="0ga-bD-Suk">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="0.0" maxValue="200" id="0ga-bD-Suk">
                                 <rect key="frame" x="75" y="474" width="608" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
@@ -170,7 +170,7 @@
                                     <action selector="stepperLeftTank:" destination="2" eventType="valueChanged" id="J2W-OK-Wyi"/>
                                 </connections>
                             </stepper>
-                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="92" stepValue="0.10000000000000001" id="y8C-Pv-Tea">
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="200" stepValue="0.10000000000000001" id="y8C-Pv-Tea">
                                 <rect key="frame" x="337" y="508" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
@@ -334,9 +334,41 @@
                                     <action selector="clickDone:" destination="HWa-fL-Fj2" eventType="touchUpInside" id="YYw-Bk-k4l"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Hua-Uf-RYy">
+                                <rect key="frame" x="219" y="266" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="YbR-xl-0Xw">
+                                <rect key="frame" x="417" y="266" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="200" stepValue="0.10000000000000001" id="6SK-DW-0em">
+                                <rect key="frame" x="222" y="319" width="94" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="onStepperTabs:" destination="HWa-fL-Fj2" eventType="valueChanged" id="hYv-Cb-cJo"/>
+                                </connections>
+                            </stepper>
+                            <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="200" stepValue="0.10000000000000001" id="b13-x5-Mzq">
+                                <rect key="frame" x="418" y="319" width="94" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="onStepperFull:" destination="HWa-fL-Fj2" eventType="valueChanged" id="gcL-jl-xOU"/>
+                                </connections>
+                            </stepper>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="stepperFull" destination="b13-x5-Mzq" id="6qe-27-31S"/>
+                        <outlet property="stepperTabs" destination="6SK-DW-0em" id="Vr9-bu-MMz"/>
+                        <outlet property="textFull" destination="YbR-xl-0Xw" id="7wF-d7-o05"/>
+                        <outlet property="textTabs" destination="Hua-Uf-RYy" id="6M5-zY-kIA"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1034" y="-127"/>

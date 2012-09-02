@@ -13,6 +13,10 @@
 @end
 
 @implementation iffOptionsViewController
+@synthesize textTabs;
+@synthesize textFull;
+@synthesize stepperTabs;
+@synthesize stepperFull;
 
 @synthesize delegate = _delegate;
 
@@ -25,10 +29,24 @@
     return self;
 }
 
+- (void)updateTextTabs
+{
+    textTabs.text = [[NSString alloc]initWithFormat:@"%.1f", self->valueTabs];
+}
+
+- (void)updateTextFull
+{
+    textFull.text = [[NSString alloc]initWithFormat:@"%.1f", self->valueFull];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    [self updateTextTabs];
+    [self updateTextFull];
+    stepperTabs.value = self->valueTabs;
+    stepperFull.value = self->valueFull;
 }
 
 - (void)initializeValues:(float)vt valueFull:(float)vf
@@ -43,6 +61,10 @@
 
 - (void)viewDidUnload
 {
+    [self setTextTabs:nil];
+    [self setTextFull:nil];
+    [self setStepperTabs:nil];
+    [self setStepperFull:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -52,4 +74,13 @@
 	return YES;
 }
 
+- (IBAction)onStepperTabs:(id)sender {
+    self->valueTabs = ((UIStepper*)sender).value;
+    [self updateTextTabs];
+}
+
+- (IBAction)onStepperFull:(id)sender {
+    self->valueFull = ((UIStepper*)sender).value;
+    [self updateTextFull];
+}
 @end
