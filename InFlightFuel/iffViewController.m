@@ -1,4 +1,4 @@
-//
+    //
 //  iffViewController.m
 //  InFlightFuel
 //
@@ -9,11 +9,45 @@
 #import "iffViewController.h"
 #import "FuelTank.h"
 
-@interface iffViewController ()
+#pragma mark -
+#pragma mark IffSaveData
 
+@implementation iffSaveData
+
+- (id)init
+{
+    self = [super init];
+    self->leftTankLevel = self->rightTankLevel = 0.0;
+    return self;
+}
+
+#define LEFT_TANK_LEVEL @"LeftTankLevel"
+#define RIGHT_TANK_LEVEL @"RightTankLevel"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [self init];
+    self->leftTankLevel = [aDecoder decodeFloatForKey:LEFT_TANK_LEVEL];
+    self->rightTankLevel = [aDecoder decodeFloatForKey:RIGHT_TANK_LEVEL];
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeFloat:self->leftTankLevel forKey:LEFT_TANK_LEVEL];
+    [aCoder encodeFloat:self->rightTankLevel forKey:RIGHT_TANK_LEVEL];
+}
 @end
 
+
+#pragma mark -
+#pragma mark iffViewController
+
 @implementation iffViewController
+
+@synthesize leftFuelTank;
+@synthesize rightFuelTank;
+
 @synthesize leftTankDiff;
 @synthesize rightTankDiff;
 @synthesize stepperBothTanks;
@@ -30,14 +64,25 @@
 @synthesize sliderBothTanks;
 @synthesize leftRightTank;
 
-@synthesize managedObjectContext;
 @synthesize tabsValue;
 @synthesize fullValue;
 
+- (float)getLeftTankValue
+{
+    return self.leftFuelTank->level;
+}
+
+- (float)getRightTankValue
+{
+    return self.rightFuelTank->level;
+}
+
 - (void)updateTankDiffs
 {
-    leftTankDiff.text = [[NSString alloc]initWithFormat:@"%.1f gals", leftTankFuel - rightTankFuel];
-    rightTankDiff.text = [[NSString alloc]initWithFormat:@"%.1f gals", rightTankFuel - leftTankFuel];
+    leftTankDiff.text = [[NSString alloc]initWithFormat:@"%.1f gals",
+                         [self getLeftTankValue] - [self getRightTankValue]];
+    rightTankDiff.text = [[NSString alloc]initWithFormat:@"%.1f gals",
+                          [self getRightTankValue] - [self getLeftTankValue]];
 }
 
 - (void)setValuesDefaults
@@ -54,73 +99,36 @@
 {
     // Defaults for non-loaded
     [self setValuesDefaults];
-    sliderLeftTank.value = leftTankFuel;
-    sliderRightTank.value = rightTankFuel;
+    sliderLeftTank.value = [self getLeftTankValue];
+    sliderRightTank.value = [self getRightTankValue];
     textLeftTank.text = [self getTankString:sliderLeftTank];
     textRightTank.text = [self getTankString:sliderRightTank];
-    textBothTanks.text = [self getValueString:leftTankFuel + rightTankFuel];
-    sliderBothTanks.value = leftTankFuel + rightTankFuel;
-    stepperBothTanks.value = leftTankFuel + rightTankFuel;
-
-}
-
-- (NSMutableArray*)loadLastTankValues
-{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"FuelTank" inManagedObjectContext:managedObjectContext];
-    [request setEntity:entity];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tankNo" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [request setSortDescriptors:sortDescriptors];
-    NSError *error = nil;
-    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    if (error != nil)
-        mutableFetchResults = nil;
-    if ([mutableFetchResults count] == 0)
-        mutableFetchResults = nil;
-    return mutableFetchResults;
-}
-
-- (void)saveLastTankValues
-{
-    
-    FuelTank *ftl = (FuelTank*)[NSEntityDescription insertNewObjectForEntityForName:@"FuelTank" inManagedObjectContext:managedObjectContext];
-    FuelTank *ftr = (FuelTank*)[NSEntityDescription insertNewObjectForEntityForName:@"FuelTank" inManagedObjectContext:managedObjectContext];
-    
-    [ftl setTankNo:[NSNumber numberWithInt:0]];
-    [ftl setLevel: [NSNumber numberWithFloat:leftTankFuel]];
-    [ftr setTankNo:[NSNumber numberWithInt:1]];
-    [ftr setLevel: [NSNumber numberWithFloat:rightTankFuel]];
-    
-    NSError *error = nil;
-    [managedObjectContext save:&error];
-
+    float both = [self getLeftTankValue] + [self getRightTankValue];
+    textBothTanks.text = [self getValueString:both];
+    sliderBothTanks.value = both;
+    stepperBothTanks.value = both;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // XXXPAM - load these values from storage
-    self->leftTankFuel = 30;
-    self->rightTankFuel = 30;
     self->ison = FALSE;
     self->startedFuel = 0;
     self->valueTabs = 60;
     self->valueFull = 92;
     self->maxEachTank = self->valueFull / 2;
-
-    NSMutableArray *mutableFetchResults = [self loadLastTankValues];
-    if (mutableFetchResults != nil) {
-        for (FuelTank *ftv in mutableFetchResults) {
-            if ([ftv.tankNo intValue] == 0) {
-                self->leftTankFuel = [ftv.level floatValue];
-            } else if ([ftv.tankNo intValue] == 1) {
-                self->rightTankFuel = [ftv.level floatValue];
-            }
-        }
+    
+    iffSaveData *sd = [self loadSaveData];
+    if (sd == nil) {				
+        sd = [[iffSaveData alloc]init];
+        sd->leftTankLevel = 30.0;
+        sd->rightTankLevel = 30.0;
     }
+    
+    [self setLeftFuelTank:[[FuelTank alloc]initWithLevel:sd->leftTankLevel]];
+    [self setRightFuelTank:[[FuelTank alloc]initWithLevel:sd->rightTankLevel]];
     [self setTankDefaults];    
     [self updateTankDiffs];
 	// Do any additional setup after loading the view, typically from a nib.
@@ -139,9 +147,10 @@
     [self setStepperBothTanks:nil];
     [self setLeftTankDiff:nil];
     [self setRightTankDiff:nil];
-    [self setManagedObjectContext:nil];
     [self setTabsValue:nil];
     [self setFullValue:nil];
+    [self setLeftFuelTank:nil];
+    [self setRightFuelTank:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -173,14 +182,16 @@
 - (IBAction)sliderLeftTank:(id)sender
 {
     if (self->ison) {
-        sliderLeftTank.value = self->leftTankFuel;
+        sliderLeftTank.value = self.leftFuelTank->level;
         return;
     }
-    self->leftTankFuel = [self getTankValue:(UISlider*)sender];
+    self.leftFuelTank->level = [self getTankValue:(UISlider*)sender];
     textLeftTank.text = [self getTankString:(UISlider*)sender];
-    textBothTanks.text = [self getValueString:self->leftTankFuel + self->rightTankFuel];
-    sliderBothTanks.value = self->leftTankFuel + self->rightTankFuel;
-    stepperBothTanks.value = self->leftTankFuel + self->rightTankFuel;
+    
+    float both = [self getLeftTankValue] + [self getRightTankValue];
+    textBothTanks.text = [self getValueString:both];
+    sliderBothTanks.value = both;
+    stepperBothTanks.value = both;
     [self updateTankDiffs];
     [self saveLastTankValues];
 }
@@ -188,14 +199,16 @@
 - (IBAction)sliderRightTank:(id)sender
 {
     if (self->ison) {
-        sliderRightTank.value = self->rightTankFuel;
+        sliderRightTank.value = self.rightFuelTank->level;
         return;
     }
-    self->rightTankFuel = [self getTankValue:(UISlider *)sender];
+    self.rightFuelTank->level = [self getTankValue:(UISlider *)sender];
     textRightTank.text = [self getTankString:(UISlider*)sender];
-    textBothTanks.text = [self getValueString:self->leftTankFuel + self->rightTankFuel];
-    sliderBothTanks.value = self->leftTankFuel + self->rightTankFuel;
-    stepperBothTanks.value = self->leftTankFuel + self->rightTankFuel;
+    
+    float both = [self getLeftTankValue] + [self getRightTankValue];
+    textBothTanks.text = [self getValueString:both];
+    sliderBothTanks.value = both;
+    stepperBothTanks.value = both;
     [self updateTankDiffs];
     [self saveLastTankValues];
 }
@@ -203,39 +216,40 @@
 - (IBAction)sliderBothTanks:(id)sender
 {
     float v = [self getTankValue:(UISlider *)sender];
-    float oldv = self->leftTankFuel + self->rightTankFuel;
+    float oldv = [self getLeftTankValue] + [self getRightTankValue];
     float diff = oldv - v;
     if (leftRightTank.selectedSegmentIndex == 0) {
         // underflow
-        if (self->leftTankFuel < diff) {
-            self->leftTankFuel = 0.0;
-            sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
+        if (self.leftFuelTank->level < diff) {
+            self.leftFuelTank->level = 0.0;
+            sliderBothTanks.value = v = [self getLeftTankValue] + [self getRightTankValue];
         // overflow
-        } else if (self->leftTankFuel - diff > self->maxEachTank) {
-            self->leftTankFuel = self->maxEachTank;
-            sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
+        } else if (self.leftFuelTank->level - diff > self->maxEachTank) {
+            self.leftFuelTank->level = self->maxEachTank;
+            sliderBothTanks.value = v = [self getLeftTankValue] + [self getRightTankValue];
         } else {
-            self->leftTankFuel -= diff;
+            self.leftFuelTank->level -= diff;
         }
-        textLeftTank.text = [self getValueString:leftTankFuel];
-        sliderLeftTank.value = self->leftTankFuel;
+        textLeftTank.text = [self getValueString:[self getLeftTankValue]];
+        sliderLeftTank.value = [self getLeftTankValue];
     } else {
         // underflow
-        if (self->rightTankFuel < diff) {
-            self->rightTankFuel = 0.0;
-            sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
+        if (self.rightFuelTank->level < diff) {
+            self.rightFuelTank->level = 0.0;
+            sliderBothTanks.value = v = [self getLeftTankValue] + [self getRightTankValue];
         // overflow
-        } else if (self->rightTankFuel - diff > self->maxEachTank) {
-            self->rightTankFuel = self->maxEachTank;
-            sliderBothTanks.value = v = self->leftTankFuel + self->rightTankFuel;
+        } else if (self.rightFuelTank->level - diff > self->maxEachTank) {
+            self.rightFuelTank->level = self->maxEachTank;
+            sliderBothTanks.value = v = [self getLeftTankValue] + [self getRightTankValue];
         } else {
-            self->rightTankFuel -= diff;
+            self.rightFuelTank->level -= diff;
         }
-        textRightTank.text = [self getValueString:rightTankFuel];
-        sliderRightTank.value = self->rightTankFuel;
+        textRightTank.text = [self getValueString:[self getRightTankValue]];
+        sliderRightTank.value = [self getRightTankValue];
     }
-    textBothTanks.text = [self getValueString:self->leftTankFuel + self->rightTankFuel];
-    textUsedFuel.text = [self getValueString:self->startedFuel - (self->leftTankFuel + self->rightTankFuel)];
+    float both = [self getLeftTankValue] + [self getRightTankValue];
+    textBothTanks.text = [self getValueString:both];
+    textUsedFuel.text = [self getValueString:self->startedFuel - (both)];
     stepperBothTanks.value = v;
     [self updateTankDiffs];
     [self saveLastTankValues];
@@ -245,7 +259,7 @@
         self->ison = FALSE;
     } else {
         self->ison = TRUE;
-        self->startedFuel = self->leftTankFuel + self->rightTankFuel;
+        self->startedFuel = [self getLeftTankValue] + [self getRightTankValue];
         textUsedFuel.text = [self getValueString:0];
     }
 }
@@ -271,6 +285,43 @@
     sliderRightTank.value = self->valueFull / 2;
     [self sliderRightTank:(id)sliderRightTank];
 }
+
+#pragma mark -
+#pragma mark Saving and Loading
+
+#define ARCHIVE_FILE @"IffData"
+
+- (NSString *)pathForDataFile
+{
+    NSArray *documentDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = nil;
+    
+    if (documentDir)
+        path = [documentDir objectAtIndex:0];
+    
+    return [NSString stringWithFormat:@"%@/%@", path, ARCHIVE_FILE];
+}
+
+- (void)saveLastTankValues
+{
+    iffSaveData *sd = [[iffSaveData alloc]init];
+    
+    sd->leftTankLevel = [self leftFuelTank]->level;
+    sd->rightTankLevel = [self rightFuelTank]->level;
+    
+    NSString *archivePath = [self pathForDataFile];
+    [NSKeyedArchiver archiveRootObject:sd toFile:archivePath];
+}
+
+- (iffSaveData*)loadSaveData
+{
+    NSString *archivePath = [self pathForDataFile];
+    iffSaveData *sd = [NSKeyedUnarchiver unarchiveObjectWithFile:archivePath];
+    return sd;
+}
+
+#pragma mark -
+#pragma mark SettingOptions
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

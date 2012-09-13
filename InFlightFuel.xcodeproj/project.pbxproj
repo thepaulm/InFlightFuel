@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1AB9C75E15A93A58008AE567 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB9C75D15A93A58008AE567 /* CoreData.framework */; };
 		1ABEC01F15982B3C00806748 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEC01E15982B3C00806748 /* UIKit.framework */; };
 		1ABEC02115982B3C00806748 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEC02015982B3C00806748 /* Foundation.framework */; };
 		1ABEC02315982B3C00806748 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEC02215982B3C00806748 /* CoreGraphics.framework */; };
@@ -20,7 +19,6 @@
 		1AC67019159975B9006939B5 /* DiamondPlate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1AC67018159975B9006939B5 /* DiamondPlate.gif */; };
 		1AD115BC159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */; };
 		1AD115C1159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */; };
-		1ADD4B3F15B1270A000A083B /* FuelTank.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1ADD4B3D15B1270A000A083B /* FuelTank.xcdatamodeld */; };
 		1ADD4B4315B127A9000A083B /* FuelTank.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADD4B4215B127A9000A083B /* FuelTank.m */; };
 		1AF5F9AD15EDE8FE001AEE83 /* iffOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5F9AC15EDE8FE001AEE83 /* iffOptionsViewController.m */; };
 /* End PBXBuildFile section */
@@ -38,7 +36,6 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
-		1AB9C75D15A93A58008AE567 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1ABEC01A15982B3C00806748 /* InFlightFuel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InFlightFuel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEC01E15982B3C00806748 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1ABEC02015982B3C00806748 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -56,7 +53,6 @@
 		1AC67018159975B9006939B5 /* DiamondPlate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = DiamondPlate.gif; sourceTree = "<group>"; };
 		1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg; sourceTree = "<group>"; };
 		1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dark_Brushed_Metal_by_halfthelaw.jpg; sourceTree = "<group>"; };
-		1ADD4B3E15B1270A000A083B /* FuelTank.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FuelTank.xcdatamodel; sourceTree = "<group>"; };
 		1ADD4B4115B127A9000A083B /* FuelTank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuelTank.h; sourceTree = "<group>"; };
 		1ADD4B4215B127A9000A083B /* FuelTank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuelTank.m; sourceTree = "<group>"; };
 		1AF5F9AB15EDE8FD001AEE83 /* iffOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iffOptionsViewController.h; sourceTree = "<group>"; };
@@ -68,7 +64,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AB9C75E15A93A58008AE567 /* CoreData.framework in Frameworks */,
 				1ABEC01F15982B3C00806748 /* UIKit.framework in Frameworks */,
 				1ABEC02115982B3C00806748 /* Foundation.framework in Frameworks */,
 				1ABEC02315982B3C00806748 /* CoreGraphics.framework in Frameworks */,
@@ -98,7 +93,6 @@
 		1ABEC01D15982B3C00806748 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1AB9C75D15A93A58008AE567 /* CoreData.framework */,
 				1ABEC01E15982B3C00806748 /* UIKit.framework */,
 				1ABEC02015982B3C00806748 /* Foundation.framework */,
 				1ABEC02215982B3C00806748 /* CoreGraphics.framework */,
@@ -117,7 +111,6 @@
 				1AF5F9AC15EDE8FE001AEE83 /* iffOptionsViewController.m */,
 				1ABEC03615982B3C00806748 /* iffViewController.h */,
 				1ABEC03715982B3C00806748 /* iffViewController.m */,
-				1ADD4B3D15B1270A000A083B /* FuelTank.xcdatamodeld */,
 				1ADD4B4115B127A9000A083B /* FuelTank.h */,
 				1ADD4B4215B127A9000A083B /* FuelTank.m */,
 				1ABEC02515982B3C00806748 /* Supporting Files */,
@@ -211,7 +204,6 @@
 				1ABEC02B15982B3C00806748 /* main.m in Sources */,
 				1ABEC02F15982B3C00806748 /* iffAppDelegate.m in Sources */,
 				1ABEC03815982B3C00806748 /* iffViewController.m in Sources */,
-				1ADD4B3F15B1270A000A083B /* FuelTank.xcdatamodeld in Sources */,
 				1ADD4B4315B127A9000A083B /* FuelTank.m in Sources */,
 				1AF5F9AD15EDE8FE001AEE83 /* iffOptionsViewController.m in Sources */,
 			);
@@ -338,19 +330,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		1ADD4B3D15B1270A000A083B /* FuelTank.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				1ADD4B3E15B1270A000A083B /* FuelTank.xcdatamodel */,
-			);
-			currentVersion = 1ADD4B3E15B1270A000A083B /* FuelTank.xcdatamodel */;
-			path = FuelTank.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 1ABEC01115982B3C00806748 /* Project object */;
 }

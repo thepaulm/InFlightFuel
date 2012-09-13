@@ -6,13 +6,12 @@
 //  Copyright (c) 2012 personal. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@interface FuelTank : NSObject //<NSCoding>
+{
+    @public
+    float level;
+}
 
-
-@interface FuelTank : NSManagedObject
-
-@property (nonatomic, retain) NSNumber * tankNo;
-@property (nonatomic, retain) NSNumber * level;
+- (id)initWithLevel:(float)l;
 
 @end

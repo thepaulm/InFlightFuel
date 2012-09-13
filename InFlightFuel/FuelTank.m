@@ -11,7 +11,11 @@
 
 @implementation FuelTank
 
-@dynamic tankNo;
-@dynamic level;
+- (id)initWithLevel:(float)l
+{
+    self = [super init];
+    self->level = l;
+    return self;
+}
 
 @end
