@@ -290,6 +290,41 @@
         <image name="Dark_Brushed_Metal_by_halfthelaw.jpg" width="3000" height="2400"/>
         <image name="DiamondPlate.gif" width="480" height="326"/>
     </resources>
+    <classes>
+        <class className="iffOptionsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iffOptionsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="clickDone:"/>
+                <relationship kind="action" name="onFullText:"/>
+                <relationship kind="action" name="onStepperFull:"/>
+                <relationship kind="action" name="onStepperTabs:"/>
+                <relationship kind="action" name="onTabsText:"/>
+                <relationship kind="outlet" name="stepperFull" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="stepperTabs" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="textFull" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textTabs" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="iffViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iffViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="fuelFull:"/>
+                <relationship kind="action" name="fuelTabs:"/>
+                <relationship kind="action" name="sliderBothTanks:"/>
+                <relationship kind="action" name="stepperBothTanks:"/>
+                <relationship kind="action" name="switchOn:"/>
+                <relationship kind="outlet" name="buttonFull" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonTabs" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="fullValue" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="leftRightTank" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="sliderBothTanks" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="stepperBothTanks" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="tabsValue" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textBothTanks" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textUsedFuel" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

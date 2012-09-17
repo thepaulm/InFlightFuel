@@ -239,6 +239,7 @@
     [self.leftFuelTank setLevel:self->valueTabs / 2];
     [self.rightFuelTank setLevel:self->valueTabs / 2];
     [self resetSlider];
+    [self saveLastTankValues];
 }
 
 - (IBAction)fuelFull:(id)sender {
@@ -247,6 +248,7 @@
     [self.leftFuelTank setLevel:self->valueFull / 2];
     [self.rightFuelTank setLevel:self->valueFull / 2];
     [self resetSlider];
+    [self saveLastTankValues];
 }
 
 #pragma mark -
