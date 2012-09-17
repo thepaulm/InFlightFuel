@@ -47,14 +47,6 @@
 @property (strong, nonatomic) FuelTank *rightFuelTank;
 
 /* UI Elements */
-- (IBAction)sliderLeftTank:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *textLeftTank;
-@property (weak, nonatomic) IBOutlet UISlider *sliderLeftTank;
-
-- (IBAction)sliderRightTank:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *textRightTank;
-@property (weak, nonatomic) IBOutlet UISlider *sliderRightTank;
-
 @property (weak, nonatomic) IBOutlet UITextField *textBothTanks;
 - (IBAction)sliderBothTanks:(id)sender;
 @property (weak, nonatomic) IBOutlet UISlider *sliderBothTanks;
@@ -64,12 +56,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *textUsedFuel;
 - (IBAction)stepperBothTanks:(id)sender;
 @property (weak, nonatomic) IBOutlet UIStepper *stepperBothTanks;
-@property (weak, nonatomic) IBOutlet UITextField *leftTankDiff;
-@property (weak, nonatomic) IBOutlet UITextField *rightTankDiff;
 - (IBAction)fuelTabs:(id)sender;
 - (IBAction)fuelFull:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITextField *tabsValue;
 @property (weak, nonatomic) IBOutlet UITextField *fullValue;
+@property (weak, nonatomic) IBOutlet UIButton *buttonTabs;
+@property (weak, nonatomic) IBOutlet UIButton *buttonFull;
 
 @end
