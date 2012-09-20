@@ -24,7 +24,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.60000000000000009" contentMode="scaleToFill" image="DiamondPlate.gif" id="UOx-yd-ckV">
-                                <rect key="frame" x="462" y="266" width="174" height="651"/>
+                                <rect key="frame" x="425" y="193" width="254" height="724"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                             </imageView>
@@ -288,7 +288,7 @@
     <resources>
         <image name="Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg" width="1344" height="1024"/>
         <image name="Dark_Brushed_Metal_by_halfthelaw.jpg" width="3000" height="2400"/>
-        <image name="DiamondPlate.gif" width="480" height="326"/>
+        <image name="DiamondPlate.gif" width="457" height="306"/>
     </resources>
     <classes>
         <class className="iffOptionsViewController" superclassName="UIViewController">

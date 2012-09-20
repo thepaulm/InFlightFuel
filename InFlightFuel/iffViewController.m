@@ -137,17 +137,18 @@
 
 - (void)viewDidUnload
 {
+    [self setLeftFuelTank:nil];
+    [self setRightFuelTank:nil];
     [self setTextBothTanks:nil];
-    [self setLeftRightTank:nil];
     [self setSliderBothTanks:nil];
+    [self setLeftRightTank:nil];
     [self setTextUsedFuel:nil];
     [self setStepperBothTanks:nil];
     [self setTabsValue:nil];
     [self setFullValue:nil];
-    [self setLeftFuelTank:nil];
-    [self setRightFuelTank:nil];
     [self setButtonTabs:nil];
     [self setButtonFull:nil];
+
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
