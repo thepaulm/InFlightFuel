@@ -23,7 +23,7 @@
                                 <rect key="frame" x="71" y="60" width="622" height="877"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.60000000000000009" contentMode="scaleToFill" image="DiamondPlate.gif" id="UOx-yd-ckV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Dark_Brushed_Metal_by_halfthelaw.jpg" id="UOx-yd-ckV">
                                 <rect key="frame" x="425" y="193" width="254" height="724"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -86,7 +86,7 @@
                                 </connections>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="E0u-hI-pCo">
-                                <rect key="frame" x="452" y="207" width="197" height="44"/>
+                                <rect key="frame" x="452" y="217" width="197" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Left"/>
@@ -94,7 +94,7 @@
                                 </segments>
                             </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="0.0" maxValue="200" id="0ga-bD-Suk">
-                                <rect key="frame" x="276" y="556" width="545" height="23"/>
+                                <rect key="frame" x="267" y="544" width="570" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="sliderBothTanks:" destination="2" eventType="valueChanged" id="gei-cO-RDx"/>
@@ -182,6 +182,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="wallpaper-cf2-1440x900.png" id="aHP-Yi-4uP">
+                                <rect key="frame" x="238" y="207" width="135" height="710"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="wallpaper-cf2-1440x900.png" id="0a8-RL-44u">
+                                <rect key="frame" x="84" y="207" width="135" height="710"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.48688009510869568" green="0.48688009510869568" blue="0.48688009510869568" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -288,7 +296,7 @@
     <resources>
         <image name="Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg" width="1344" height="1024"/>
         <image name="Dark_Brushed_Metal_by_halfthelaw.jpg" width="3000" height="2400"/>
-        <image name="DiamondPlate.gif" width="457" height="306"/>
+        <image name="wallpaper-cf2-1440x900.png" width="1440" height="900"/>
     </resources>
     <classes>
         <class className="iffOptionsViewController" superclassName="UIViewController">

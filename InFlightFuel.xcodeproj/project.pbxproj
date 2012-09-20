@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AB51B39160AE6570059953D /* wallpaper-cf2-1440x900.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB51B38160AE6570059953D /* wallpaper-cf2-1440x900.png */; };
 		1ABEC01F15982B3C00806748 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEC01E15982B3C00806748 /* UIKit.framework */; };
 		1ABEC02115982B3C00806748 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEC02015982B3C00806748 /* Foundation.framework */; };
 		1ABEC02315982B3C00806748 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEC02215982B3C00806748 /* CoreGraphics.framework */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
+		1AB51B38160AE6570059953D /* wallpaper-cf2-1440x900.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wallpaper-cf2-1440x900.png"; path = "../../../../Downloads/wallpaper-cf2-1440x900.png"; sourceTree = "<group>"; };
 		1ABEC01A15982B3C00806748 /* InFlightFuel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InFlightFuel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEC01E15982B3C00806748 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1ABEC02015982B3C00806748 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -121,6 +123,7 @@
 		1ABEC02515982B3C00806748 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1AB51B38160AE6570059953D /* wallpaper-cf2-1440x900.png */,
 				1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */,
 				1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */,
 				1AC67018159975B9006939B5 /* DiamondPlate.gif */,
@@ -191,6 +194,7 @@
 				1AC67019159975B9006939B5 /* DiamondPlate.gif in Resources */,
 				1AD115BC159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg in Resources */,
 				1AD115C1159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg in Resources */,
+				1AB51B39160AE6570059953D /* wallpaper-cf2-1440x900.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
