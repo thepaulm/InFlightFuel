@@ -5,15 +5,14 @@
 //  Created by Paul Mikesell on 7/13/12.
 //  Copyright (c) 2012 personal. All rights reserved.
 //
+#import "FuelValue.h"
 
 @interface FuelTank : NSObject //<NSCoding>
-{
-    @public
-    float level;
-    float min;
-    float max;
-    float diff;
-}
+
+@property (strong, nonatomic) FuelValue *level;
+@property (strong, nonatomic) FuelValue *min;
+@property (strong, nonatomic) FuelValue *max;
+@property (strong, nonatomic) FuelValue *diff;
 
 @property (strong, nonatomic) UISlider *slider;
 @property (strong, nonatomic) UITextField *text;
@@ -23,10 +22,5 @@
 
 - (id)initWithLabel:(NSString*)l;
 - (void)drawRelativeFrame:(UIView*)parent :(CGRect)pct;
-- (void)setLevel:(float)l;
-- (void)setMin:(float)l;
-- (void)setMax:(float)l;
-- (void)setDiff:(float)l;
-- (NSString*)getValueString;
 
 @end

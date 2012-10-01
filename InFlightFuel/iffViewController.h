@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "iffOptionsViewController.h"
 #import "FuelTank.h"
+#import "FuelValue.h"
 
 #pragma mark -
 #pragma mark iffSaveData
@@ -16,8 +17,8 @@
 @interface iffSaveData : NSObject <NSCoding>
 {
     @public
-    float leftTankLevel;
-    float rightTankLevel;
+    int leftTankLevel;
+    int rightTankLevel;
 }
 
 - (id)init;
@@ -32,11 +33,13 @@
 @interface iffViewController : UIViewController <iffOptionsViewControllerDelegate>
 {
     BOOL ison;
-    float startedFuel;
-    float valueTabs;
-    float valueFull;
-    float maxEachTank;
 }
+
+/* Value Elements */
+@property (strong, nonatomic) FuelValue *startedFuel;
+@property (strong, nonatomic) FuelValue *valueTabs;
+@property (strong, nonatomic) FuelValue *valueFull;
+@property (strong, nonatomic) FuelValue *maxEachTank;
 
 /* Save Data */
 - (void)saveLastTankValues;

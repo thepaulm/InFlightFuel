@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FuelValue.h"
 
 @class iffOptionsViewController;
 
@@ -15,14 +16,12 @@
 @end
 
 @interface iffOptionsViewController : UIViewController <UITextFieldDelegate>
-{
-    @public
-    float valueTabs;
-    float valueFull;
-}
+
+@property (strong, nonatomic) FuelValue *valueTabs;
+@property (strong, nonatomic) FuelValue *valueFull;
 
 @property (weak, nonatomic) id <iffOptionsViewControllerDelegate> delegate;
-- (void)initializeValues:(float)vt valueFull:(float)vf;
+- (void)initializeValues:(FuelValue*)vt valueFull:(FuelValue*)vf;
 - (IBAction)clickDone:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *textTabs;
 @property (weak, nonatomic) IBOutlet UITextField *textFull;

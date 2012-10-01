@@ -17,7 +17,7 @@
 - (id)init
 {
     self = [super init];
-    self->leftTankLevel = self->rightTankLevel = 0.0;
+    self->leftTankLevel = self->rightTankLevel = 0;
     return self;
 }
 
@@ -27,15 +27,19 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [self init];
-    self->leftTankLevel = [aDecoder decodeFloatForKey:LEFT_TANK_LEVEL];
-    self->rightTankLevel = [aDecoder decodeFloatForKey:RIGHT_TANK_LEVEL];
+    @try {
+        self->leftTankLevel = [aDecoder decodeIntForKey:LEFT_TANK_LEVEL];
+        self->rightTankLevel = [aDecoder decodeIntForKey:RIGHT_TANK_LEVEL];
+    }
+    @catch (NSException *e) {
+    }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeFloat:self->leftTankLevel forKey:LEFT_TANK_LEVEL];
-    [aCoder encodeFloat:self->rightTankLevel forKey:RIGHT_TANK_LEVEL];
+    [aCoder encodeInt:self->leftTankLevel forKey:LEFT_TANK_LEVEL];
+    [aCoder encodeInt:self->rightTankLevel forKey:RIGHT_TANK_LEVEL];
 }
 @end
 
@@ -60,43 +64,38 @@
 @synthesize buttonTabs;
 @synthesize buttonFull;
 
-- (float)getLeftTankValue
-{
-    return self.leftFuelTank->level;
-}
-
-- (float)getRightTankValue
-{
-    return self.rightFuelTank->level;
-}
+@synthesize startedFuel;
+@synthesize valueTabs;
+@synthesize valueFull;
+@synthesize maxEachTank;
 
 - (void)updateTankDiffs
 {
-    [self.leftFuelTank setDiff:[self getLeftTankValue] - [self getRightTankValue]];
-    [self.rightFuelTank setDiff:[self getRightTankValue] - [self getLeftTankValue]];
+    [self.leftFuelTank setDiff:[self.leftFuelTank.level minus:self.rightFuelTank.level]];
+    [self.rightFuelTank setDiff:[self.rightFuelTank.level minus:self.leftFuelTank.level]];
 }
 
 - (void)setValuesDefaults
 {
-    tabsValue.text = [self getValueString:self->valueTabs];
-    fullValue.text = [self getValueString:self->valueFull];
-    self->maxEachTank = self->valueFull / 2;
+    tabsValue.text = [self->valueTabs toString];
+    fullValue.text = [self->valueFull toString];
+    [self setMaxEachTank:[self->valueFull slashInt:2]];
 
-    sliderBothTanks.maximumValue = self->valueFull;
-    
-    [self.leftFuelTank setMax:self->maxEachTank];
-    [self.rightFuelTank setMax:self->maxEachTank];
+    sliderBothTanks.maximumValue = [self->valueFull toFloat];
+
+    [self.leftFuelTank setMax:[self->maxEachTank copy]];
+    [self.rightFuelTank setMax:[self->maxEachTank copy]];
 }
 
 - (void)setTankDefaults
 {
     // Defaults for non-loaded
     [self setValuesDefaults];
-    
-    float both = [self getLeftTankValue] + [self getRightTankValue];
-    textBothTanks.text = [self getValueString:both];
-    sliderBothTanks.value = both;
-    stepperBothTanks.value = both;
+
+    FuelValue *both = [leftFuelTank.level plus:rightFuelTank.level];
+    textBothTanks.text = [both toString];
+    sliderBothTanks.value = [both toFloat];
+    stepperBothTanks.value = [both toFloat];
 }
 
 - (void)viewDidLoad
@@ -104,10 +103,10 @@
     [super viewDidLoad];
     
     self->ison = FALSE;
-    self->startedFuel = 0;
-    self->valueTabs = 60;
-    self->valueFull = 92;
-    self->maxEachTank = self->valueFull / 2;
+    self->startedFuel = [[FuelValue alloc]initFromInt:0];
+    self->valueTabs = [[FuelValue alloc]initFromInt:60];
+    self->valueFull = [[FuelValue alloc]initFromInt:92];
+    self->maxEachTank = [self->valueFull slashInt:2];
     
     iffSaveData *sd = [self loadSaveData];
     if (sd == nil) {				
@@ -118,8 +117,8 @@
     [self setLeftFuelTank:[[FuelTank alloc]initWithLabel:[[NSString alloc]initWithFormat:@"Left Tank"]]];
     [self setRightFuelTank:[[FuelTank alloc]initWithLabel:[[NSString alloc]initWithFormat:@"Right Tank"]]];
     
-    [self.leftFuelTank setLevel:sd->leftTankLevel];
-    [self.rightFuelTank setLevel:sd->rightTankLevel];
+    [self.leftFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->leftTankLevel]];
+    [self.rightFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->rightTankLevel]];
 
     [self setTankDefaults];
 
@@ -162,26 +161,12 @@
     }
 }
 
-- (NSString*)getValueString:(float) v
-{
-    return [[NSString alloc]initWithFormat:@"%.1f", v];
-}
-
-- (float)getTankValue:(UISlider *)s
-{
-    return s.value;
-}
-
-- (NSString*)getTankString:(UISlider *)s
-{
-    return [self getValueString:[self getTankValue:s]];
-}
-
 - (IBAction)sliderBothTanks:(id)sender
 {
-    float v = [self getTankValue:(UISlider *)sender];
-    float oldv = [self getLeftTankValue] + [self getRightTankValue];
-    float diff = oldv - v;
+    UISlider *s = (UISlider *)sender;
+    FuelValue *v = [[FuelValue alloc]initFromFloat:s.value];
+    FuelValue *oldv = [self.leftFuelTank.level plus:self.rightFuelTank.level];
+    FuelValue *diff = [oldv minus:v];
     FuelTank *ft = nil;
     if (leftRightTank.selectedSegmentIndex == 0) {
         ft = self.leftFuelTank;
@@ -190,18 +175,18 @@
     }
     
     // underflow
-    if (ft->level < diff) {
-        [ft setLevel:0.0];
+    if ([ft.level lt:diff]) {
+        [ft setLevel:[[FuelValue alloc]initFromInt:0]];
     // overflow
-    } else if (ft->level - diff > self->maxEachTank) {
-        [ft setLevel:self->maxEachTank];
+    } else if ([[ft.level minus:diff] gt:self.maxEachTank]) {
+        [ft setLevel:[self->maxEachTank copy]];
     // normal
     } else {
-        [ft setLevel:ft->level - diff];
+        [ft setLevel:[ft.level minus:diff]];
     }
 
-    float both = [self getLeftTankValue] + [self getRightTankValue];
-    textUsedFuel.text = [self getValueString:self->startedFuel - (both)];
+    FuelValue *both = [self.leftFuelTank.level plus:self.rightFuelTank.level];
+    textUsedFuel.text = [[self.startedFuel minus:both] toString];
     [self resetSlider];
     [self updateTankDiffs];
     [self saveLastTankValues];
@@ -216,8 +201,8 @@
         self->ison = TRUE;
         self.buttonFull.enabled = FALSE;
         self.buttonTabs.enabled = FALSE;
-        self->startedFuel = [self getLeftTankValue] + [self getRightTankValue];
-        textUsedFuel.text = [self getValueString:0];
+        [self setStartedFuel:[self.leftFuelTank.level plus:self.rightFuelTank.level]];
+        textUsedFuel.text = [[[FuelValue alloc]initFromInt:0] toString];
     }
 }
 
@@ -228,27 +213,29 @@
 
 - (void)resetSlider
 {
-    float both = [self getLeftTankValue] + [self getRightTankValue];
-    self.sliderBothTanks.value = both;
-    self.stepperBothTanks.value = both;
-    self.textBothTanks.text = [self getValueString:both];
+    FuelValue *both = [self.leftFuelTank.level plus:self.rightFuelTank.level];
+    self.sliderBothTanks.value = [both toFloat];
+    self.stepperBothTanks.value = [both toFloat];
+    self.textBothTanks.text = [both toString];
 }
 
 - (IBAction)fuelTabs:(id)sender {
     if (self->ison)
         return;
-    [self.leftFuelTank setLevel:self->valueTabs / 2];
-    [self.rightFuelTank setLevel:self->valueTabs / 2];
+    [self.leftFuelTank setLevel:[self.valueTabs slashInt:2]];
+    [self.rightFuelTank setLevel:[self.valueTabs slashInt:2]];
     [self resetSlider];
+    [self updateTankDiffs];
     [self saveLastTankValues];
 }
 
 - (IBAction)fuelFull:(id)sender {
     if (self->ison)
         return;
-    [self.leftFuelTank setLevel:self->valueFull / 2];
-    [self.rightFuelTank setLevel:self->valueFull / 2];
+    [self.leftFuelTank setLevel:[self.valueFull slashInt:2]];
+    [self.rightFuelTank setLevel:[self.valueFull slashInt:2]];
     [self resetSlider];
+    [self updateTankDiffs];
     [self saveLastTankValues];
 }
 
@@ -272,8 +259,8 @@
 {
     iffSaveData *sd = [[iffSaveData alloc]init];
     
-    sd->leftTankLevel = [self leftFuelTank]->level;
-    sd->rightTankLevel = [self rightFuelTank]->level;
+    sd->leftTankLevel = [self.leftFuelTank.level toValue];
+    sd->rightTankLevel = [self.rightFuelTank.level toValue];
     
     NSString *archivePath = [self pathForDataFile];
     [NSKeyedArchiver archiveRootObject:sd toFile:archivePath];
@@ -294,15 +281,16 @@
     if ([[segue identifier] isEqualToString:@"ShowIffOptions"]) {
         iffOptionsViewController* pOther = [segue destinationViewController];
         [pOther setDelegate:self];
-        [pOther initializeValues:self->valueTabs valueFull:self->valueFull];
+        [pOther initializeValues:[self.valueTabs copy] valueFull:[self.valueFull copy]];
     }
 }
 
 - (void)iffOptionsViewControllerDidFinish:(iffOptionsViewController *)controller
 {
-    self->valueTabs = controller->valueTabs;
-    self->valueFull = controller->valueFull;
+    [self setValueTabs:[controller.valueTabs copy]];
+    [self setValueFull:[controller.valueFull copy]];
     [self setValuesDefaults];
     [controller dismissModalViewControllerAnimated:TRUE];
 }
+
 @end

@@ -17,13 +17,18 @@
 @synthesize label;
 @synthesize name;
 
+@synthesize level;
+@synthesize min;
+@synthesize max;
+@synthesize diff;
+
 - (id)initWithLabel:(NSString *)l
 {
     self = [super init];
-    self->level = 0;
-    self->min = 0;
-    self->max = 0;
-    self->diff = 0;
+    [self setLevel: [[FuelValue alloc]initFromInt:0]];
+    [self setMin: [[FuelValue alloc]initFromInt:0]];
+    [self setMax: [[FuelValue alloc]initFromInt:0]];
+    [self setDiff: [[FuelValue alloc]initFromInt:0]];
     self.text = nil;
     self.tdiff = nil;
     self.name = l;
@@ -89,43 +94,38 @@
     self.tdiff.textAlignment = UITextAlignmentLeft;
     [parent addSubview:self.tdiff];
     
-    [self setMin:self->min];
-    [self setMax:self->max];
-    [self setLevel:self->level];
-    [self setDiff:self->diff];
+    [self setMin:self.min];
+    [self setMax:self.max];
+    [self setLevel:self.level];
+    [self setDiff:self.diff];
 }
 
-- (void)setLevel:(float)l
+- (void)setLevel:(FuelValue *)l
 {
     self->level = l;
-    self.slider.value = l;
-    self.text.text = [self getValueString];
+    self.slider.value = [l toFloat];
+    self.text.text = [l toString];
 }
 
-- (void)setMin:(float)l
+- (void)setMin:(FuelValue *)l
 {
     self->min = l;
-    self.slider.minimumValue = l;
+    self.slider.minimumValue = [l toFloat];
 }
 
-- (void)setMax:(float)l
+- (void)setMax:(FuelValue *)l
 {
     self->max = l;
-    self.slider.maximumValue = l;
+    self.slider.maximumValue = [l toFloat];
 }
 
-- (NSString *)getValueString
-{
-    return [[NSString alloc]initWithFormat:@"%.1f gl", self->level];
-}
-
-- (void)setDiff:(float)l
+- (void)setDiff:(FuelValue *)l
 {
     self->diff = l;
-    if (l >= 0.0) {
-        self.tdiff.text = [[NSString alloc]initWithFormat:@"+%.1f gl", self->diff];
+    if ([l lt:[[FuelValue alloc]initFromInt:0]]) {
+        self.tdiff.text = [[NSString alloc]initWithFormat:@"%@ gl", [self.diff toString]];
     } else {
-        self.tdiff.text = [[NSString alloc]initWithFormat:@"%.1f gl", self->diff];
+        self.tdiff.text = [[NSString alloc]initWithFormat:@"+%@ gl", [self.diff toString]];
     }
 }
 @end

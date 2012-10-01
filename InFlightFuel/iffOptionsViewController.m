@@ -18,6 +18,9 @@
 @synthesize stepperTabs;
 @synthesize stepperFull;
 
+@synthesize valueTabs;
+@synthesize valueFull;
+
 @synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,12 +34,12 @@
 
 - (void)updateTextTabs
 {
-    textTabs.text = [[NSString alloc]initWithFormat:@"%.1f", self->valueTabs];
+    textTabs.text = [self.valueTabs toString];
 }
 
 - (void)updateTextFull
 {
-    textFull.text = [[NSString alloc]initWithFormat:@"%.1f", self->valueFull];
+    textFull.text = [self.valueFull toString];
 }
 
 - (void)viewDidLoad
@@ -45,14 +48,14 @@
     
     [self updateTextTabs];
     [self updateTextFull];
-    stepperTabs.value = self->valueTabs;
-    stepperFull.value = self->valueFull;
+    stepperTabs.value = [self.valueTabs toFloat];
+    stepperFull.value = [self.valueFull toFloat];
 }
 
-- (void)initializeValues:(float)vt valueFull:(float)vf
+- (void)initializeValues:(FuelValue*)vt valueFull:(FuelValue*)vf
 {
-    self->valueTabs = vt;
-    self->valueFull = vf;
+    self.valueTabs = vt;
+    self.valueFull = vf;
 }
 
 - (IBAction)clickDone:(id)sender {
@@ -75,23 +78,23 @@
 }
 
 - (IBAction)onStepperTabs:(id)sender {
-    self->valueTabs = ((UIStepper*)sender).value;
+    self.valueTabs = [[FuelValue alloc]initFromFloat:((UIStepper*)sender).value];
     [self updateTextTabs];
 }
 
 - (IBAction)onStepperFull:(id)sender {
-    self->valueFull = ((UIStepper*)sender).value;
+    self.valueFull = [[FuelValue alloc]initFromFloat:((UIStepper*)sender).value];
     [self updateTextFull];
 }
 
 - (IBAction)onTabsText:(id)sender {
-    self->valueTabs = [((UITextField*)sender).text floatValue];
-    stepperTabs.value = self->valueTabs;
+    self.valueTabs = [[FuelValue alloc]initFromFloat:[((UITextField*)sender).text floatValue]];
+    stepperTabs.value = [self.valueTabs toFloat];
 }
 
 - (IBAction)onFullText:(id)sender {
-    self->valueFull = [((UITextField*)sender).text floatValue];
-    stepperFull.value = self->valueFull;
+    self.valueFull = [[FuelValue alloc]initFromFloat:[((UITextField*)sender).text floatValue]];
+    stepperFull.value = [self.valueFull toFloat];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)sender
