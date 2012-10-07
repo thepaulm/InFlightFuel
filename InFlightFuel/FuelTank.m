@@ -25,10 +25,11 @@
 - (id)initWithLabel:(NSString *)l
 {
     self = [super init];
-    [self setLevel: [[FuelValue alloc]initFromInt:0]];
-    [self setMin: [[FuelValue alloc]initFromInt:0]];
-    [self setMax: [[FuelValue alloc]initFromInt:0]];
-    [self setDiff: [[FuelValue alloc]initFromInt:0]];
+    /* Use -> here = don't want to copy these initializers */
+    self->level = [[FuelValue alloc]initFromInt:0];
+    self->min = [[FuelValue alloc]initFromInt:0];
+    self->max = [[FuelValue alloc]initFromInt:0];
+    self->diff = [[FuelValue alloc]initFromInt:0];
     self.text = nil;
     self.tdiff = nil;
     self.name = l;
@@ -102,26 +103,34 @@
 
 - (void)setLevel:(FuelValue *)l
 {
-    self->level = l;
+    if (self->level != l) {
+        self->level = [l copy];
+    }
     self.slider.value = [l toFloat];
     self.text.text = [l toString];
 }
 
 - (void)setMin:(FuelValue *)l
 {
-    self->min = l;
+    if (self->min != l) {
+        self->min = [l copy];
+    }
     self.slider.minimumValue = [l toFloat];
 }
 
 - (void)setMax:(FuelValue *)l
 {
-    self->max = l;
+    if (self->max != l) {
+        self->max = [l copy];
+    }
     self.slider.maximumValue = [l toFloat];
 }
 
 - (void)setDiff:(FuelValue *)l
 {
-    self->diff = l;
+    if (self->diff != l) {
+        self->diff = [l copy];
+    }
     if ([l lt:[[FuelValue alloc]initFromInt:0]]) {
         self.tdiff.text = [[NSString alloc]initWithFormat:@"%@ gl", [self.diff toString]];
     } else {

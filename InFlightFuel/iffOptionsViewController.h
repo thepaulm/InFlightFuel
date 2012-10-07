@@ -17,16 +17,18 @@
 
 @interface iffOptionsViewController : UIViewController <UITextFieldDelegate>
 
-@property (strong, nonatomic) FuelValue *valueTabs;
-@property (strong, nonatomic) FuelValue *valueFull;
+@property (copy, nonatomic) FuelValue *valueTabs;
+@property (copy, nonatomic) FuelValue *valueFull;
 
 @property (weak, nonatomic) id <iffOptionsViewControllerDelegate> delegate;
-- (void)initializeValues:(FuelValue*)vt valueFull:(FuelValue*)vf;
-- (IBAction)clickDone:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *textTabs;
 @property (weak, nonatomic) IBOutlet UITextField *textFull;
 @property (weak, nonatomic) IBOutlet UIStepper *stepperTabs;
 @property (weak, nonatomic) IBOutlet UIStepper *stepperFull;
+
+- (void)initializeValues:(FuelValue*)vt valueFull:(FuelValue*)vf;
+
+- (IBAction)clickDone:(id)sender;
 - (IBAction)onStepperTabs:(id)sender;
 - (IBAction)onStepperFull:(id)sender;
 - (IBAction)onTabsText:(id)sender;

@@ -79,12 +79,13 @@
 {
     tabsValue.text = [self->valueTabs toString];
     fullValue.text = [self->valueFull toString];
-    [self setMaxEachTank:[self->valueFull slashInt:2]];
+    self->maxEachTank = [self->valueFull slashInt:2];
 
     sliderBothTanks.maximumValue = [self->valueFull toFloat];
 
-    [self.leftFuelTank setMax:[self->maxEachTank copy]];
-    [self.rightFuelTank setMax:[self->maxEachTank copy]];
+    /* FuelTank will store these with property type "copy" */
+    [self.leftFuelTank setMax:self->maxEachTank];
+    [self.rightFuelTank setMax:self->maxEachTank];
 }
 
 - (void)setTankDefaults
@@ -103,6 +104,7 @@
     [super viewDidLoad];
     
     self->ison = FALSE;
+    /* Use -> here = don't want to copy these initializers */
     self->startedFuel = [[FuelValue alloc]initFromInt:0];
     self->valueTabs = [[FuelValue alloc]initFromInt:60];
     self->valueFull = [[FuelValue alloc]initFromInt:92];
@@ -281,14 +283,16 @@
     if ([[segue identifier] isEqualToString:@"ShowIffOptions"]) {
         iffOptionsViewController* pOther = [segue destinationViewController];
         [pOther setDelegate:self];
-        [pOther initializeValues:[self.valueTabs copy] valueFull:[self.valueFull copy]];
+        /* The pOther stores these as type "copy" */
+        [pOther initializeValues:self.valueTabs valueFull:self.valueFull];
     }
 }
 
 - (void)iffOptionsViewControllerDidFinish:(iffOptionsViewController *)controller
 {
-    [self setValueTabs:[controller.valueTabs copy]];
-    [self setValueFull:[controller.valueFull copy]];
+    /* These are of property type "copy" */
+    [self setValueTabs: controller.valueTabs];
+    [self setValueFull: controller.valueFull];
     [self setValuesDefaults];
     [controller dismissModalViewControllerAnimated:TRUE];
 }

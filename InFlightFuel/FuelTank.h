@@ -9,10 +9,10 @@
 
 @interface FuelTank : NSObject //<NSCoding>
 
-@property (strong, nonatomic) FuelValue *level;
-@property (strong, nonatomic) FuelValue *min;
-@property (strong, nonatomic) FuelValue *max;
-@property (strong, nonatomic) FuelValue *diff;
+@property (copy, nonatomic) FuelValue *level;
+@property (copy, nonatomic) FuelValue *min;
+@property (copy, nonatomic) FuelValue *max;
+@property (copy, nonatomic) FuelValue *diff;
 
 @property (strong, nonatomic) UISlider *slider;
 @property (strong, nonatomic) UITextField *text;

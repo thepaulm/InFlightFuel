@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FuelValue : NSObject
+@interface FuelValue : NSObject <NSCopying, NSMutableCopying>
 {
     int value;
 }
@@ -24,6 +24,8 @@
 -(int)toValue;
 
 -(id)copy;
+-(id)copyWithZone:(NSZone *)zone;
+-(id)mutableCopyWithZone:(NSZone *)zone;
 
 -(id)plus:(FuelValue*)other;
 -(id)minus:(FuelValue*)other;

@@ -54,8 +54,9 @@
 
 - (void)initializeValues:(FuelValue*)vt valueFull:(FuelValue*)vf
 {
-    self.valueTabs = vt;
-    self.valueFull = vf;
+    /* These have property value "copy" */
+    [self setValueTabs: vt];
+    [self setValueFull: vf];
 }
 
 - (IBAction)clickDone:(id)sender {

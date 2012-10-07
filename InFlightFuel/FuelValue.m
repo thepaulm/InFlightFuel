@@ -8,6 +8,7 @@
 
 #import "FuelValue.h"
 
+#define TRACK_FUEL_VALUES 1
 #ifdef TRACK_FUEL_VALUES
 int FuelValueCount = 0;
 #endif
@@ -97,6 +98,16 @@ int FuelValueCount = 0;
 {
     id n = [[FuelValue alloc]initFromValue:self->value];
     return n;
+}
+
+-(id)copyWithZone:(NSZone *)zone
+{
+    return [self copy];
+}
+
+-(id)mutableCopyWithZone:(NSZone *)zone
+{
+    return [self copy];
 }
 
 -(id)plus:(FuelValue*)other

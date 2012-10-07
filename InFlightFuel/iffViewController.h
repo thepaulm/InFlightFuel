@@ -36,10 +36,10 @@
 }
 
 /* Value Elements */
-@property (strong, nonatomic) FuelValue *startedFuel;
-@property (strong, nonatomic) FuelValue *valueTabs;
-@property (strong, nonatomic) FuelValue *valueFull;
-@property (strong, nonatomic) FuelValue *maxEachTank;
+@property (copy, nonatomic) FuelValue *startedFuel;
+@property (copy, nonatomic) FuelValue *valueTabs;
+@property (copy, nonatomic) FuelValue *valueFull;
+@property (copy, nonatomic) FuelValue *maxEachTank;
 
 /* Save Data */
 - (void)saveLastTankValues;
