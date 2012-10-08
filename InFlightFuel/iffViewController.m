@@ -122,6 +122,8 @@
     [self.leftFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->leftTankLevel]];
     [self.rightFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->rightTankLevel]];
 
+    /* The minimum movement is 0.1 gals */
+    stepperBothTanks.stepValue = 0.1;
     [self setTankDefaults];
 
     CGRect r = CGRectMake(0.27, 0.9, 0, 0.7);

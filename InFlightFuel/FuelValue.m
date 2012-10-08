@@ -8,7 +8,7 @@
 
 #import "FuelValue.h"
 
-#define TRACK_FUEL_VALUES 1
+//#define TRACK_FUEL_VALUES 1
 #ifdef TRACK_FUEL_VALUES
 int FuelValueCount = 0;
 #endif
@@ -42,7 +42,8 @@ int FuelValueCount = 0;
 -(id)initFromFloat:(float)v
 {
     self = [super init];
-    self->value = v * 10;
+    /* Round this up */
+    self->value = (v * 10.0) + 0.5;
     
 #ifdef TRACK_FUEL_VALUES
     FuelValueCount++;
