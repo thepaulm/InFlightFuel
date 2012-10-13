@@ -10,6 +10,7 @@
 #import "iffOptionsViewController.h"
 #import "FuelTank.h"
 #import "FuelValue.h"
+#import "FuelRulerView.h"
 
 #pragma mark -
 #pragma mark iffSaveData
@@ -33,6 +34,9 @@
 @interface iffViewController : UIViewController <iffOptionsViewControllerDelegate>
 {
     BOOL ison;
+    NSMutableArray *switchOverPoints;
+    NSMutableArray *projectedSwitchOverPoints;
+    int startTank;
 }
 
 /* Value Elements */
@@ -40,6 +44,7 @@
 @property (copy, nonatomic) FuelValue *valueTabs;
 @property (copy, nonatomic) FuelValue *valueFull;
 @property (copy, nonatomic) FuelValue *maxEachTank;
+@property (copy, nonatomic) FuelValue *targetDiff;
 
 /* Save Data */
 - (void)saveLastTankValues;
@@ -53,6 +58,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *textBothTanks;
 - (IBAction)sliderBothTanks:(id)sender;
 @property (weak, nonatomic) IBOutlet UISlider *sliderBothTanks;
+@property (weak, nonatomic) IBOutlet FuelRulerView *fuelRuler;
+- (IBAction)switchedTank:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *leftRightTank;
 - (IBAction)switchOn:(id)sender;

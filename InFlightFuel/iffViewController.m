@@ -57,6 +57,7 @@
 @synthesize textBothTanks;
 
 @synthesize sliderBothTanks;
+@synthesize fuelRuler;
 @synthesize leftRightTank;
 
 @synthesize tabsValue;
@@ -68,6 +69,7 @@
 @synthesize valueTabs;
 @synthesize valueFull;
 @synthesize maxEachTank;
+@synthesize targetDiff;
 
 - (void)updateTankDiffs
 {
@@ -103,12 +105,17 @@
 {
     [super viewDidLoad];
     
+    self->startTank = 0;
+    self->switchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
+    self->projectedSwitchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
+    
     self->ison = FALSE;
     /* Use -> here = don't want to copy these initializers */
     self->startedFuel = [[FuelValue alloc]initFromInt:0];
     self->valueTabs = [[FuelValue alloc]initFromInt:60];
     self->valueFull = [[FuelValue alloc]initFromInt:92];
     self->maxEachTank = [self->valueFull slashInt:2];
+    self->targetDiff = [[FuelValue alloc]initFromValue:85];
     
     iffSaveData *sd = [self loadSaveData];
     if (sd == nil) {				
@@ -135,7 +142,9 @@
     [self.sliderBothTanks setTransform:CGAffineTransformRotate(self.sliderBothTanks.transform,270.0/180*M_PI)];
    
     [self updateTankDiffs];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    [self->fuelRuler setMaxFuel:self->valueFull];
+    [self->fuelRuler setStartedTank:self->startTank];
 }
 
 - (void)viewDidUnload
@@ -151,7 +160,10 @@
     [self setFullValue:nil];
     [self setButtonTabs:nil];
     [self setButtonFull:nil];
+    self->switchOverPoints = nil;
+    self->projectedSwitchOverPoints = nil;
 
+    [self setFuelRuler:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -196,17 +208,60 @@
     [self saveLastTankValues];
 }
 
+- (void)resetUsedFuel
+{
+    [self setStartedFuel:[self.leftFuelTank.level plus:self.rightFuelTank.level]];
+    textUsedFuel.text = [[[FuelValue alloc]initFromInt:0] toString];
+}
+
+- (void)recalcProjected
+{
+    self->projectedSwitchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
+    
+    FuelTank *ft = nil;
+    if (leftRightTank.selectedSegmentIndex == 0) {
+        ft = self.rightFuelTank;
+    } else {
+        ft = self.leftFuelTank;
+    }
+    
+    FuelValue *last = [ft.level plus:[ft.level minus:self->targetDiff]];
+    [self->projectedSwitchOverPoints addObject:last];
+    FuelValue *tosub = [self->targetDiff plus:self->targetDiff];
+    
+    while([last gt:tosub]) {
+        last = [last minus:tosub];
+        [self->projectedSwitchOverPoints addObject:last];
+    }
+    [self->fuelRuler setProjectedSwitchOverPoints:self->projectedSwitchOverPoints];
+}
+
+- (void)sampleSwitchOverPoint
+{
+    [self->switchOverPoints addObject:[self.leftFuelTank.level plus:self.rightFuelTank.level]];
+}
+
 - (IBAction)switchOn:(id)sender {
     if (self->ison) {
         self->ison = FALSE;
         self.buttonFull.enabled = TRUE;
         self.buttonTabs.enabled = TRUE;
     } else {
+        if (leftRightTank.selectedSegmentIndex == 0) {
+            self->startTank = 0;
+        } else {
+            self->startTank = 1;
+        }
+        [self->fuelRuler setStartedTank:self->startTank];
         self->ison = TRUE;
         self.buttonFull.enabled = FALSE;
         self.buttonTabs.enabled = FALSE;
-        [self setStartedFuel:[self.leftFuelTank.level plus:self.rightFuelTank.level]];
-        textUsedFuel.text = [[[FuelValue alloc]initFromInt:0] toString];
+        [self resetUsedFuel];
+        self->switchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
+        [self sampleSwitchOverPoint];
+        [self->fuelRuler setSwitchOverPoints:self->switchOverPoints];
+        [self recalcProjected];
+        [self->fuelRuler setNeedsDisplay];
     }
 }
 
@@ -231,6 +286,7 @@
     [self resetSlider];
     [self updateTankDiffs];
     [self saveLastTankValues];
+    [self resetUsedFuel];
 }
 
 - (IBAction)fuelFull:(id)sender {
@@ -241,6 +297,36 @@
     [self resetSlider];
     [self updateTankDiffs];
     [self saveLastTankValues];
+    [self resetUsedFuel];
+}
+
+- (IBAction)switchedTank:(id)sender {
+    [self sampleSwitchOverPoint];
+    int count = [self->switchOverPoints count];
+    /* If we just switched back and forth without changing anything, just
+       remove the last two samples, since we didn't actually switch */
+    if (count > 1) {
+        FuelValue *l1 = [self->switchOverPoints objectAtIndex:count - 1];
+        FuelValue *l2 = [self->switchOverPoints objectAtIndex:count - 2];
+        if ([l1 eq:l2]) {
+            [self->switchOverPoints removeLastObject];
+            [self->switchOverPoints removeLastObject];
+        }
+        /* However, if we've now nuked all of the data points, we need
+           to switch started and resample */
+        if ([self->switchOverPoints count] == 0) {
+            if (self->startTank == 0) {
+                self->startTank = 1;
+            } else {
+                self->startTank = 0;
+            }
+            [self->fuelRuler setStartedTank:self->startTank];
+            [self sampleSwitchOverPoint];
+        }
+    }
+    [self->fuelRuler setSwitchOverPoints:self->switchOverPoints];
+    [self recalcProjected];
+    [self->fuelRuler setNeedsDisplay];
 }
 
 #pragma mark -

@@ -142,4 +142,9 @@ int FuelValueCount = 0;
     return self->value > other->value;
 }
 
+-(BOOL)eq:(FuelValue *)other
+{
+    return self->value == other->value;
+}
+
 @end

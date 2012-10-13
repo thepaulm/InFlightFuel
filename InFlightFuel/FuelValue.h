@@ -33,5 +33,6 @@
 
 -(BOOL)lt:(FuelValue *)other;
 -(BOOL)gt:(FuelValue *)other;
+-(BOOL)eq:(FuelValue *)other;
 
 @end
