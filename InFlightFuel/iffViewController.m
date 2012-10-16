@@ -107,7 +107,7 @@
     
     self->startTank = 0;
     self->switchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
-    self->projectedSwitchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
+    self->projectedSwitchOverPoints = [[NSMutableArray alloc]initWithCapacity:1];
     
     self->ison = FALSE;
     /* Use -> here = don't want to copy these initializers */
@@ -216,7 +216,7 @@
 
 - (void)recalcProjected
 {
-    self->projectedSwitchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
+    self->projectedSwitchOverPoints = [[NSMutableArray alloc]initWithCapacity:1];
     
     FuelTank *ft = nil;
     if (leftRightTank.selectedSegmentIndex == 0) {
@@ -227,12 +227,6 @@
     
     FuelValue *last = [ft.level plus:[ft.level minus:self->targetDiff]];
     [self->projectedSwitchOverPoints addObject:last];
-    FuelValue *tosub = [self->targetDiff plus:self->targetDiff];
-    
-    while([last gt:tosub]) {
-        last = [last minus:tosub];
-        [self->projectedSwitchOverPoints addObject:last];
-    }
     [self->fuelRuler setProjectedSwitchOverPoints:self->projectedSwitchOverPoints];
 }
 
@@ -246,6 +240,11 @@
         self->ison = FALSE;
         self.buttonFull.enabled = TRUE;
         self.buttonTabs.enabled = TRUE;
+        self->switchOverPoints = nil;
+        self->projectedSwitchOverPoints = nil;
+        [self->fuelRuler setSwitchOverPoints:nil];
+        [self->fuelRuler setProjectedSwitchOverPoints:nil];
+        [self->fuelRuler setNeedsDisplay];
     } else {
         if (leftRightTank.selectedSegmentIndex == 0) {
             self->startTank = 0;
@@ -301,6 +300,9 @@
 }
 
 - (IBAction)switchedTank:(id)sender {
+    if (!self->ison)
+        return;
+    
     [self sampleSwitchOverPoint];
     int count = [self->switchOverPoints count];
     /* If we just switched back and forth without changing anything, just
