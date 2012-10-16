@@ -96,11 +96,6 @@
                                     <action selector="switchedTank:" destination="2" eventType="valueChanged" id="xZ5-LP-lcw"/>
                                 </connections>
                             </segmentedControl>
-                            <view contentMode="scaleToFill" id="9dQ-A7-B5p" customClass="FuelRulerView">
-                                <rect key="frame" x="537" y="273" width="94" height="565"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                            </view>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="0.0" maxValue="200" id="0ga-bD-Suk">
                                 <rect key="frame" x="301" y="544" width="570" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -218,7 +213,6 @@
                     <connections>
                         <outlet property="buttonFull" destination="tPW-EV-83J" id="I8R-fV-d6x"/>
                         <outlet property="buttonTabs" destination="xfY-JQ-RLg" id="87v-2m-klp"/>
-                        <outlet property="fuelRuler" destination="9dQ-A7-B5p" id="4d1-au-5bU"/>
                         <outlet property="fullValue" destination="fle-Wf-bpY" id="CD7-5U-MvU"/>
                         <outlet property="leftRightTank" destination="E0u-hI-pCo" id="U7X-rn-zTf"/>
                         <outlet property="sliderBothTanks" destination="0ga-bD-Suk" id="3Pz-Tl-aLA"/>
@@ -321,46 +315,6 @@
         <image name="Dark_Brushed_Metal_by_halfthelaw.jpg" width="3000" height="2400"/>
         <image name="wallpaper-cf2-1440x900.png" width="1440" height="900"/>
     </resources>
-    <classes>
-        <class className="FuelRulerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FuelRulerView.h"/>
-        </class>
-        <class className="iffOptionsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/iffOptionsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="clickDone:"/>
-                <relationship kind="action" name="onFullText:"/>
-                <relationship kind="action" name="onStepperFull:"/>
-                <relationship kind="action" name="onStepperTabs:"/>
-                <relationship kind="action" name="onTabsText:"/>
-                <relationship kind="outlet" name="stepperFull" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="stepperTabs" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="textFull" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textTabs" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="iffViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/iffViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="fuelFull:"/>
-                <relationship kind="action" name="fuelTabs:"/>
-                <relationship kind="action" name="sliderBothTanks:"/>
-                <relationship kind="action" name="stepperBothTanks:"/>
-                <relationship kind="action" name="switchOn:"/>
-                <relationship kind="action" name="switchedTank:"/>
-                <relationship kind="outlet" name="buttonFull" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="buttonTabs" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="fuelRuler" candidateClass="FuelRulerView"/>
-                <relationship kind="outlet" name="fullValue" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="leftRightTank" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="sliderBothTanks" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="stepperBothTanks" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="tabsValue" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textBothTanks" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textUsedFuel" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

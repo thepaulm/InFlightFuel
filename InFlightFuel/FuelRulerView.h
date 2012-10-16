@@ -17,6 +17,7 @@
 @property int startedTank;
 
 - (id)initWithFrame:(CGRect)frame;
+- (id)initFromSliderRect:(UISlider*)slider;
 - (void)drawRect:(CGRect)rect;
 - (void)drawLeftTankTriangle:(int)y :(BOOL)fill;
 - (void)drawRightTankTriangle:(int)y :(BOOL)fill;

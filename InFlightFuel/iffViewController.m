@@ -88,6 +88,8 @@
     /* FuelTank will store these with property type "copy" */
     [self.leftFuelTank setMax:self->maxEachTank];
     [self.rightFuelTank setMax:self->maxEachTank];
+    
+    [self.fuelRuler setMaxFuel:self->valueFull];
 }
 
 - (void)setTankDefaults
@@ -140,6 +142,9 @@
     [self.rightFuelTank drawRelativeFrame:self.view :r];
     
     [self.sliderBothTanks setTransform:CGAffineTransformRotate(self.sliderBothTanks.transform,270.0/180*M_PI)];
+    
+    [self setFuelRuler:[[FuelRulerView alloc]initFromSliderRect:self->sliderBothTanks]];
+    [self.view addSubview:self.fuelRuler];
    
     [self updateTankDiffs];
 

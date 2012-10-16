@@ -15,12 +15,41 @@
 @synthesize projectedSwitchOverPoints;
 @synthesize startedTank;
 
+#define TRIANGLE_HEIGHT 10
+#define TRIANGLE_WIDTH 20
+#define TOTAL_WIDTH 94
+#define LEFT_TANK_X 13
+#define RIGHT_TANK_X 80
+#define TRIANGLE_VERTICAL_OFFSET 11
+#define LINE_HORIZ_OFFSET 5
+
+- (void)commonInitialize
+{
+    if (self)
+        self->startedTank = 0;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        self->startedTank = 0;
-    }
+    [self commonInitialize];
+    return self;
+}
+
+- (id)initFromSliderRect:(UISlider*)slider
+{
+    CGRect frame = slider.frame;
+    /*
+    frame.origin.y -= TRIANGLE_VERTICAL_OFFSET;
+    frame.size.height += 2 * TRIANGLE_VERTICAL_OFFSET;
+     */
+    float center = frame.origin.x + frame.size.width / 2.0;
+    frame.origin.x = center - TOTAL_WIDTH / 2;
+    frame.size.width = TOTAL_WIDTH;
+    self = [super initWithFrame:frame];
+    self.backgroundColor = [[UIColor alloc]initWithWhite:1.0 alpha:0.0];
+    self.userInteractionEnabled = FALSE;
+    [self commonInitialize];
     return self;
 }
 
@@ -31,12 +60,6 @@
     [self setProjectedSwitchOverPoints:nil];
 }
 
-#define TRIANGLE_HEIGHT 10
-#define TRIANGLE_WIDTH 20
-#define LEFT_TANK_X 15
-#define RIGHT_TANK_X 82
-#define TRIANGLE_VERTICAL_OFFSET 10
-#define LINE_HORIZ_OFFSET 5
 
 - (void)drawRect:(CGRect)rect
 {
