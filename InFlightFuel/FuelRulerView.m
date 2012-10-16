@@ -117,12 +117,24 @@
     if (x1 < x2) {
         CGContextAddLineToPoint(context, x1 - LINE_HORIZ_OFFSET, y1);
         CGContextAddLineToPoint(context, x1 - LINE_HORIZ_OFFSET, y2);
+        CGContextAddLineToPoint(context, x2 - TRIANGLE_WIDTH, y2);
     } else {
         CGContextAddLineToPoint(context, x1 + LINE_HORIZ_OFFSET, y1);
         CGContextAddLineToPoint(context, x1 + LINE_HORIZ_OFFSET, y2);
+        CGContextAddLineToPoint(context, x2 + TRIANGLE_WIDTH, y2);
     }
-    CGContextAddLineToPoint(context, x2, y2);
     CGContextStrokePath(context);
+}
+
+-(int)getLocyForFuelValue:(FuelValue*)v
+{
+    /* Figure out at what percentage down the view to draw */
+    float pct = [v toFloat] / [self->maxFuel toFloat];
+    pct = 1.0 - pct;
+    CGRect r = self.frame;
+    /* Now find the absolute y location */
+    int locy = pct * (r.size.height - TRIANGLE_VERTICAL_OFFSET * 2) + TRIANGLE_VERTICAL_OFFSET;
+    return locy;
 }
 
 -(void)drawSwitchOverPoints
@@ -130,15 +142,11 @@
     int current = self->startedTank;
     int lasty = -1;
 
+    CGContextSetStrokeColorWithColor(UIGraphicsGetCurrentContext(), [UIColor blackColor].CGColor);
     NSArray *v = self.switchOverPoints;
     for (FuelValue *x in v) {
         NSLog(@"Drawing: %@", [x toString]);
-        /* Figure out at what percentage down the view to draw */
-        float pct = [x toFloat] / [self->maxFuel toFloat];
-        pct = 1.0 - pct;
-        CGRect r = self.frame;
-        /* Now find the absolute y location */
-        int locy = pct * (r.size.height - TRIANGLE_VERTICAL_OFFSET * 2) + TRIANGLE_VERTICAL_OFFSET;
+        int locy = [self getLocyForFuelValue:x];
         /* Draw based on which tank */
         if (current == 0) {
             [self drawLeftTankTriangle:locy :TRUE];
@@ -163,6 +171,8 @@
 {
     int current = self->startedTank;
 
+    CGContextSetStrokeColorWithColor(UIGraphicsGetCurrentContext(), [[UIColor alloc]initWithRed:0.8 green:0.0 blue:0.8 alpha:1.0].CGColor);
+    
     if ([self->switchOverPoints count] % 2 != 0) {
         if (current == 0) {
             current = 1;
@@ -170,20 +180,28 @@
             current = 0;
         }
     }
+    int lasty = -1;
+    if ([self->switchOverPoints count]) {
+        FuelValue *v = [self->switchOverPoints lastObject];
+        lasty = [self getLocyForFuelValue:v];
+    }
 
     NSArray *v = self.projectedSwitchOverPoints;
     for (FuelValue *x in v) {
         NSLog(@"Hollow Drawing: %@", [x toString]);
-        float pct = [x toFloat] / [self->maxFuel toFloat];
-        pct = 1.0 - pct;
-        CGRect r = self.frame;
-        int locy = pct * (r.size.height - TRIANGLE_VERTICAL_OFFSET * 2) + TRIANGLE_VERTICAL_OFFSET;
+        int locy = [self getLocyForFuelValue:x];
         if (current == 0) {
             [self drawLeftTankTriangle:locy :FALSE];
             current = 1;
         } else {
             [self drawRightTankTriangle:locy :FALSE];
             current = 0;
+        }
+        
+        if (current == 0) {
+            [self drawConnectingLines:LEFT_TANK_X :lasty :RIGHT_TANK_X :locy];
+        } else {
+            [self drawConnectingLines:RIGHT_TANK_X :lasty :LEFT_TANK_X :locy];
         }
     }
 }
