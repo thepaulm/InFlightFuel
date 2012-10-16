@@ -216,6 +216,7 @@
 - (void)resetUsedFuel
 {
     [self setStartedFuel:[self.leftFuelTank.level plus:self.rightFuelTank.level]];
+    [self->fuelRuler setStartedFuel:self->startedFuel];
     textUsedFuel.text = [[[FuelValue alloc]initFromInt:0] toString];
 }
 

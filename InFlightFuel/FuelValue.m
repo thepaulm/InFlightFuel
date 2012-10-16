@@ -65,6 +65,13 @@ int FuelValueCount = 0;
     return [[NSString alloc]initWithFormat:@"%d.%d", self->value / 10, self->value % 10];
 }
 
+-(const char *)toCString
+{
+    NSString *svalue = [self toString];
+    const char *s = [svalue cStringUsingEncoding: [NSString defaultCStringEncoding]];
+    return s;
+}
+
 -(void)add:(FuelValue *)other
 {
     self->value = self->value + other->value;

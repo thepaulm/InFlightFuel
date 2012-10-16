@@ -11,17 +11,26 @@
 @implementation FuelRulerView
 
 @synthesize maxFuel;
+@synthesize startedFuel;
 @synthesize switchOverPoints;
 @synthesize projectedSwitchOverPoints;
 @synthesize startedTank;
 
+
+#define TEXT_AREA_WIDTH 80
+#define TEXT_LABEL_HEIGHT 10
+
 #define TRIANGLE_HEIGHT 10
 #define TRIANGLE_WIDTH 20
 #define TOTAL_WIDTH 94
-#define LEFT_TANK_X 13
-#define RIGHT_TANK_X 80
+
+#define LEFT_TANK_X (TEXT_AREA_WIDTH + 13)
+#define RIGHT_TANK_X (TEXT_AREA_WIDTH + 80)
 #define TRIANGLE_VERTICAL_OFFSET 11
 #define LINE_HORIZ_OFFSET 5
+
+#define TEXT_USED_OFFSET 2
+#define TEXT_REMAINING_OFFSET 40
 
 - (void)commonInitialize
 {
@@ -39,13 +48,13 @@
 - (id)initFromSliderRect:(UISlider*)slider
 {
     CGRect frame = slider.frame;
-    /*
-    frame.origin.y -= TRIANGLE_VERTICAL_OFFSET;
-    frame.size.height += 2 * TRIANGLE_VERTICAL_OFFSET;
-     */
     float center = frame.origin.x + frame.size.width / 2.0;
     frame.origin.x = center - TOTAL_WIDTH / 2;
     frame.size.width = TOTAL_WIDTH;
+    frame.origin.x -= TEXT_AREA_WIDTH;
+    frame.size.width += TEXT_AREA_WIDTH;
+    frame.origin.y -= TEXT_LABEL_HEIGHT;
+    frame.size.height += TEXT_LABEL_HEIGHT;
     self = [super initWithFrame:frame];
     self.backgroundColor = [[UIColor alloc]initWithWhite:1.0 alpha:0.0];
     self.userInteractionEnabled = FALSE;
@@ -56,6 +65,7 @@
 - (void)dealloc
 {
     [self setMaxFuel:nil];
+    [self setStartedFuel:nil];
     [self setSwitchOverPoints:nil];
     [self setProjectedSwitchOverPoints:nil];
 }
@@ -68,14 +78,20 @@
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetLineWidth(context, 2.0);
 
+    CGContextSelectFont(context, "Arial", 12.0, kCGEncodingMacRoman);
+    CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
+    CGContextShowTextAtPoint(context, TEXT_USED_OFFSET, TEXT_LABEL_HEIGHT, "Used", 4);
+    CGContextShowTextAtPoint(context, TEXT_REMAINING_OFFSET, TEXT_LABEL_HEIGHT, "Remaining", 9);
     
     /* Make the frame - remove this later */
+#ifdef DO_BORDER
     CGContextMoveToPoint(context, 0,0);
     CGContextAddLineToPoint(context, rect.size.width, 0);
     CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
     CGContextAddLineToPoint(context, 0, rect.size.height);
     CGContextAddLineToPoint(context, 0, 0);
     CGContextStrokePath(context);
+#endif
     
     /* Update the points */
     [self drawSwitchOverPoints];
@@ -133,8 +149,15 @@
     pct = 1.0 - pct;
     CGRect r = self.frame;
     /* Now find the absolute y location */
-    int locy = pct * (r.size.height - TRIANGLE_VERTICAL_OFFSET * 2) + TRIANGLE_VERTICAL_OFFSET;
+    int locy = pct * (r.size.height - TEXT_LABEL_HEIGHT - TRIANGLE_VERTICAL_OFFSET * 2) + TRIANGLE_VERTICAL_OFFSET + TEXT_LABEL_HEIGHT;
     return locy;
+}
+
+-(const char *)getUsedFuelCString:(FuelValue *)v
+{
+    FuelValue *n = [self->startedFuel minus:v];
+    const char *s = [n toCString];
+    return s;
 }
 
 -(void)drawSwitchOverPoints
@@ -142,7 +165,11 @@
     int current = self->startedTank;
     int lasty = -1;
 
-    CGContextSetStrokeColorWithColor(UIGraphicsGetCurrentContext(), [UIColor blackColor].CGColor);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
+    CGContextSelectFont(context, "Arial", 12.0, kCGEncodingMacRoman);
+
     NSArray *v = self.switchOverPoints;
     for (FuelValue *x in v) {
         NSLog(@"Drawing: %@", [x toString]);
@@ -163,6 +190,10 @@
                 [self drawConnectingLines:RIGHT_TANK_X :lasty :LEFT_TANK_X :locy];
             }
         }
+        const char *s = [x toCString];
+        CGContextShowTextAtPoint(context, TEXT_REMAINING_OFFSET, locy + 4, s, strlen(s));
+        s = [self getUsedFuelCString:x];
+        CGContextShowTextAtPoint(context, TEXT_USED_OFFSET, locy + 4, s, strlen(s));
         lasty = locy;
     }
 }
@@ -170,8 +201,12 @@
 -(void)drawProjectedSwitchOverPoints
 {
     int current = self->startedTank;
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
 
-    CGContextSetStrokeColorWithColor(UIGraphicsGetCurrentContext(), [[UIColor alloc]initWithRed:0.8 green:0.0 blue:0.8 alpha:1.0].CGColor);
+    CGContextSetStrokeColorWithColor(context, [[UIColor alloc]initWithRed:0.8 green:0.0 blue:0.8 alpha:1.0].CGColor);
+    CGContextSetFillColorWithColor(context, [[UIColor alloc]initWithRed:0.0 green:1 blue:1 alpha:1.0].CGColor);
+    CGContextSelectFont(context, "Arial", 16.0, kCGEncodingMacRoman);
     
     if ([self->switchOverPoints count] % 2 != 0) {
         if (current == 0) {
@@ -203,6 +238,10 @@
         } else {
             [self drawConnectingLines:RIGHT_TANK_X :lasty :LEFT_TANK_X :locy];
         }
+        const char *s = [x toCString];
+        CGContextShowTextAtPoint(context, TEXT_REMAINING_OFFSET, locy + 4, s, strlen(s));
+        s = [self getUsedFuelCString:x];
+        CGContextShowTextAtPoint(context, TEXT_USED_OFFSET, locy + 4, s, strlen(s));
     }
 }
 

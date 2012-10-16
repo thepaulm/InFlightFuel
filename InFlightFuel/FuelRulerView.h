@@ -12,6 +12,7 @@
 @interface FuelRulerView : UIView
 
 @property (copy, nonatomic) FuelValue *maxFuel;
+@property (copy, nonatomic) FuelValue *startedFuel;
 @property (copy, nonatomic) NSArray *switchOverPoints;
 @property (copy, nonatomic) NSArray *projectedSwitchOverPoints;
 @property int startedTank;
