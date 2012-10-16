@@ -15,11 +15,14 @@
 @implementation iffOptionsViewController
 @synthesize textTabs;
 @synthesize textFull;
+@synthesize textDiff;
 @synthesize stepperTabs;
 @synthesize stepperFull;
+@synthesize stepperDiff;
 
 @synthesize valueTabs;
 @synthesize valueFull;
+@synthesize valueDiff;
 
 @synthesize delegate = _delegate;
 
@@ -42,21 +45,29 @@
     textFull.text = [self.valueFull toString];
 }
 
+- (void)updateTextDiff
+{
+    textDiff.text = [self.valueDiff toString];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self updateTextTabs];
     [self updateTextFull];
+    [self updateTextDiff];
     stepperTabs.value = [self.valueTabs toFloat];
     stepperFull.value = [self.valueFull toFloat];
+    stepperDiff.value = [self.valueDiff toFloat];
 }
 
-- (void)initializeValues:(FuelValue*)vt valueFull:(FuelValue*)vf
+- (void)initializeValues:(FuelValue*)vt valueFull:(FuelValue*)vf valueDiff:(FuelValue*)vd
 {
     /* These have property value "copy" */
     [self setValueTabs: vt];
     [self setValueFull: vf];
+    [self setValueDiff: vd];
 }
 
 - (IBAction)clickDone:(id)sender {
@@ -69,6 +80,8 @@
     [self setTextFull:nil];
     [self setStepperTabs:nil];
     [self setStepperFull:nil];
+    [self setTextDiff:nil];
+    [self setStepperDiff:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -88,6 +101,11 @@
     [self updateTextFull];
 }
 
+- (IBAction)onStepperDiff:(id)sender {
+    self.valueDiff = [[FuelValue alloc]initFromFloat:((UIStepper*)sender).value];
+    [self updateTextDiff];
+}
+
 - (IBAction)onTabsText:(id)sender {
     self.valueTabs = [[FuelValue alloc]initFromFloat:[((UITextField*)sender).text floatValue]];
     stepperTabs.value = [self.valueTabs toFloat];
@@ -98,9 +116,14 @@
     stepperFull.value = [self.valueFull toFloat];
 }
 
+- (IBAction)onDiffText:(id)sender {
+    self.valueDiff = [[FuelValue alloc]initFromFloat:[((UITextField*)sender).text floatValue]];
+    stepperDiff.value = [self.valueDiff toFloat];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)sender
 {
-    if (sender == self.textFull || sender == self.textTabs) {
+    if (sender == self.textFull || sender == self.textTabs || sender == self.textDiff) {
         [sender resignFirstResponder];
     }
     return TRUE;

@@ -172,7 +172,6 @@
 
     NSArray *v = self.switchOverPoints;
     for (FuelValue *x in v) {
-        NSLog(@"Drawing: %@", [x toString]);
         int locy = [self getLocyForFuelValue:x];
         /* Draw based on which tank */
         if (current == 0) {
@@ -223,7 +222,6 @@
 
     NSArray *v = self.projectedSwitchOverPoints;
     for (FuelValue *x in v) {
-        NSLog(@"Hollow Drawing: %@", [x toString]);
         int locy = [self getLocyForFuelValue:x];
         if (current == 0) {
             [self drawLeftTankTriangle:locy :FALSE];

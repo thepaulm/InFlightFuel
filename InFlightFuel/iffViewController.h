@@ -20,6 +20,9 @@
     @public
     int leftTankLevel;
     int rightTankLevel;
+    int valueTabs;
+    int valueFull;
+    int targetDiff;
 }
 
 - (id)init;
@@ -71,6 +74,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *tabsValue;
 @property (weak, nonatomic) IBOutlet UITextField *fullValue;
+@property (weak, nonatomic) IBOutlet UITextField *textDiff;
 @property (weak, nonatomic) IBOutlet UIButton *buttonTabs;
 @property (weak, nonatomic) IBOutlet UIButton *buttonFull;
 

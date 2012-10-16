@@ -18,11 +18,15 @@
 {
     self = [super init];
     self->leftTankLevel = self->rightTankLevel = 0;
+    self->valueTabs = self->valueFull = self->targetDiff = 0;
     return self;
 }
 
 #define LEFT_TANK_LEVEL @"LeftTankLevel"
 #define RIGHT_TANK_LEVEL @"RightTankLevel"
+#define TABS_TANK_LEVEL @"TabsTankLevel"
+#define FULL_TANK_LEVEL @"FullTankLevel"
+#define TARGET_TANK_DIFF @"TargetTankDiff"
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -30,6 +34,9 @@
     @try {
         self->leftTankLevel = [aDecoder decodeIntForKey:LEFT_TANK_LEVEL];
         self->rightTankLevel = [aDecoder decodeIntForKey:RIGHT_TANK_LEVEL];
+        self->valueTabs = [aDecoder decodeIntForKey:TABS_TANK_LEVEL];
+        self->valueFull = [aDecoder decodeIntForKey:FULL_TANK_LEVEL];
+        self->targetDiff = [aDecoder decodeIntForKey:TARGET_TANK_DIFF];
     }
     @catch (NSException *e) {
     }
@@ -40,6 +47,9 @@
 {
     [aCoder encodeInt:self->leftTankLevel forKey:LEFT_TANK_LEVEL];
     [aCoder encodeInt:self->rightTankLevel forKey:RIGHT_TANK_LEVEL];
+    [aCoder encodeInt:self->valueTabs forKey:TABS_TANK_LEVEL];
+    [aCoder encodeInt:self->valueFull forKey:FULL_TANK_LEVEL];
+    [aCoder encodeInt:self->targetDiff forKey:TARGET_TANK_DIFF];
 }
 @end
 
@@ -62,6 +72,7 @@
 
 @synthesize tabsValue;
 @synthesize fullValue;
+@synthesize textDiff;
 @synthesize buttonTabs;
 @synthesize buttonFull;
 
@@ -81,6 +92,7 @@
 {
     tabsValue.text = [self->valueTabs toString];
     fullValue.text = [self->valueFull toString];
+    textDiff.text = [self->targetDiff toString];
     self->maxEachTank = [self->valueFull slashInt:2];
 
     sliderBothTanks.maximumValue = [self->valueFull toFloat];
@@ -116,20 +128,27 @@
     self->startedFuel = [[FuelValue alloc]initFromInt:0];
     self->valueTabs = [[FuelValue alloc]initFromInt:60];
     self->valueFull = [[FuelValue alloc]initFromInt:92];
-    self->maxEachTank = [self->valueFull slashInt:2];
+    self->maxEachTank = nil;
     self->targetDiff = [[FuelValue alloc]initFromValue:85];
     
     iffSaveData *sd = [self loadSaveData];
-    if (sd == nil) {				
-        sd = [[iffSaveData alloc]init];
-        sd->leftTankLevel = 30.0;
-        sd->rightTankLevel = 30.0;
-    }
+
+    if (sd->valueTabs == 0)
+        sd->valueTabs = [self->valueTabs toValue];
+    if (sd->valueFull == 0)
+        sd->valueFull = [self->valueFull toValue];
+    if (sd->targetDiff == 0)
+        sd->targetDiff = [self->targetDiff toValue];
+    
     [self setLeftFuelTank:[[FuelTank alloc]initWithLabel:[[NSString alloc]initWithFormat:@"Left Tank"]]];
     [self setRightFuelTank:[[FuelTank alloc]initWithLabel:[[NSString alloc]initWithFormat:@"Right Tank"]]];
     
     [self.leftFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->leftTankLevel]];
     [self.rightFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->rightTankLevel]];
+    
+    self.valueTabs = [[FuelValue alloc]initFromValue:sd->valueTabs];
+    self.valueFull = [[FuelValue alloc]initFromValue:sd->valueFull];
+    self.targetDiff = [[FuelValue alloc]initFromValue:sd->targetDiff];
 
     /* The minimum movement is 0.1 gals */
     stepperBothTanks.stepValue = 0.1;
@@ -169,6 +188,7 @@
     self->projectedSwitchOverPoints = nil;
 
     [self setFuelRuler:nil];
+    [self setTextDiff:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -359,6 +379,9 @@
     
     sd->leftTankLevel = [self.leftFuelTank.level toValue];
     sd->rightTankLevel = [self.rightFuelTank.level toValue];
+    sd->valueTabs = [self.valueTabs toValue];
+    sd->valueFull = [self.valueFull toValue];
+    sd->targetDiff = [self.targetDiff toValue];
     
     NSString *archivePath = [self pathForDataFile];
     [NSKeyedArchiver archiveRootObject:sd toFile:archivePath];
@@ -380,7 +403,7 @@
         iffOptionsViewController* pOther = [segue destinationViewController];
         [pOther setDelegate:self];
         /* The pOther stores these as type "copy" */
-        [pOther initializeValues:self.valueTabs valueFull:self.valueFull];
+        [pOther initializeValues:self.valueTabs valueFull:self.valueFull valueDiff:self.targetDiff];
     }
 }
 
@@ -389,7 +412,9 @@
     /* These are of property type "copy" */
     [self setValueTabs: controller.valueTabs];
     [self setValueFull: controller.valueFull];
+    [self setTargetDiff:controller.valueDiff];
     [self setValuesDefaults];
+    [self saveLastTankValues];
     [controller dismissModalViewControllerAnimated:TRUE];
 }
 
