@@ -17,7 +17,6 @@
 -(id)initFromInt:(int)v;
 -(id)initFromFloat:(float)v;
 -(NSString*)toString;
--(const char *)toCString;
 -(void)add:(FuelValue*)other;
 -(void)subtract:(FuelValue*)other;
 -(void)intDevide:(int)x;

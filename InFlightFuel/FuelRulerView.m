@@ -153,10 +153,16 @@
     return locy;
 }
 
--(const char *)getUsedFuelCString:(FuelValue *)v
+-(NSString *)getUsedFuelString:(FuelValue *)v
 {
     FuelValue *n = [self->startedFuel minus:v];
-    const char *s = [n toCString];
+    NSString *nss = [n toString];
+    return nss;
+}
+
+-(const char *)getCString:(NSString *)nss
+{
+    const char *s = [nss cStringUsingEncoding: [NSString defaultCStringEncoding]];
     return s;
 }
 
@@ -189,9 +195,13 @@
                 [self drawConnectingLines:RIGHT_TANK_X :lasty :LEFT_TANK_X :locy];
             }
         }
-        const char *s = [x toCString];
+        /* Keep the NSString around for calls to getCString.  This is how we guarantee
+           it to be valid */
+        NSString *nss = [x toString];
+        const char *s = [self getCString:nss];
         CGContextShowTextAtPoint(context, TEXT_REMAINING_OFFSET, locy + 4, s, strlen(s));
-        s = [self getUsedFuelCString:x];
+        nss = [self getUsedFuelString:x];
+        s = [self getCString:nss];
         CGContextShowTextAtPoint(context, TEXT_USED_OFFSET, locy + 4, s, strlen(s));
         lasty = locy;
     }
@@ -236,9 +246,11 @@
         } else {
             [self drawConnectingLines:RIGHT_TANK_X :lasty :LEFT_TANK_X :locy];
         }
-        const char *s = [x toCString];
+        NSString *nss = [x toString];
+        const char *s = [self getCString:nss];
         CGContextShowTextAtPoint(context, TEXT_REMAINING_OFFSET, locy + 4, s, strlen(s));
-        s = [self getUsedFuelCString:x];
+        nss = [self getUsedFuelString:x];
+        s = [self getCString:nss];
         CGContextShowTextAtPoint(context, TEXT_USED_OFFSET, locy + 4, s, strlen(s));
     }
 }
