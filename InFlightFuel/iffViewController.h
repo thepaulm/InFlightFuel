@@ -71,6 +71,7 @@
 @property (weak, nonatomic) IBOutlet UIStepper *stepperBothTanks;
 - (IBAction)fuelTabs:(id)sender;
 - (IBAction)fuelFull:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *optionsButton;
 
 @property (weak, nonatomic) IBOutlet UITextField *tabsValue;
 @property (weak, nonatomic) IBOutlet UITextField *fullValue;

@@ -70,6 +70,7 @@
 @synthesize fuelRuler;
 @synthesize leftRightTank;
 
+@synthesize optionsButton;
 @synthesize tabsValue;
 @synthesize fullValue;
 @synthesize textDiff;
@@ -189,6 +190,7 @@
 
     [self setFuelRuler:nil];
     [self setTextDiff:nil];
+    [self setOptionsButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -266,6 +268,7 @@
         self->ison = FALSE;
         self.buttonFull.enabled = TRUE;
         self.buttonTabs.enabled = TRUE;
+        self.optionsButton.enabled = TRUE;
         self->switchOverPoints = nil;
         self->projectedSwitchOverPoints = nil;
         [self->fuelRuler setSwitchOverPoints:nil];
@@ -281,6 +284,7 @@
         self->ison = TRUE;
         self.buttonFull.enabled = FALSE;
         self.buttonTabs.enabled = FALSE;
+        self.optionsButton.enabled = FALSE;
         [self resetUsedFuel];
         self->switchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
         [self sampleSwitchOverPoint];

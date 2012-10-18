@@ -137,7 +137,7 @@
                                 </connections>
                             </stepper>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xfY-JQ-RLg">
-                                <rect key="frame" x="84" y="104" width="72" height="37"/>
+                                <rect key="frame" x="84" y="77" width="72" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Tabs">
@@ -152,7 +152,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tPW-EV-83J">
-                                <rect key="frame" x="166" y="104" width="72" height="37"/>
+                                <rect key="frame" x="166" y="77" width="72" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Full">
@@ -166,20 +166,8 @@
                                     <action selector="fuelFull:" destination="2" eventType="touchUpInside" id="Oz6-Eu-Ouu"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ycv-a9-0fg">
-                                <rect key="frame" x="84" y="60" width="36" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="Qdo-9J-Dq2">
-                                <rect key="frame" x="88" y="63" width="29" height="31"/>
+                                <rect key="frame" x="374" y="949" width="29" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal">
@@ -227,6 +215,7 @@
                         <outlet property="buttonTabs" destination="xfY-JQ-RLg" id="87v-2m-klp"/>
                         <outlet property="fullValue" destination="fle-Wf-bpY" id="CD7-5U-MvU"/>
                         <outlet property="leftRightTank" destination="E0u-hI-pCo" id="U7X-rn-zTf"/>
+                        <outlet property="optionsButton" destination="Qdo-9J-Dq2" id="XDY-Jn-eKY"/>
                         <outlet property="sliderBothTanks" destination="0ga-bD-Suk" id="3Pz-Tl-aLA"/>
                         <outlet property="stepperBothTanks" destination="y8C-Pv-Tea" id="0cn-Rj-LwU"/>
                         <outlet property="tabsValue" destination="eNF-Fa-UwX" id="jic-7O-NjT"/>
@@ -391,6 +380,7 @@
                 <relationship kind="outlet" name="fuelRuler" candidateClass="FuelRulerView"/>
                 <relationship kind="outlet" name="fullValue" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="leftRightTank" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="optionsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="sliderBothTanks" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="stepperBothTanks" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="tabsValue" candidateClass="UITextField"/>
