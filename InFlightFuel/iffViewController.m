@@ -204,6 +204,19 @@
     }
 }
 
+- (void)sliderDoneSliding
+{
+    [self saveLastTankValues];
+}
+
+- (IBAction)sliderTouchUpInside:(id)sender {
+    [self sliderDoneSliding];
+}
+
+- (IBAction)sliderTouchUpOutside:(id)sender {
+    [self sliderDoneSliding];
+}
+
 - (IBAction)sliderBothTanks:(id)sender
 {
     UISlider *s = (UISlider *)sender;
@@ -232,7 +245,6 @@
     textUsedFuel.text = [[self.startedFuel minus:both] toString];
     [self resetSlider];
     [self updateTankDiffs];
-    [self saveLastTankValues];
 }
 
 - (void)resetUsedFuel
@@ -297,6 +309,7 @@
 - (IBAction)stepperBothTanks:(id)sender {
     sliderBothTanks.value = ((UIStepper*)sender).value;
     [self sliderBothTanks:sliderBothTanks];
+    [self sliderDoneSliding];
 }
 
 - (void)resetSlider
@@ -379,6 +392,7 @@
 
 - (void)saveLastTankValues
 {
+    NSLog(@"Saving ...");
     iffSaveData *sd = [[iffSaveData alloc]init];
     
     sd->leftTankLevel = [self.leftFuelTank.level toValue];

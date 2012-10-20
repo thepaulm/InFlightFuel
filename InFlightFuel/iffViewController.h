@@ -78,5 +78,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *textDiff;
 @property (weak, nonatomic) IBOutlet UIButton *buttonTabs;
 @property (weak, nonatomic) IBOutlet UIButton *buttonFull;
+- (IBAction)sliderTouchUpInside:(id)sender;
+- (IBAction)sliderTouchUpOutside:(id)sender;
 
 @end
