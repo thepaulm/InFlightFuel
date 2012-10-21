@@ -19,6 +19,7 @@
     self = [super init];
     self->leftTankLevel = self->rightTankLevel = 0;
     self->valueTabs = self->valueFull = self->targetDiff = 0;
+    self->activeTank = 0;
     return self;
 }
 
@@ -27,6 +28,7 @@
 #define TABS_TANK_LEVEL @"TabsTankLevel"
 #define FULL_TANK_LEVEL @"FullTankLevel"
 #define TARGET_TANK_DIFF @"TargetTankDiff"
+#define ACTIVE_TANK @"ActiveTank"
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -37,6 +39,7 @@
         self->valueTabs = [aDecoder decodeIntForKey:TABS_TANK_LEVEL];
         self->valueFull = [aDecoder decodeIntForKey:FULL_TANK_LEVEL];
         self->targetDiff = [aDecoder decodeIntForKey:TARGET_TANK_DIFF];
+        self->activeTank = [aDecoder decodeIntForKey:ACTIVE_TANK];
     }
     @catch (NSException *e) {
     }
@@ -50,6 +53,7 @@
     [aCoder encodeInt:self->valueTabs forKey:TABS_TANK_LEVEL];
     [aCoder encodeInt:self->valueFull forKey:FULL_TANK_LEVEL];
     [aCoder encodeInt:self->targetDiff forKey:TARGET_TANK_DIFF];
+    [aCoder encodeInt:self->activeTank forKey:ACTIVE_TANK];
 }
 @end
 
@@ -150,6 +154,7 @@
     self.valueTabs = [[FuelValue alloc]initFromValue:sd->valueTabs];
     self.valueFull = [[FuelValue alloc]initFromValue:sd->valueFull];
     self.targetDiff = [[FuelValue alloc]initFromValue:sd->targetDiff];
+    self.leftRightTank.selectedSegmentIndex = sd->activeTank;
 
     /* The minimum movement is 0.1 gals */
     stepperBothTanks.stepValue = 0.1;
@@ -343,6 +348,8 @@
 }
 
 - (IBAction)switchedTank:(id)sender {
+    [self saveLastTankValues];
+    
     if (!self->ison)
         return;
     
@@ -392,7 +399,7 @@
 
 - (void)saveLastTankValues
 {
-    NSLog(@"Saving ...");
+    //NSLog(@"Saving ...");
     iffSaveData *sd = [[iffSaveData alloc]init];
     
     sd->leftTankLevel = [self.leftFuelTank.level toValue];
@@ -400,6 +407,7 @@
     sd->valueTabs = [self.valueTabs toValue];
     sd->valueFull = [self.valueFull toValue];
     sd->targetDiff = [self.targetDiff toValue];
+    sd->activeTank = self.leftRightTank.selectedSegmentIndex;
     
     NSString *archivePath = [self pathForDataFile];
     [NSKeyedArchiver archiveRootObject:sd toFile:archivePath];

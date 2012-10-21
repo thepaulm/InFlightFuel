@@ -23,6 +23,7 @@
     int valueTabs;
     int valueFull;
     int targetDiff;
+    int activeTank;
 }
 
 - (id)init;
