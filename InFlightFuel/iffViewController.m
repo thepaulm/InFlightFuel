@@ -20,6 +20,8 @@
     self->leftTankLevel = self->rightTankLevel = 0;
     self->valueTabs = self->valueFull = self->targetDiff = 0;
     self->activeTank = 0;
+    self->valueStartedFuel = 0;
+    self->isOn = 0;
     return self;
 }
 
@@ -29,6 +31,8 @@
 #define FULL_TANK_LEVEL @"FullTankLevel"
 #define TARGET_TANK_DIFF @"TargetTankDiff"
 #define ACTIVE_TANK @"ActiveTank"
+#define STARTED_FUEL @"StartedFuel"
+#define IS_IN_FLIGHT @"IsInFlight"
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -40,6 +44,8 @@
         self->valueFull = [aDecoder decodeIntForKey:FULL_TANK_LEVEL];
         self->targetDiff = [aDecoder decodeIntForKey:TARGET_TANK_DIFF];
         self->activeTank = [aDecoder decodeIntForKey:ACTIVE_TANK];
+        self->valueStartedFuel = [aDecoder decodeIntForKey:STARTED_FUEL];
+        self->isOn = [aDecoder decodeIntForKey:IS_IN_FLIGHT];
     }
     @catch (NSException *e) {
     }
@@ -54,6 +60,8 @@
     [aCoder encodeInt:self->valueFull forKey:FULL_TANK_LEVEL];
     [aCoder encodeInt:self->targetDiff forKey:TARGET_TANK_DIFF];
     [aCoder encodeInt:self->activeTank forKey:ACTIVE_TANK];
+    [aCoder encodeInt:self->valueStartedFuel forKey:STARTED_FUEL];
+    [aCoder encodeInt:self->isOn forKey:IS_IN_FLIGHT];
 }
 @end
 
@@ -155,6 +163,7 @@
     self.valueFull = [[FuelValue alloc]initFromValue:sd->valueFull];
     self.targetDiff = [[FuelValue alloc]initFromValue:sd->targetDiff];
     self.leftRightTank.selectedSegmentIndex = sd->activeTank;
+    self.startedFuel = [[FuelValue alloc]initFromValue:sd->valueStartedFuel];
 
     /* The minimum movement is 0.1 gals */
     stepperBothTanks.stepValue = 0.1;
@@ -173,8 +182,15 @@
    
     [self updateTankDiffs];
 
+    FuelValue *both = [self.leftFuelTank.level plus:self.rightFuelTank.level];
+    textUsedFuel.text = [[self.startedFuel minus:both] toString];
+    [self->fuelRuler setStartedFuel:self->startedFuel];
     [self->fuelRuler setMaxFuel:self->valueFull];
     [self->fuelRuler setStartedTank:self->startTank];
+    
+    self->ison = sd->isOn;
+    if (self->ison)
+        [self isInFlight];
 }
 
 - (void)viewDidUnload
@@ -280,6 +296,27 @@
     [self->switchOverPoints addObject:[self.leftFuelTank.level plus:self.rightFuelTank.level]];
 }
 
+- (void)isInFlight
+{
+    if (leftRightTank.selectedSegmentIndex == 0) {
+        self->startTank = 0;
+    } else {
+        self->startTank = 1;
+    }
+    [self->fuelRuler setStartedTank:self->startTank];
+    self->ison = TRUE;
+    self.buttonFull.enabled = FALSE;
+    self.buttonTabs.enabled = FALSE;
+    self.optionsButton.enabled = FALSE;
+
+    if ([self->switchOverPoints count] == 0)
+        [self sampleSwitchOverPoint];
+
+    [self->fuelRuler setSwitchOverPoints:self->switchOverPoints];
+    [self recalcProjected];
+    [self->fuelRuler setNeedsDisplay];
+}
+
 - (IBAction)switchOn:(id)sender {
     if (self->ison) {
         self->ison = FALSE;
@@ -292,23 +329,11 @@
         [self->fuelRuler setProjectedSwitchOverPoints:nil];
         [self->fuelRuler setNeedsDisplay];
     } else {
-        if (leftRightTank.selectedSegmentIndex == 0) {
-            self->startTank = 0;
-        } else {
-            self->startTank = 1;
-        }
-        [self->fuelRuler setStartedTank:self->startTank];
-        self->ison = TRUE;
-        self.buttonFull.enabled = FALSE;
-        self.buttonTabs.enabled = FALSE;
-        self.optionsButton.enabled = FALSE;
         [self resetUsedFuel];
         self->switchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
-        [self sampleSwitchOverPoint];
-        [self->fuelRuler setSwitchOverPoints:self->switchOverPoints];
-        [self recalcProjected];
-        [self->fuelRuler setNeedsDisplay];
+        [self isInFlight];
     }
+    [self saveLastTankValues];
 }
 
 - (IBAction)stepperBothTanks:(id)sender {
@@ -408,6 +433,8 @@
     sd->valueFull = [self.valueFull toValue];
     sd->targetDiff = [self.targetDiff toValue];
     sd->activeTank = self.leftRightTank.selectedSegmentIndex;
+    sd->valueStartedFuel = [self.startedFuel toValue];
+    sd->isOn = self->ison;
     
     NSString *archivePath = [self pathForDataFile];
     [NSKeyedArchiver archiveRootObject:sd toFile:archivePath];

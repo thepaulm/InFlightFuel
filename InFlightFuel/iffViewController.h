@@ -24,6 +24,8 @@
     int valueFull;
     int targetDiff;
     int activeTank;
+    int valueStartedFuel;
+    int isOn;
 }
 
 - (id)init;
