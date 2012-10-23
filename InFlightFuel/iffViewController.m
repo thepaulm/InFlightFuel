@@ -319,11 +319,6 @@
 
 - (void)isInFlight
 {
-    if (leftRightTank.selectedSegmentIndex == 0) {
-        self->startTank = 0;
-    } else {
-        self->startTank = 1;
-    }
     [self->fuelRuler setStartedTank:self->startTank];
     self->ison = TRUE;
     self.buttonFull.enabled = FALSE;
@@ -351,6 +346,11 @@
         [self->fuelRuler setNeedsDisplay];
     } else {
         [self resetUsedFuel];
+        if (leftRightTank.selectedSegmentIndex == 0) {
+            self->startTank = 0;
+        } else {
+            self->startTank = 1;
+        }
         self->switchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
         [self isInFlight];
     }
