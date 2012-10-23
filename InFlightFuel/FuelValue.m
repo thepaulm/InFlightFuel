@@ -147,4 +147,20 @@ int FuelValueCount = 0;
     return self->value == other->value;
 }
 
+#pragma mark -
+#pragma mark Saving And Loading
+
+#define FUEL_VALUE @"FuelValue"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    int v = [aDecoder decodeIntForKey:FUEL_VALUE];
+    return [self initFromValue:v];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeInt:self->value forKey:FUEL_VALUE];
+}
+
 @end

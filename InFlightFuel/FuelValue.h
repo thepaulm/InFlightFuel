@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FuelValue : NSObject <NSCopying, NSMutableCopying>
+@interface FuelValue : NSObject <NSCopying, NSMutableCopying, NSCoding>
 {
     int value;
 }
@@ -34,5 +34,8 @@
 -(BOOL)lt:(FuelValue *)other;
 -(BOOL)gt:(FuelValue *)other;
 -(BOOL)eq:(FuelValue *)other;
+
+- (id)initWithCoder:(NSCoder *)aDecoder;
+- (void)encodeWithCoder:(NSCoder *)aCoder;
 
 @end

@@ -14,6 +14,8 @@
 
 @implementation iffSaveData
 
+@synthesize switchOverPoints;
+
 - (id)init
 {
     self = [super init];
@@ -22,6 +24,8 @@
     self->activeTank = 0;
     self->valueStartedFuel = 0;
     self->isOn = 0;
+    self->startedTank = 0;
+    self->switchOverPoints = nil;
     return self;
 }
 
@@ -33,6 +37,8 @@
 #define ACTIVE_TANK @"ActiveTank"
 #define STARTED_FUEL @"StartedFuel"
 #define IS_IN_FLIGHT @"IsInFlight"
+#define START_TANK @"StartTank"
+#define SWITCH_OVER_POINTS @"SwitchOverPoints"
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -46,6 +52,8 @@
         self->activeTank = [aDecoder decodeIntForKey:ACTIVE_TANK];
         self->valueStartedFuel = [aDecoder decodeIntForKey:STARTED_FUEL];
         self->isOn = [aDecoder decodeIntForKey:IS_IN_FLIGHT];
+        self->startedTank = [aDecoder decodeIntForKey:START_TANK];
+        self.switchOverPoints = [aDecoder decodeObjectForKey:SWITCH_OVER_POINTS];
     }
     @catch (NSException *e) {
     }
@@ -62,6 +70,8 @@
     [aCoder encodeInt:self->activeTank forKey:ACTIVE_TANK];
     [aCoder encodeInt:self->valueStartedFuel forKey:STARTED_FUEL];
     [aCoder encodeInt:self->isOn forKey:IS_IN_FLIGHT];
+    [aCoder encodeInt:self->startedTank forKey:START_TANK];
+    [aCoder encodeObject:self.switchOverPoints forKey:SWITCH_OVER_POINTS];
 }
 @end
 
@@ -80,6 +90,7 @@
 
 @synthesize sliderBothTanks;
 @synthesize fuelRuler;
+@synthesize inFlightSwitch;
 @synthesize leftRightTank;
 
 @synthesize optionsButton;
@@ -153,6 +164,13 @@
     if (sd->targetDiff == 0)
         sd->targetDiff = [self->targetDiff toValue];
     
+    self->startTank = sd->startedTank;
+    if (sd.switchOverPoints != nil) {
+        for (FuelValue *x in sd.switchOverPoints) {
+            [self->switchOverPoints addObject:[x copy]];
+        }
+    }
+    
     [self setLeftFuelTank:[[FuelTank alloc]initWithLabel:[[NSString alloc]initWithFormat:@"Left Tank"]]];
     [self setRightFuelTank:[[FuelTank alloc]initWithLabel:[[NSString alloc]initWithFormat:@"Right Tank"]]];
     
@@ -189,8 +207,10 @@
     [self->fuelRuler setStartedTank:self->startTank];
     
     self->ison = sd->isOn;
-    if (self->ison)
+    if (self->ison) {
+        self.inFlightSwitch.on = TRUE;
         [self isInFlight];
+    }
 }
 
 - (void)viewDidUnload
@@ -212,6 +232,7 @@
     [self setFuelRuler:nil];
     [self setTextDiff:nil];
     [self setOptionsButton:nil];
+    [self setInFlightSwitch:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -373,10 +394,12 @@
 }
 
 - (IBAction)switchedTank:(id)sender {
-    [self saveLastTankValues];
     
-    if (!self->ison)
+    if (!self->ison) {
+        /* Short exit save */
+        [self saveLastTankValues];
         return;
+    }
     
     [self sampleSwitchOverPoint];
     int count = [self->switchOverPoints count];
@@ -403,6 +426,9 @@
     }
     [self->fuelRuler setSwitchOverPoints:self->switchOverPoints];
     [self recalcProjected];
+    /* Save the new list of points */
+    [self saveLastTankValues];
+
     [self->fuelRuler setNeedsDisplay];
 }
 
@@ -435,6 +461,8 @@
     sd->activeTank = self.leftRightTank.selectedSegmentIndex;
     sd->valueStartedFuel = [self.startedFuel toValue];
     sd->isOn = self->ison;
+    sd->startedTank = self->startTank;
+    sd.switchOverPoints = self->switchOverPoints;
     
     NSString *archivePath = [self pathForDataFile];
     [NSKeyedArchiver archiveRootObject:sd toFile:archivePath];

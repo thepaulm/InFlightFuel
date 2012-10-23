@@ -26,7 +26,10 @@
     int activeTank;
     int valueStartedFuel;
     int isOn;
+    int startedTank;
 }
+
+@property (copy, nonatomic) NSMutableArray *switchOverPoints;
 
 - (id)init;
 - (id)initWithCoder:(NSCoder *)aDecoder;
@@ -66,6 +69,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *sliderBothTanks;
 @property (strong, nonatomic) IBOutlet FuelRulerView *fuelRuler;
 - (IBAction)switchedTank:(id)sender;
+@property (weak, nonatomic) IBOutlet UISwitch *inFlightSwitch;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *leftRightTank;
 - (IBAction)switchOn:(id)sender;

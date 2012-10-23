@@ -216,6 +216,7 @@
                         <outlet property="buttonFull" destination="tPW-EV-83J" id="I8R-fV-d6x"/>
                         <outlet property="buttonTabs" destination="xfY-JQ-RLg" id="87v-2m-klp"/>
                         <outlet property="fullValue" destination="fle-Wf-bpY" id="CD7-5U-MvU"/>
+                        <outlet property="inFlightSwitch" destination="BOZ-P4-cDW" id="s5K-gg-20s"/>
                         <outlet property="leftRightTank" destination="E0u-hI-pCo" id="U7X-rn-zTf"/>
                         <outlet property="optionsButton" destination="Qdo-9J-Dq2" id="XDY-Jn-eKY"/>
                         <outlet property="sliderBothTanks" destination="0ga-bD-Suk" id="3Pz-Tl-aLA"/>
