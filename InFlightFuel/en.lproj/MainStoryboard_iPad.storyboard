@@ -201,14 +201,25 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="wallpaper-cf2-1440x900.png" id="aHP-Yi-4uP">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="wallpaper-cf2-1440x900.png" id="aHP-Yi-4uP" customClass="FuelTank">
                                 <rect key="frame" x="238" y="207" width="135" height="710"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="wallpaper-cf2-1440x900.png" id="0a8-RL-44u">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="wallpaper-cf2-1440x900.png" id="0a8-RL-44u" customClass="FuelTank">
                                 <rect key="frame" x="84" y="207" width="135" height="710"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="InFlight" borderStyle="line" textAlignment="center" minimumFontSize="17" id="Awe-CX-VEK">
+                                <rect key="frame" x="528" y="72" width="70" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.94242987580000004" green="0.94310052710000003" blue="0.9419357116" alpha="1" colorSpace="deviceRGB"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.48688009510869568" green="0.48688009510869568" blue="0.48688009510869568" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -217,8 +228,10 @@
                         <outlet property="buttonTabs" destination="xfY-JQ-RLg" id="87v-2m-klp"/>
                         <outlet property="fullValue" destination="fle-Wf-bpY" id="CD7-5U-MvU"/>
                         <outlet property="inFlightSwitch" destination="BOZ-P4-cDW" id="s5K-gg-20s"/>
+                        <outlet property="leftFuelTank" destination="0a8-RL-44u" id="YmY-Lj-Jzy"/>
                         <outlet property="leftRightTank" destination="E0u-hI-pCo" id="U7X-rn-zTf"/>
                         <outlet property="optionsButton" destination="Qdo-9J-Dq2" id="XDY-Jn-eKY"/>
+                        <outlet property="rightFuelTank" destination="aHP-Yi-4uP" id="Jd8-jf-2yG"/>
                         <outlet property="sliderBothTanks" destination="0ga-bD-Suk" id="3Pz-Tl-aLA"/>
                         <outlet property="stepperBothTanks" destination="y8C-Pv-Tea" id="0cn-Rj-LwU"/>
                         <outlet property="tabsValue" destination="eNF-Fa-UwX" id="jic-7O-NjT"/>
@@ -347,6 +360,60 @@
         <image name="Dark_Brushed_Metal_by_halfthelaw.jpg" width="3000" height="2400"/>
         <image name="wallpaper-cf2-1440x900.png" width="1440" height="900"/>
     </resources>
+    <classes>
+        <class className="FuelRulerView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FuelRulerView.h"/>
+        </class>
+        <class className="FuelTank" superclassName="UIImageView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FuelTank.h"/>
+        </class>
+        <class className="iffOptionsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iffOptionsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="clickDone:"/>
+                <relationship kind="action" name="onDiffText:"/>
+                <relationship kind="action" name="onFullText:"/>
+                <relationship kind="action" name="onStepperDiff:"/>
+                <relationship kind="action" name="onStepperFull:"/>
+                <relationship kind="action" name="onStepperTabs:"/>
+                <relationship kind="action" name="onTabsText:"/>
+                <relationship kind="outlet" name="stepperDiff" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="stepperFull" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="stepperTabs" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="textDiff" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textFull" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textTabs" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="iffViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iffViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="fuelFull:"/>
+                <relationship kind="action" name="fuelTabs:"/>
+                <relationship kind="action" name="sliderBothTanks:"/>
+                <relationship kind="action" name="sliderTouchUpInside:"/>
+                <relationship kind="action" name="sliderTouchUpOutside:"/>
+                <relationship kind="action" name="stepperBothTanks:"/>
+                <relationship kind="action" name="switchOn:"/>
+                <relationship kind="action" name="switchedTank:"/>
+                <relationship kind="outlet" name="buttonFull" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="buttonTabs" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="fuelRuler" candidateClass="FuelRulerView"/>
+                <relationship kind="outlet" name="fullValue" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="inFlightSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="leftFuelTank" candidateClass="FuelTank"/>
+                <relationship kind="outlet" name="leftRightTank" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="optionsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="rightFuelTank" candidateClass="FuelTank"/>
+                <relationship kind="outlet" name="sliderBothTanks" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="stepperBothTanks" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="tabsValue" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textBothTanks" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textDiff" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textUsedFuel" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -60,8 +60,8 @@
 - (iffSaveData*)loadSaveData;
 
 /* Fuel Tanks */
-@property (strong, nonatomic) FuelTank *leftFuelTank;
-@property (strong, nonatomic) FuelTank *rightFuelTank;
+@property (weak, nonatomic) IBOutlet FuelTank *rightFuelTank;
+@property (weak, nonatomic) IBOutlet FuelTank *leftFuelTank;
 
 /* UI Elements */
 @property (weak, nonatomic) IBOutlet UITextField *textBothTanks;

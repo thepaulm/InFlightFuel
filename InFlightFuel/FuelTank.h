@@ -7,7 +7,7 @@
 //
 #import "FuelValue.h"
 
-@interface FuelTank : NSObject //<NSCoding>
+@interface FuelTank : UIImageView //<NSCoding>
 
 @property (copy, nonatomic) FuelValue *level;
 @property (copy, nonatomic) FuelValue *min;
@@ -20,7 +20,10 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) UITextField *label;
 
-- (id)initWithLabel:(NSString*)l;
-- (void)drawRelativeFrame:(UIView*)parent :(CGRect)pct;
+- (id)initWithCoder:(NSCoder *)aDecoder;
+- (void)setLevel:(FuelValue *)level;
+- (void)setMin:(FuelValue *)min;
+- (void)setMax:(FuelValue *)max;
+- (void)setDiff:(FuelValue *)diff;
 
 @end

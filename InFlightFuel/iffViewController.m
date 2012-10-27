@@ -80,9 +80,9 @@
 #pragma mark iffViewController
 
 @implementation iffViewController
-
-@synthesize leftFuelTank;
 @synthesize rightFuelTank;
+@synthesize leftFuelTank;
+
 @synthesize stepperBothTanks;
 @synthesize textUsedFuel;
 
@@ -171,8 +171,8 @@
         }
     }
     
-    [self setLeftFuelTank:[[FuelTank alloc]initWithLabel:[[NSString alloc]initWithFormat:@"Left Tank"]]];
-    [self setRightFuelTank:[[FuelTank alloc]initWithLabel:[[NSString alloc]initWithFormat:@"Right Tank"]]];
+    [self.leftFuelTank setName:[[NSString alloc]initWithFormat:@"Left Tank"]];
+    [self.rightFuelTank setName:[[NSString alloc]initWithFormat:@"Right Tank"]];
     
     [self.leftFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->leftTankLevel]];
     [self.rightFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->rightTankLevel]];
@@ -186,12 +186,6 @@
     /* The minimum movement is 0.1 gals */
     stepperBothTanks.stepValue = 0.1;
     [self setTankDefaults];
-
-    CGRect r = CGRectMake(0.27, 0.9, 0, 0.7);
-    [self.leftFuelTank drawRelativeFrame:self.view :r];
-    
-    r.origin.x = 0.47;
-    [self.rightFuelTank drawRelativeFrame:self.view :r];
     
     [self.sliderBothTanks setTransform:CGAffineTransformRotate(self.sliderBothTanks.transform,270.0/180*M_PI)];
     
@@ -215,8 +209,6 @@
 
 - (void)viewDidUnload
 {
-    [self setLeftFuelTank:nil];
-    [self setRightFuelTank:nil];
     [self setTextBothTanks:nil];
     [self setSliderBothTanks:nil];
     [self setLeftRightTank:nil];
@@ -233,6 +225,8 @@
     [self setTextDiff:nil];
     [self setOptionsButton:nil];
     [self setInFlightSwitch:nil];
+    [self setRightFuelTank:nil];
+    [self setLeftFuelTank:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

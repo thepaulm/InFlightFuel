@@ -40,22 +40,56 @@
 @synthesize max;
 @synthesize diff;
 
-- (id)initWithLabel:(NSString *)l
+- (void)allinit
 {
-    self = [super init];
     /* Use -> here = don't want to copy these initializers */
     self->level = [[FuelValue alloc]initFromInt:0];
     self->min = [[FuelValue alloc]initFromInt:0];
     self->max = [[FuelValue alloc]initFromInt:0];
     self->diff = [[FuelValue alloc]initFromInt:0];
-    self.text = nil;
-    self.tdiff = nil;
-    self.name = l;
+    [self drawRelativeFrame];
+}
+
+- (id)init
+{
+    self = [self init];
+    [self allinit];
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    [self allinit];
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    [self allinit];
+    return self;
+}
+
+- (id)initWithImage:(UIImage *)image
+{
+    self = [super initWithImage:image];
+    [self allinit];
+    return self;
+}
+
+- (void)setName:(NSString *)n
+{
+    self->name = n;
+    self.label.text = self->name;
+}
+
 #define TWIDTH 97
-#define THEIGHT 31
+#define THEIGHT 24
+#define SLIDER_HORIZ_PCT 0.88
+#define SLIDER_VERT_PCT 0.50
+#define SLIDER_LENGTH_PCT 0.95
+
 /*
  CGRect.origin.{x, y}
  CGRect.size.{width, height}
@@ -64,24 +98,27 @@
  new x,y,width,height will be translated.
   
  */
-- (void)drawRelativeFrame:(UIView*)parent :(CGRect)pct
+- (void)drawRelativeFrame
 {
-    CGRect src = [parent frame];
+    CGRect src = [self frame];
     CGRect res = src;
     
     /* Set up the slider */
-    res.size.width = pct.size.height * src.size.height;
+    res.size.width = SLIDER_LENGTH_PCT * src.size.height;
     res.size.height = 1;
-    res.origin.x = pct.origin.x * src.size.width - res.size.width / 2;
-    res.origin.y = pct.origin.y * src.size.height - res.size.height / 2 - res.size.width / 2;
+    res.origin.x = SLIDER_HORIZ_PCT * src.size.width - res.size.width / 2;
+    res.origin.y = SLIDER_VERT_PCT * src.size.height - res.size.height - 10;
     
     [self setSlider:[[UISlider alloc]initWithFrame:res]];
-    [parent addSubview:[self slider]];
+    [self addSubview:[self slider]];
     [self.slider setTransform:CGAffineTransformRotate(self.slider.transform,270.0/180*M_PI)];
     [self.slider setUserInteractionEnabled:FALSE];
     
+    [self.slider resignFirstResponder];
+    [self becomeFirstResponder];
+    
     /* Set up the label */
-    CGRect tr = CGRectMake(res.origin.x + res.size.width / 2 - TWIDTH - 20,
+    CGRect tr = CGRectMake(res.origin.x + res.size.width / 2 - TWIDTH - 15,
                            res.origin.y + res.size.width / 2 - THEIGHT - 4 * THEIGHT,
                            TWIDTH, THEIGHT);
     
@@ -91,7 +128,7 @@
     self.label.text = self.name;
     self.label.font = [UIFont systemFontOfSize:14.0];
     self.label.textAlignment = UITextAlignmentLeft;
-    [parent addSubview:self.label];
+    [self addSubview:self.label];
     
     /* Set up the total avail text */
     tr.origin.y += 2 * THEIGHT;
@@ -101,7 +138,7 @@
     self.text.enabled = FALSE;
     self.text.font = [UIFont systemFontOfSize:14.0];
     self.text.textAlignment = UITextAlignmentLeft;
-    [parent addSubview:self.text];
+    [self addSubview:self.text];
     
     /* Set up the total diff text */
     tr.origin.y += 2 * THEIGHT;
@@ -111,7 +148,7 @@
     self.tdiff.enabled = FALSE;
     self.tdiff.font = [UIFont systemFontOfSize:14.0];
     self.tdiff.textAlignment = UITextAlignmentLeft;
-    [parent addSubview:self.tdiff];
+    [self addSubview:self.tdiff];
     
     [self setMin:self.min];
     [self setMax:self.max];
@@ -142,6 +179,7 @@
         self->max = [l copy];
     }
     self.slider.maximumValue = [l toFloat];
+    self.slider.value = [self.level toFloat];
 }
 
 - (void)setDiff:(FuelValue *)l
