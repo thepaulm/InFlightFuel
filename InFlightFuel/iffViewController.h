@@ -87,5 +87,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonFull;
 - (IBAction)sliderTouchUpInside:(id)sender;
 - (IBAction)sliderTouchUpOutside:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *sliderBackground;
 
 @end

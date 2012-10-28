@@ -124,7 +124,7 @@
                             </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="0.0" maxValue="200" id="0ga-bD-Suk">
                                 <rect key="frame" x="301" y="548" width="570" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="sliderBothTanks:" destination="2" eventType="valueChanged" id="gei-cO-RDx"/>
                                     <action selector="sliderTouchUpInside:" destination="2" eventType="touchUpInside" id="fzv-jp-2Co"/>
@@ -132,7 +132,7 @@
                                 </connections>
                             </slider>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="200" stepValue="0.10000000000000001" id="y8C-Pv-Tea">
-                                <rect key="frame" x="537" y="853" width="94" height="27"/>
+                                <rect key="frame" x="539" y="863" width="94" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="stepperBothTanks:" destination="2" eventType="valueChanged" id="AKk-Nx-g0I"/>
@@ -232,6 +232,7 @@
                         <outlet property="leftRightTank" destination="E0u-hI-pCo" id="U7X-rn-zTf"/>
                         <outlet property="optionsButton" destination="Qdo-9J-Dq2" id="XDY-Jn-eKY"/>
                         <outlet property="rightFuelTank" destination="aHP-Yi-4uP" id="Jd8-jf-2yG"/>
+                        <outlet property="sliderBackground" destination="UOx-yd-ckV" id="NG2-Rx-ZXa"/>
                         <outlet property="sliderBothTanks" destination="0ga-bD-Suk" id="3Pz-Tl-aLA"/>
                         <outlet property="stepperBothTanks" destination="y8C-Pv-Tea" id="0cn-Rj-LwU"/>
                         <outlet property="tabsValue" destination="eNF-Fa-UwX" id="jic-7O-NjT"/>
@@ -405,6 +406,7 @@
                 <relationship kind="outlet" name="leftRightTank" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="optionsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="rightFuelTank" candidateClass="FuelTank"/>
+                <relationship kind="outlet" name="sliderBackground" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="sliderBothTanks" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="stepperBothTanks" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="tabsValue" candidateClass="UITextField"/>

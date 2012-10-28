@@ -80,6 +80,7 @@
 #pragma mark iffViewController
 
 @implementation iffViewController
+@synthesize sliderBackground;
 @synthesize rightFuelTank;
 @synthesize leftFuelTank;
 
@@ -137,6 +138,21 @@
     textBothTanks.text = [both toString];
     sliderBothTanks.value = [both toFloat];
     stepperBothTanks.value = [both toFloat];
+}
+
+#define SLIDER_HEIGHT_PCT 0.95
+
+- (void)setSliderHeightFromBackground
+{
+    CGRect src = self.sliderBackground.frame;
+    CGRect frame = self.sliderBothTanks.frame;
+    frame.size.height = SLIDER_HEIGHT_PCT * (src.size.height - 120);
+    self.sliderBothTanks.frame = frame;
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [self setSliderHeightFromBackground];
 }
 
 - (void)viewDidLoad
@@ -227,6 +243,7 @@
     [self setInFlightSwitch:nil];
     [self setRightFuelTank:nil];
     [self setLeftFuelTank:nil];
+    [self setSliderBackground:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
