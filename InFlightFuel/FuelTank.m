@@ -27,6 +27,12 @@
  }
  */
 
+#define TWIDTH 97
+#define THEIGHT 24
+#define SLIDER_HORIZ_PCT 0.88
+#define SLIDER_VERT_PCT 0.50
+#define SLIDER_LENGTH_PCT 0.95
+
 @implementation FuelTank
 
 @synthesize slider;
@@ -39,6 +45,22 @@
 @synthesize min;
 @synthesize max;
 @synthesize diff;
+
+- (void)layoutSubviews
+{    
+    CGRect src = [self frame];
+    CGRect res = [self transformedSliderFrameFromFrame:src];
+    self.slider.frame = res;
+    
+    res = [self labelFrameFromSliderFrame:res];
+    self.label.frame = res;
+    
+    res.origin.y += 2 * THEIGHT;
+    self.text.frame = res;
+    
+    res.origin.y += 2 * THEIGHT;
+    self.tdiff.frame = res;
+}
 
 - (void)allinit
 {
@@ -84,11 +106,22 @@
     self.label.text = self->name;
 }
 
-#define TWIDTH 97
-#define THEIGHT 24
-#define SLIDER_HORIZ_PCT 0.88
-#define SLIDER_VERT_PCT 0.50
-#define SLIDER_LENGTH_PCT 0.95
+- (CGRect)transformedSliderFrameFromFrame:(CGRect)src
+{
+    CGRect res = src;
+    res.size.height = SLIDER_LENGTH_PCT * src.size.height;
+    res.size.width = 1;
+    res.origin.x = SLIDER_HORIZ_PCT * src.size.width - res.size.width / 2;
+    res.origin.y = SLIDER_VERT_PCT * src.size.height - res.size.height / 2;
+    return res;   
+}
+
+- (CGRect)labelFrameFromSliderFrame:(CGRect)src
+{
+    return CGRectMake(src.origin.x + src.size.width / 2 - TWIDTH - 15,
+                      src.origin.y + src.size.height - THEIGHT - 4 * THEIGHT,
+                      TWIDTH, THEIGHT);    
+}
 
 /*
  CGRect.origin.{x, y}
@@ -99,30 +132,15 @@
   
  */
 - (void)drawRelativeFrame
-{
-    CGRect src = [self frame];
-    CGRect res = src;
-    
+{    
     /* Set up the slider */
-    res.size.width = SLIDER_LENGTH_PCT * src.size.height;
-    res.size.height = 1;
-    res.origin.x = SLIDER_HORIZ_PCT * src.size.width - res.size.width / 2;
-    res.origin.y = SLIDER_VERT_PCT * src.size.height - res.size.height - 10;
-    
-    [self setSlider:[[UISlider alloc]initWithFrame:res]];
+    [self setSlider:[[UISlider alloc]init]];
     [self addSubview:[self slider]];
     [self.slider setTransform:CGAffineTransformRotate(self.slider.transform,270.0/180*M_PI)];
     [self.slider setUserInteractionEnabled:FALSE];
     
-    [self.slider resignFirstResponder];
-    [self becomeFirstResponder];
-    
-    /* Set up the label */
-    CGRect tr = CGRectMake(res.origin.x + res.size.width / 2 - TWIDTH - 15,
-                           res.origin.y + res.size.width / 2 - THEIGHT - 4 * THEIGHT,
-                           TWIDTH, THEIGHT);
-    
-    [self setLabel:[[UITextField alloc]initWithFrame:tr]];
+    /* Set up the label */    
+    [self setLabel:[[UITextField alloc]init]];
     self.label.borderStyle = UITextBorderStyleRoundedRect;
     self.label.enabled = FALSE;
     self.label.text = self.name;
@@ -131,8 +149,7 @@
     [self addSubview:self.label];
     
     /* Set up the total avail text */
-    tr.origin.y += 2 * THEIGHT;
-    [self setText:[[UITextField alloc]initWithFrame:tr]];
+    [self setText:[[UITextField alloc]init]];
     self.text.borderStyle = UITextBorderStyleRoundedRect;
     self.text.adjustsFontSizeToFitWidth = TRUE;
     self.text.enabled = FALSE;
@@ -141,8 +158,7 @@
     [self addSubview:self.text];
     
     /* Set up the total diff text */
-    tr.origin.y += 2 * THEIGHT;
-    [self setTdiff:[[UITextField alloc]initWithFrame:tr]];
+    [self setTdiff:[[UITextField alloc]init]];
     self.tdiff.borderStyle = UITextBorderStyleRoundedRect;
     self.tdiff.adjustsFontSizeToFitWidth = TRUE;
     self.tdiff.enabled = FALSE;
