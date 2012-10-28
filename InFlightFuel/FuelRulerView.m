@@ -34,32 +34,30 @@
 
 - (void)commonInitialize
 {
-    if (self)
-        self->startedTank = 0;
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    [self commonInitialize];
-    return self;
-}
-
-- (id)initFromSliderRect:(UISlider*)slider
-{
-    CGRect frame = slider.frame;
-    float center = frame.origin.x + frame.size.width / 2.0;
-    frame.origin.x = center - TOTAL_WIDTH / 2;
-    frame.size.width = TOTAL_WIDTH;
-    frame.origin.x -= TEXT_AREA_WIDTH;
-    frame.size.width += TEXT_AREA_WIDTH;
-    frame.origin.y -= TEXT_LABEL_HEIGHT;
-    frame.size.height += TEXT_LABEL_HEIGHT;
-    self = [super initWithFrame:frame];
+    self->startedTank = 0;
     self.backgroundColor = [[UIColor alloc]initWithWhite:1.0 alpha:0.0];
     self.userInteractionEnabled = FALSE;
+}
+
+- (id)init
+{
+    self = [super init];
     [self commonInitialize];
     return self;
+}
+
+- (void)layoutFromSliderRect:(UISlider*)slider
+{
+    CGRect src = slider.frame;
+    float center = src.origin.x + src.size.width / 2.0;
+    src.origin.x = center - TOTAL_WIDTH / 2;
+    src.size.width = TOTAL_WIDTH;
+    src.origin.x -= TEXT_AREA_WIDTH;
+    src.size.width += TEXT_AREA_WIDTH;
+    src.origin.y -= TEXT_LABEL_HEIGHT;
+    src.size.height += TEXT_LABEL_HEIGHT;
+    self.frame = src;
+    [self setNeedsDisplay];
 }
 
 - (void)dealloc

@@ -150,9 +150,15 @@
     self.sliderBothTanks.frame = frame;
 }
 
+- (void)layoutRulerFromSlider
+{
+    [self.fuelRuler layoutFromSliderRect:self->sliderBothTanks];
+}
+
 - (void)viewWillLayoutSubviews
 {
     [self setSliderHeightFromBackground];
+    [self layoutRulerFromSlider];
 }
 
 - (void)viewDidLoad
@@ -204,8 +210,9 @@
     [self setTankDefaults];
     
     [self.sliderBothTanks setTransform:CGAffineTransformRotate(self.sliderBothTanks.transform,270.0/180*M_PI)];
-    
-    [self setFuelRuler:[[FuelRulerView alloc]initFromSliderRect:self->sliderBothTanks]];
+
+    [self setFuelRuler:[[FuelRulerView alloc]init]];
+     
     [self.view addSubview:self.fuelRuler];
    
     [self updateTankDiffs];
