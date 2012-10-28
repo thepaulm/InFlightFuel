@@ -20,7 +20,6 @@
 {
     self = [super init];
     self->leftTankLevel = self->rightTankLevel = 0;
-    self->valueTabs = self->valueFull = self->targetDiff = 0;
     self->activeTank = 0;
     self->valueStartedFuel = 0;
     self->isOn = 0;
@@ -31,9 +30,6 @@
 
 #define LEFT_TANK_LEVEL @"LeftTankLevel"
 #define RIGHT_TANK_LEVEL @"RightTankLevel"
-#define TABS_TANK_LEVEL @"TabsTankLevel"
-#define FULL_TANK_LEVEL @"FullTankLevel"
-#define TARGET_TANK_DIFF @"TargetTankDiff"
 #define ACTIVE_TANK @"ActiveTank"
 #define STARTED_FUEL @"StartedFuel"
 #define IS_IN_FLIGHT @"IsInFlight"
@@ -46,9 +42,6 @@
     @try {
         self->leftTankLevel = [aDecoder decodeIntForKey:LEFT_TANK_LEVEL];
         self->rightTankLevel = [aDecoder decodeIntForKey:RIGHT_TANK_LEVEL];
-        self->valueTabs = [aDecoder decodeIntForKey:TABS_TANK_LEVEL];
-        self->valueFull = [aDecoder decodeIntForKey:FULL_TANK_LEVEL];
-        self->targetDiff = [aDecoder decodeIntForKey:TARGET_TANK_DIFF];
         self->activeTank = [aDecoder decodeIntForKey:ACTIVE_TANK];
         self->valueStartedFuel = [aDecoder decodeIntForKey:STARTED_FUEL];
         self->isOn = [aDecoder decodeIntForKey:IS_IN_FLIGHT];
@@ -64,15 +57,47 @@
 {
     [aCoder encodeInt:self->leftTankLevel forKey:LEFT_TANK_LEVEL];
     [aCoder encodeInt:self->rightTankLevel forKey:RIGHT_TANK_LEVEL];
-    [aCoder encodeInt:self->valueTabs forKey:TABS_TANK_LEVEL];
-    [aCoder encodeInt:self->valueFull forKey:FULL_TANK_LEVEL];
-    [aCoder encodeInt:self->targetDiff forKey:TARGET_TANK_DIFF];
     [aCoder encodeInt:self->activeTank forKey:ACTIVE_TANK];
     [aCoder encodeInt:self->valueStartedFuel forKey:STARTED_FUEL];
     [aCoder encodeInt:self->isOn forKey:IS_IN_FLIGHT];
     [aCoder encodeInt:self->startedTank forKey:START_TANK];
     [aCoder encodeObject:self.switchOverPoints forKey:SWITCH_OVER_POINTS];
 }
+@end
+
+@implementation iffSaveSettings
+
+- (id)init
+{
+    self = [super init];
+    self->valueTabs = self->valueFull = self->targetDiff = 0;
+    return self;
+}
+
+#define TABS_TANK_LEVEL @"TabsTankLevel"
+#define FULL_TANK_LEVEL @"FullTankLevel"
+#define TARGET_TANK_DIFF @"TargetTankDiff"
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [self init];
+    @try {
+        self->valueTabs = [aDecoder decodeIntForKey:TABS_TANK_LEVEL];
+        self->valueFull = [aDecoder decodeIntForKey:FULL_TANK_LEVEL];
+        self->targetDiff = [aDecoder decodeIntForKey:TARGET_TANK_DIFF];
+    }
+    @catch (NSException *e) {
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeInt:self->valueTabs forKey:TABS_TANK_LEVEL];
+    [aCoder encodeInt:self->valueFull forKey:FULL_TANK_LEVEL];
+    [aCoder encodeInt:self->targetDiff forKey:TARGET_TANK_DIFF];
+}
+
 @end
 
 
@@ -178,13 +203,19 @@
     self->targetDiff = [[FuelValue alloc]initFromValue:85];
     
     iffSaveData *sd = [self loadSaveData];
+    iffSaveSettings *ss = [self loadSaveSettings];
 
-    if (sd->valueTabs == 0)
-        sd->valueTabs = [self->valueTabs toValue];
-    if (sd->valueFull == 0)
-        sd->valueFull = [self->valueFull toValue];
-    if (sd->targetDiff == 0)
-        sd->targetDiff = [self->targetDiff toValue];
+    if (sd == nil)
+        sd = [[iffSaveData alloc]init];
+    if (ss == nil)
+        ss = [[iffSaveSettings alloc]init];
+    
+    if (ss->valueTabs == 0)
+        ss->valueTabs = [self->valueTabs toValue];
+    if (ss->valueFull == 0)
+        ss->valueFull = [self->valueFull toValue];
+    if (ss->targetDiff == 0)
+        ss->targetDiff = [self->targetDiff toValue];
     
     self->startTank = sd->startedTank;
     if (sd.switchOverPoints != nil) {
@@ -199,9 +230,9 @@
     [self.leftFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->leftTankLevel]];
     [self.rightFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->rightTankLevel]];
     
-    self.valueTabs = [[FuelValue alloc]initFromValue:sd->valueTabs];
-    self.valueFull = [[FuelValue alloc]initFromValue:sd->valueFull];
-    self.targetDiff = [[FuelValue alloc]initFromValue:sd->targetDiff];
+    self.valueTabs = [[FuelValue alloc]initFromValue:ss->valueTabs];
+    self.valueFull = [[FuelValue alloc]initFromValue:ss->valueFull];
+    self.targetDiff = [[FuelValue alloc]initFromValue:ss->targetDiff];
     self.leftRightTank.selectedSegmentIndex = sd->activeTank;
     self.startedFuel = [[FuelValue alloc]initFromValue:sd->valueStartedFuel];
 
@@ -230,6 +261,11 @@
     }
 }
 
+- (void)viewWillUnload
+{
+    [self saveLastTankValues];
+}
+
 - (void)viewDidUnload
 {
     [self setTextBothTanks:nil];
@@ -251,6 +287,12 @@
     [self setRightFuelTank:nil];
     [self setLeftFuelTank:nil];
     [self setSliderBackground:nil];
+    [self setStartedFuel:nil];
+    [self setValueTabs:nil];
+    [self setValueFull:nil];
+    [self setMaxEachTank:nil];
+    [self setTargetDiff:nil];
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -455,7 +497,8 @@
 #pragma mark -
 #pragma mark Saving and Loading
 
-#define ARCHIVE_FILE @"IffData"
+#define DATA_FILE @"IffData"
+#define SETTINGS_FILE @"IffSettings"
 
 - (NSString *)pathForDataFile
 {
@@ -465,19 +508,26 @@
     if (documentDir)
         path = [documentDir objectAtIndex:0];
     
-    return [NSString stringWithFormat:@"%@/%@", path, ARCHIVE_FILE];
+    return [NSString stringWithFormat:@"%@/%@", path, DATA_FILE];
+}
+
+- (NSString *)pathForSettingsFile
+{
+    NSArray *documentDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = nil;
+    
+    if (documentDir)
+        path = [documentDir objectAtIndex:0];
+    
+    return [NSString stringWithFormat:@"%@/%@", path, SETTINGS_FILE];
 }
 
 - (void)saveLastTankValues
 {
-    //NSLog(@"Saving ...");
     iffSaveData *sd = [[iffSaveData alloc]init];
     
     sd->leftTankLevel = [self.leftFuelTank.level toValue];
     sd->rightTankLevel = [self.rightFuelTank.level toValue];
-    sd->valueTabs = [self.valueTabs toValue];
-    sd->valueFull = [self.valueFull toValue];
-    sd->targetDiff = [self.targetDiff toValue];
     sd->activeTank = self.leftRightTank.selectedSegmentIndex;
     sd->valueStartedFuel = [self.startedFuel toValue];
     sd->isOn = self->ison;
@@ -488,11 +538,29 @@
     [NSKeyedArchiver archiveRootObject:sd toFile:archivePath];
 }
 
+- (void)saveLastSettings
+{
+    iffSaveSettings *ss = [[iffSaveSettings alloc]init];
+    ss->valueTabs = [self.valueTabs toValue];
+    ss->valueFull = [self.valueFull toValue];
+    ss->targetDiff = [self.targetDiff toValue];
+    
+    NSString *archivePath = [self pathForSettingsFile];
+    [NSKeyedArchiver archiveRootObject:ss toFile:archivePath];
+}
+
 - (iffSaveData*)loadSaveData
 {
     NSString *archivePath = [self pathForDataFile];
     iffSaveData *sd = [NSKeyedUnarchiver unarchiveObjectWithFile:archivePath];
     return sd;
+}
+
+- (iffSaveSettings*)loadSaveSettings
+{
+    NSString *archivePath = [self pathForSettingsFile];
+    iffSaveSettings *ss = [NSKeyedUnarchiver unarchiveObjectWithFile:archivePath];
+    return ss;
 }
 
 #pragma mark -
@@ -515,7 +583,7 @@
     [self setValueFull: controller.valueFull];
     [self setTargetDiff:controller.valueDiff];
     [self setValuesDefaults];
-    [self saveLastTankValues];
+    [self saveLastSettings];
     [controller dismissModalViewControllerAnimated:TRUE];
 }
 

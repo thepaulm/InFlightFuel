@@ -20,9 +20,6 @@
     @public
     int leftTankLevel;
     int rightTankLevel;
-    int valueTabs;
-    int valueFull;
-    int targetDiff;
     int activeTank;
     int valueStartedFuel;
     int isOn;
@@ -30,6 +27,20 @@
 }
 
 @property (copy, nonatomic) NSMutableArray *switchOverPoints;
+
+- (id)init;
+- (id)initWithCoder:(NSCoder *)aDecoder;
+- (void)encodeWithCoder:(NSCoder *)aCoder;
+
+@end
+
+@interface iffSaveSettings : NSObject <NSCoding>
+{
+    @public
+    int valueTabs;
+    int valueFull;
+    int targetDiff;
+}
 
 - (id)init;
 - (id)initWithCoder:(NSCoder *)aDecoder;
