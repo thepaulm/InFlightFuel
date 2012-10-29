@@ -18,5 +18,6 @@
 
 @property (weak, nonatomic) id <iffInfoViewControllerDelegate> delegate;
 - (IBAction)clickDone:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *text;
 
 @end
