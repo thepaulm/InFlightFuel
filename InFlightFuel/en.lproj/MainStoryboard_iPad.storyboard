@@ -291,7 +291,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="afi-M0-Xzc">
-                                <rect key="frame" x="81" y="25" width="607" height="384"/>
+                                <rect key="frame" x="41" y="25" width="686" height="449"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.89000000000000001" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
