@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "iffOptionsViewController.h"
+#import "iffInfoViewController.h"
 #import "FuelTank.h"
 #import "FuelValue.h"
 #import "FuelRulerView.h"
@@ -51,7 +52,8 @@
 #pragma mark -
 #pragma mark iffViewController
 
-@interface iffViewController : UIViewController <iffOptionsViewControllerDelegate>
+@interface iffViewController : UIViewController
+    <iffOptionsViewControllerDelegate, iffInfoViewControllerDelegate>
 {
     BOOL ison;
     NSMutableArray *switchOverPoints;

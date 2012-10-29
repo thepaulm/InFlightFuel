@@ -573,6 +573,9 @@
         [pOther setDelegate:self];
         /* The pOther stores these as type "copy" */
         [pOther initializeValues:self.valueTabs valueFull:self.valueFull valueDiff:self.targetDiff];
+    } else if ([[segue identifier] isEqualToString:@"ShowIffInfo"]) {
+        iffInfoViewController* pOther = [segue destinationViewController];
+        [pOther setDelegate:self];
     }
 }
 
@@ -584,6 +587,11 @@
     [self setTargetDiff:controller.valueDiff];
     [self setValuesDefaults];
     [self saveLastSettings];
+    [controller dismissModalViewControllerAnimated:TRUE];
+}
+
+- (void)iffInfoViewControllerDidFinish:(iffInfoViewController *)controller
+{
     [controller dismissModalViewControllerAnimated:TRUE];
 }
 

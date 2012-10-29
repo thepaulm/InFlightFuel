@@ -25,6 +25,7 @@
 		1AD115BC159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */; };
 		1AD115C1159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */; };
 		1ADD4B4315B127A9000A083B /* FuelTank.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADD4B4215B127A9000A083B /* FuelTank.m */; };
+		1AE72CF1163E187500C38195 /* iffInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE72CF0163E187500C38195 /* iffInfoViewController.m */; };
 		1AF5F9AD15EDE8FE001AEE83 /* iffOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5F9AC15EDE8FE001AEE83 /* iffOptionsViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,8 @@
 		1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dark_Brushed_Metal_by_halfthelaw.jpg; sourceTree = "<group>"; };
 		1ADD4B4115B127A9000A083B /* FuelTank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuelTank.h; sourceTree = "<group>"; };
 		1ADD4B4215B127A9000A083B /* FuelTank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuelTank.m; sourceTree = "<group>"; };
+		1AE72CEF163E187500C38195 /* iffInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iffInfoViewController.h; sourceTree = "<group>"; };
+		1AE72CF0163E187500C38195 /* iffInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iffInfoViewController.m; sourceTree = "<group>"; };
 		1AF5F9AB15EDE8FD001AEE83 /* iffOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iffOptionsViewController.h; sourceTree = "<group>"; };
 		1AF5F9AC15EDE8FE001AEE83 /* iffOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iffOptionsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +126,8 @@
 				1ABEC02E15982B3C00806748 /* iffAppDelegate.m */,
 				1ABEC03015982B3C00806748 /* MainStoryboard_iPhone.storyboard */,
 				1ABEC03315982B3C00806748 /* MainStoryboard_iPad.storyboard */,
+				1AE72CEF163E187500C38195 /* iffInfoViewController.h */,
+				1AE72CF0163E187500C38195 /* iffInfoViewController.m */,
 				1AF5F9AB15EDE8FD001AEE83 /* iffOptionsViewController.h */,
 				1AF5F9AC15EDE8FE001AEE83 /* iffOptionsViewController.m */,
 				1ABEC03615982B3C00806748 /* iffViewController.h */,
@@ -230,6 +235,7 @@
 				1AF5F9AD15EDE8FE001AEE83 /* iffOptionsViewController.m in Sources */,
 				1A2936541612C3E20079B9E2 /* FuelValue.m in Sources */,
 				1A52F8CB16247A0D00535FAD /* FuelRulerView.m in Sources */,
+				1AE72CF1163E187500C38195 /* iffInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
