@@ -327,6 +327,7 @@
 				GCC_PREFIX_HEADER = "InFlightFuel/InFlightFuel-Prefix.pch";
 				INFOPLIST_FILE = "InFlightFuel/InFlightFuel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -338,6 +339,7 @@
 				GCC_PREFIX_HEADER = "InFlightFuel/InFlightFuel-Prefix.pch";
 				INFOPLIST_FILE = "InFlightFuel/InFlightFuel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
