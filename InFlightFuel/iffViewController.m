@@ -572,7 +572,8 @@
         iffOptionsViewController* pOther = [segue destinationViewController];
         [pOther setDelegate:self];
         /* The pOther stores these as type "copy" */
-        [pOther initializeValues:self.valueTabs valueFull:self.valueFull valueDiff:self.targetDiff];
+        [pOther initializeValues:self.valueTabs valueFull:self.valueFull valueDiff:self.targetDiff
+               valueInitialTimer:nil valueSubsequenTimer:nil];
     } else if ([[segue identifier] isEqualToString:@"ShowIffInfo"]) {
         iffInfoViewController* pOther = [segue destinationViewController];
         [pOther setDelegate:self];
