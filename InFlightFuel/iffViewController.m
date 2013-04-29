@@ -9,6 +9,20 @@
 #import "iffViewController.h"
 #import "FuelTank.h"
 
+NSValue *
+valueFromInteger(NSInteger i)
+{
+    return [NSValue valueWithBytes:&i objCType:@encode(NSInteger)];
+}
+
+NSInteger
+integerFromValue(NSValue *v)
+{
+    NSInteger i;
+    [v getValue:&i];
+    return i;
+}
+
 #pragma mark -
 #pragma mark IffSaveData
 
@@ -39,6 +53,9 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [self init];
+    /* Keep these in the order they were introduced. If we fail to load something
+     it means the earlier ones will be good. We should be using reasonable
+     defaults */
     @try {
         self->leftTankLevel = [aDecoder decodeIntForKey:LEFT_TANK_LEVEL];
         self->rightTankLevel = [aDecoder decodeIntForKey:RIGHT_TANK_LEVEL];
@@ -48,8 +65,8 @@
         self->startedTank = [aDecoder decodeIntForKey:START_TANK];
         self.switchOverPoints = [aDecoder decodeObjectForKey:SWITCH_OVER_POINTS];
     }
-    @catch (NSException *e) {
-    }
+    @catch (NSException *e) {}
+
     return self;
 }
 
@@ -67,26 +84,42 @@
 
 @implementation iffSaveSettings
 
+#define BAD_INT (-1)
+
 - (id)init
 {
     self = [super init];
     self->valueTabs = self->valueFull = self->targetDiff = 0;
+    self->initialTimer = self->subsequentTimer = BAD_INT;
     return self;
 }
 
 #define TABS_TANK_LEVEL @"TabsTankLevel"
 #define FULL_TANK_LEVEL @"FullTankLevel"
 #define TARGET_TANK_DIFF @"TargetTankDiff"
+#define INITIAL_TIMER @"InitialTimer"
+#define SUBSEQUENT_TIMER @"SubsequentTimer"
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [self init];
+    /* Keep these in the order they were introduced. If we fail to load something
+     it means the earlier ones will be good. We should be using reasonable
+     defaults */
     @try {
         self->valueTabs = [aDecoder decodeIntForKey:TABS_TANK_LEVEL];
         self->valueFull = [aDecoder decodeIntForKey:FULL_TANK_LEVEL];
         self->targetDiff = [aDecoder decodeIntForKey:TARGET_TANK_DIFF];
     }
-    @catch (NSException *e) {
+    @catch (NSException *e) {}
+    
+    if ([aDecoder containsValueForKey:INITIAL_TIMER] &&
+        [aDecoder containsValueForKey:SUBSEQUENT_TIMER]) {
+        @try {
+            self->initialTimer = [aDecoder decodeIntForKey:INITIAL_TIMER];
+            self->subsequentTimer = [aDecoder decodeIntForKey:SUBSEQUENT_TIMER];
+        }
+        @catch (NSException *e) {}
     }
     return self;
 }
@@ -131,6 +164,9 @@
 @synthesize valueFull;
 @synthesize maxEachTank;
 @synthesize targetDiff;
+
+@synthesize valueInitialTimer;
+@synthesize valueSubsequentTimer;
 
 - (void)updateTankDiffs
 {
@@ -194,6 +230,8 @@
     self->switchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
     self->projectedSwitchOverPoints = [[NSMutableArray alloc]initWithCapacity:1];
     
+    /* These are where we set the non-stored defaults. There's probably
+       a better place for these */
     self->ison = FALSE;
     /* Use -> here = don't want to copy these initializers */
     self->startedFuel = [[FuelValue alloc]initFromInt:0];
@@ -201,21 +239,30 @@
     self->valueFull = [[FuelValue alloc]initFromInt:92];
     self->maxEachTank = nil;
     self->targetDiff = [[FuelValue alloc]initFromValue:85];
+    self->valueInitialTimer = valueFromInteger(1);
+    self->valueSubsequentTimer = valueFromInteger(2);
     
+    /* Load the data and settings from storage */
     iffSaveData *sd = [self loadSaveData];
     iffSaveSettings *ss = [self loadSaveSettings];
 
+    /* If we failed to load either, make a default structure */
     if (sd == nil)
         sd = [[iffSaveData alloc]init];
     if (ss == nil)
         ss = [[iffSaveSettings alloc]init];
     
+    /* For anything we didn't load, use our defaults instead */
     if (ss->valueTabs == 0)
         ss->valueTabs = [self->valueTabs toValue];
     if (ss->valueFull == 0)
         ss->valueFull = [self->valueFull toValue];
     if (ss->targetDiff == 0)
         ss->targetDiff = [self->targetDiff toValue];
+    if (ss->initialTimer == BAD_INT)
+        ss->initialTimer = integerFromValue(self->valueInitialTimer);
+    if (ss->subsequentTimer == BAD_INT)
+        ss->subsequentTimer = integerFromValue(self->valueSubsequentTimer);
     
     self->startTank = sd->startedTank;
     if (sd.switchOverPoints != nil) {
@@ -227,12 +274,17 @@
     [self.leftFuelTank setName:[[NSString alloc]initWithFormat:@"Left Tank"]];
     [self.rightFuelTank setName:[[NSString alloc]initWithFormat:@"Right Tank"]];
     
+    /* Now we use the data and settings structures. These should be either loaded
+       or defaults at this point */
     [self.leftFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->leftTankLevel]];
     [self.rightFuelTank setLevel:[[FuelValue alloc]initFromValue:sd->rightTankLevel]];
     
     self.valueTabs = [[FuelValue alloc]initFromValue:ss->valueTabs];
     self.valueFull = [[FuelValue alloc]initFromValue:ss->valueFull];
     self.targetDiff = [[FuelValue alloc]initFromValue:ss->targetDiff];
+    self.valueInitialTimer = valueFromInteger(ss->initialTimer);
+    self.valueSubsequentTimer = valueFromInteger(ss->subsequentTimer);
+    
     self.leftRightTank.selectedSegmentIndex = sd->activeTank;
     self.startedFuel = [[FuelValue alloc]initFromValue:sd->valueStartedFuel];
 
@@ -292,6 +344,8 @@
     [self setValueFull:nil];
     [self setMaxEachTank:nil];
     [self setTargetDiff:nil];
+    [self setValueInitialTimer:nil];
+    [self setValueSubsequentTimer:nil];
     
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -573,7 +627,7 @@
         [pOther setDelegate:self];
         /* The pOther stores these as type "copy" */
         [pOther initializeValues:self.valueTabs valueFull:self.valueFull valueDiff:self.targetDiff
-               valueInitialTimer:nil valueSubsequenTimer:nil];
+               valueInitialTimer:self.valueInitialTimer valueSubsequenTimer:self.valueSubsequentTimer];
     } else if ([[segue identifier] isEqualToString:@"ShowIffInfo"]) {
         iffInfoViewController* pOther = [segue destinationViewController];
         [pOther setDelegate:self];
@@ -586,6 +640,8 @@
     [self setValueTabs: controller.valueTabs];
     [self setValueFull: controller.valueFull];
     [self setTargetDiff:controller.valueDiff];
+    [self setValueInitialTimer:controller.valueInitialTimer];
+    [self setValueSubsequentTimer:controller.valueSubsequentTimer];
     [self setValuesDefaults];
     [self saveLastSettings];
     [controller dismissModalViewControllerAnimated:TRUE];

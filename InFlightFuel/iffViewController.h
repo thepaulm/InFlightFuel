@@ -41,6 +41,8 @@
     int valueTabs;
     int valueFull;
     int targetDiff;
+    int initialTimer;
+    int subsequentTimer;
 }
 
 - (id)init;
@@ -67,6 +69,8 @@
 @property (copy, nonatomic) FuelValue *valueFull;
 @property (copy, nonatomic) FuelValue *maxEachTank;
 @property (copy, nonatomic) FuelValue *targetDiff;
+@property (copy, nonatomic) NSValue *valueInitialTimer;
+@property (copy, nonatomic) NSValue *valueSubsequentTimer;
 
 /* Save Data */
 - (void)saveLastTankValues;
