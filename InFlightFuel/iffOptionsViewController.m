@@ -169,21 +169,25 @@
 - (IBAction)onTabsText:(id)sender {
     self.valueTabs = [[FuelValue alloc]initFromFloat:[((UITextField*)sender).text floatValue]];
     stepperTabs.value = [self.valueTabs toFloat];
+    [self updateTextTabs];
 }
 
 - (IBAction)onFullText:(id)sender {
     self.valueFull = [[FuelValue alloc]initFromFloat:[((UITextField*)sender).text floatValue]];
     stepperFull.value = [self.valueFull toFloat];
+    [self updateTextFull];
 }
 
 - (IBAction)onDiffText:(id)sender {
     self.valueDiff = [[FuelValue alloc]initFromFloat:[((UITextField*)sender).text floatValue]];
     stepperDiff.value = [self.valueDiff toFloat];
+    [self updateTextDiff];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)sender
 {
-    if (sender == self.textFull || sender == self.textTabs || sender == self.textDiff) {
+    if (sender == self.textFull || sender == self.textTabs || sender == self.textDiff ||
+        sender == self.textInitialTimer || sender == self.textSubsequentTimer) {
         [sender resignFirstResponder];
     }
     return TRUE;
@@ -201,8 +205,16 @@
 }
 
 - (IBAction)onInitialTimerText:(id)sender {
+    NSInteger i = [((UITextField *)sender).text integerValue];
+    self.valueInitialTimer = [NSValue valueWithBytes:&i objCType:@encode(NSInteger)];
+    [self.stepperInitialTimer setValue:i];
+    [self updateTextIT];
 }
 
 - (IBAction)onSubsequentTimerText:(id)sender {
+    NSInteger i = [((UITextField *)sender).text integerValue];
+    self.valueSubsequentTimer = [NSValue valueWithBytes:&i objCType:@encode(NSInteger)];
+    [self.stepperSubsequentTimer setValue:i];
+    [self updateTextST];
 }
 @end

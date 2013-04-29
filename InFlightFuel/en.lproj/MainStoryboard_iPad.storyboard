@@ -456,7 +456,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="onStepperDiff:" destination="HWa-fL-Fj2" eventType="valueChanged" id="JpS-uj-KuA"/>
-                                    <action selector="onStepperFull:" destination="HWa-fL-Fj2" eventType="valueChanged" id="jIW-e5-dsv"/>
                                 </connections>
                             </stepper>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="900" id="A9J-Nw-n0s">
