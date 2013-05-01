@@ -220,6 +220,17 @@
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Timer" borderStyle="line" textAlignment="center" minimumFontSize="17" id="nAM-UT-2kE">
+                                <rect key="frame" x="363" y="72" width="55" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.94242987580000004" green="0.94310052710000003" blue="0.9419357116" alpha="1" colorSpace="deviceRGB"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="A2A-d7-nQD">
                                 <rect key="frame" x="357" y="955" width="18" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -235,6 +246,13 @@
                                     <segue destination="WVJ-a7-8Ia" kind="modal" identifier="ShowIffInfo" id="Sxq-Fi-Cul"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1:20:12" borderStyle="roundedRect" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="17" id="1Ed-I3-NML">
+                                <rect key="frame" x="426" y="69" width="88" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.48688009510869568" green="0.48688009510869568" blue="0.48688009510869568" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -254,6 +272,7 @@
                         <outlet property="textBothTanks" destination="wMD-7B-Mk5" id="MlO-IP-AhB"/>
                         <outlet property="textDiff" destination="SUA-Ab-miX" id="WKc-Sr-LqB"/>
                         <outlet property="textUsedFuel" destination="n4h-6T-qsw" id="mEg-xp-PYX"/>
+                        <outlet property="timerText" destination="1Ed-I3-NML" id="v2b-UD-QBi"/>
                     </connections>
                 </viewController>
             </objects>
@@ -589,6 +608,7 @@
                 <relationship kind="outlet" name="textBothTanks" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="textDiff" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="textUsedFuel" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="timerText" candidateClass="UITextField"/>
             </relationships>
         </class>
     </classes>

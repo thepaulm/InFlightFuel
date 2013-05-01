@@ -61,6 +61,7 @@
     NSMutableArray *switchOverPoints;
     NSMutableArray *projectedSwitchOverPoints;
     int startTank;
+    int runningTimer; // 0 is off, 1 is initial, 2 is subsequent
 }
 
 /* Value Elements */
@@ -71,6 +72,9 @@
 @property (copy, nonatomic) FuelValue *targetDiff;
 @property (copy, nonatomic) NSValue *valueInitialTimer;
 @property (copy, nonatomic) NSValue *valueSubsequentTimer;
+
+@property (strong, nonatomic) NSDate *timerStart;
+@property (strong, nonatomic) NSTimer *timer;
 
 /* Save Data */
 - (void)saveLastTankValues;
@@ -87,6 +91,7 @@
 @property (strong, nonatomic) IBOutlet FuelRulerView *fuelRuler;
 - (IBAction)switchedTank:(id)sender;
 @property (weak, nonatomic) IBOutlet UISwitch *inFlightSwitch;
+@property (weak, nonatomic) IBOutlet UITextField *timerText;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *leftRightTank;
 - (IBAction)switchOn:(id)sender;

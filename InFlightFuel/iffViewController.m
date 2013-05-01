@@ -150,6 +150,7 @@ integerFromValue(NSValue *v)
 @synthesize sliderBothTanks;
 @synthesize fuelRuler;
 @synthesize inFlightSwitch;
+@synthesize timerText;
 @synthesize leftRightTank;
 
 @synthesize optionsButton;
@@ -167,6 +168,9 @@ integerFromValue(NSValue *v)
 
 @synthesize valueInitialTimer;
 @synthesize valueSubsequentTimer;
+
+@synthesize timerStart;
+@synthesize timer;
 
 - (void)updateTankDiffs
 {
@@ -239,8 +243,11 @@ integerFromValue(NSValue *v)
     self->valueFull = [[FuelValue alloc]initFromInt:92];
     self->maxEachTank = nil;
     self->targetDiff = [[FuelValue alloc]initFromValue:85];
-    self->valueInitialTimer = valueFromInteger(1);
-    self->valueSubsequentTimer = valueFromInteger(2);
+    self->valueInitialTimer = valueFromInteger(0);
+    self->valueSubsequentTimer = valueFromInteger(0);
+    self->runningTimer = 0;
+    self->timerStart = nil;
+    self->timer = nil;
     
     /* Load the data and settings from storage */
     iffSaveData *sd = [self loadSaveData];
@@ -310,6 +317,8 @@ integerFromValue(NSValue *v)
     if (self->ison) {
         self.inFlightSwitch.on = TRUE;
         [self isInFlight];
+    } else {
+        [self timerStopFlight];
     }
 }
 
@@ -346,7 +355,10 @@ integerFromValue(NSValue *v)
     [self setTargetDiff:nil];
     [self setValueInitialTimer:nil];
     [self setValueSubsequentTimer:nil];
+    [self setTimerStart:nil];
+    [self setTimer:nil];
     
+    [self setTimerText:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -360,6 +372,79 @@ integerFromValue(NSValue *v)
         return YES;
     }*/
     return YES;
+}
+
+- (void)updateTimerText
+{
+    NSDate *now = [NSDate date];
+    NSTimeInterval i = [now timeIntervalSinceDate:self.timerStart];
+    int remaining_seconds = 0;
+    if (self->runningTimer == 1)
+        remaining_seconds = integerFromValue(self.valueInitialTimer) * 60;
+    else if (self->runningTimer == 2)
+        remaining_seconds = integerFromValue(self.valueSubsequentTimer) * 60;
+    
+    remaining_seconds -= (int)i;
+    int hrs = remaining_seconds / 3600;
+    remaining_seconds -= 3600 * hrs;
+    int mins = remaining_seconds / 60;
+    remaining_seconds -= 60 * mins;
+    int secs = remaining_seconds;
+    
+    NSString *t;
+    if (hrs) {
+        t = [[NSString alloc]initWithFormat:@"%.2d:%.2d:%.2d", hrs, mins, secs];
+    } else {
+        t = [[NSString alloc]initWithFormat:@"%.2d:%.2d", mins, secs];
+    }
+    [self.timerText setText:t];
+    [self.timerText setNeedsDisplay];
+}
+
+- (void)timerSeconds :(NSTimer *)t
+{
+    [self updateTimerText];
+}
+
+- (void)resetTimer
+{
+    if (self->runningTimer == 1)
+        self->runningTimer = 2;
+    self.timerStart = [NSDate date];
+    [self updateTimerText];
+}
+
+- (void)timerInFlight
+{
+    if (integerFromValue(self.valueInitialTimer) == 0 &&
+        integerFromValue(self.valueSubsequentTimer) == 0) {
+        [self.timerText setText:[[NSString alloc]initWithFormat:@"Disabled"]];
+        self->runningTimer = 0;
+    } else {
+        if (integerFromValue(self.valueInitialTimer) != 0) {
+            self->runningTimer = 1;
+        } else if (integerFromValue(self.valueSubsequentTimer) != 0) {
+            self->runningTimer = 2;
+        }
+        /* Don't call resetTimer here - it also flips the timer */
+        self.timerStart = [NSDate date];
+        [self updateTimerText];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                              target:self
+                              selector:@selector(timerSeconds:)
+                              userInfo:nil
+                              repeats:true];
+    }
+}
+
+- (void)timerStopFlight
+{
+    [self.timerText setText:[[NSString alloc]initWithFormat:@"Off"]];
+    self->runningTimer = 0;
+    if (self.timer) {
+        [self.timer invalidate];
+        [self setTimer:nil];
+    }
 }
 
 - (void)sliderDoneSliding
@@ -447,6 +532,7 @@ integerFromValue(NSValue *v)
     [self->fuelRuler setSwitchOverPoints:self->switchOverPoints];
     [self recalcProjected];
     [self->fuelRuler setNeedsDisplay];
+    [self timerInFlight];
 }
 
 - (IBAction)switchOn:(id)sender {
@@ -460,6 +546,7 @@ integerFromValue(NSValue *v)
         [self->fuelRuler setSwitchOverPoints:nil];
         [self->fuelRuler setProjectedSwitchOverPoints:nil];
         [self->fuelRuler setNeedsDisplay];
+        [self timerStopFlight];
     } else {
         [self resetUsedFuel];
         if (leftRightTank.selectedSegmentIndex == 0) {
@@ -546,6 +633,7 @@ integerFromValue(NSValue *v)
     [self saveLastTankValues];
 
     [self->fuelRuler setNeedsDisplay];
+    [self resetTimer];
 }
 
 #pragma mark -
