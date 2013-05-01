@@ -13,6 +13,7 @@
 		1A52F8CB16247A0D00535FAD /* FuelRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A52F8CA16247A0D00535FAD /* FuelRulerView.m */; };
 		1AA4CB9F163E2C620085B99D /* Iff.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AA4CB9E163E2C620085B99D /* Iff.png */; };
 		1AB51B39160AE6570059953D /* wallpaper-cf2-1440x900.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB51B38160AE6570059953D /* wallpaper-cf2-1440x900.png */; };
+		1AB8438817318BBF0021641C /* FuelSliderLevel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB8438717318BBF0021641C /* FuelSliderLevel.png */; };
 		1ABEC01F15982B3C00806748 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEC01E15982B3C00806748 /* UIKit.framework */; };
 		1ABEC02115982B3C00806748 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEC02015982B3C00806748 /* Foundation.framework */; };
 		1ABEC02315982B3C00806748 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEC02215982B3C00806748 /* CoreGraphics.framework */; };
@@ -51,6 +52,7 @@
 		1A52F8CA16247A0D00535FAD /* FuelRulerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuelRulerView.m; sourceTree = "<group>"; };
 		1AA4CB9E163E2C620085B99D /* Iff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Iff.png; sourceTree = "<group>"; };
 		1AB51B38160AE6570059953D /* wallpaper-cf2-1440x900.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wallpaper-cf2-1440x900.png"; path = "../../../../Downloads/wallpaper-cf2-1440x900.png"; sourceTree = "<group>"; };
+		1AB8438717318BBF0021641C /* FuelSliderLevel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FuelSliderLevel.png; sourceTree = "<group>"; };
 		1ABEC01A15982B3C00806748 /* InFlightFuel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InFlightFuel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEC01E15982B3C00806748 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1ABEC02015982B3C00806748 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -144,6 +146,7 @@
 		1ABEC02515982B3C00806748 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1AB8438717318BBF0021641C /* FuelSliderLevel.png */,
 				1AA4CB9E163E2C620085B99D /* Iff.png */,
 				1A29364D1612BFA70079B9E2 /* ifficon.png */,
 				1A29364E1612BFA70079B9E2 /* ifficon@2x.png */,
@@ -222,6 +225,7 @@
 				1A29364F1612BFA70079B9E2 /* ifficon.png in Resources */,
 				1A2936501612BFA70079B9E2 /* ifficon@2x.png in Resources */,
 				1AA4CB9F163E2C620085B99D /* Iff.png in Resources */,
+				1AB8438817318BBF0021641C /* FuelSliderLevel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

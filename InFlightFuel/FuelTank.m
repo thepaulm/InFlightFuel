@@ -138,6 +138,21 @@
     [self addSubview:[self slider]];
     [self.slider setTransform:CGAffineTransformRotate(self.slider.transform,270.0/180*M_PI)];
     [self.slider setUserInteractionEnabled:FALSE];
+    /*
+     enum {
+     UIControlStateNormal               = 0,
+     UIControlStateHighlighted          = 1 << 0,
+     UIControlStateDisabled             = 1 << 1,
+     UIControlStateSelected             = 1 << 2,
+     UIControlStateApplication          = 0x00FF0000,
+     UIControlStateReserved             = 0xFF000000
+     };*/
+    UIImage *sliderThumb = [UIImage imageNamed:@"FuelSliderLevel.png"];
+    
+    [self.slider setThumbImage:sliderThumb forState:UIControlStateNormal];
+    [self.slider setThumbImage:sliderThumb forState:UIControlStateHighlighted];
+    [self.slider setThumbImage:sliderThumb forState:UIControlStateDisabled];
+    [self.slider setThumbImage:sliderThumb forState:UIControlStateSelected];
     
     /* Set up the label */    
     [self setLabel:[[UITextField alloc]init]];
