@@ -25,9 +25,11 @@
     int valueStartedFuel;
     int isOn;
     int startedTank;
+    int runningTimer;
 }
 
 @property (copy, nonatomic) NSMutableArray *switchOverPoints;
+@property (copy, nonatomic) NSDate *timerStart;
 
 - (id)init;
 - (id)initWithCoder:(NSCoder *)aDecoder;
@@ -73,7 +75,7 @@
 @property (copy, nonatomic) NSValue *valueInitialTimer;
 @property (copy, nonatomic) NSValue *valueSubsequentTimer;
 
-@property (strong, nonatomic) NSDate *timerStart;
+@property (copy, nonatomic) NSDate *timerStart;
 @property (strong, nonatomic) NSTimer *timer;
 
 /* Save Data */

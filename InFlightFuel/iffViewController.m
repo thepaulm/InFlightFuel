@@ -29,6 +29,7 @@ integerFromValue(NSValue *v)
 @implementation iffSaveData
 
 @synthesize switchOverPoints;
+@synthesize timerStart;
 
 - (id)init
 {
@@ -39,6 +40,8 @@ integerFromValue(NSValue *v)
     self->isOn = 0;
     self->startedTank = 0;
     self->switchOverPoints = nil;
+    self->runningTimer = 0;
+    self->timerStart = nil;
     return self;
 }
 
@@ -49,6 +52,8 @@ integerFromValue(NSValue *v)
 #define IS_IN_FLIGHT @"IsInFlight"
 #define START_TANK @"StartTank"
 #define SWITCH_OVER_POINTS @"SwitchOverPoints"
+#define RUNNING_TIMER @"RunningTimer"
+#define TIMER_START @"TimerStart"
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -66,6 +71,15 @@ integerFromValue(NSValue *v)
         self.switchOverPoints = [aDecoder decodeObjectForKey:SWITCH_OVER_POINTS];
     }
     @catch (NSException *e) {}
+    
+    if ([aDecoder containsValueForKey:RUNNING_TIMER] &&
+        [aDecoder containsValueForKey:TIMER_START]) {
+        @try {
+            self->runningTimer = [aDecoder decodeIntForKey:RUNNING_TIMER];
+            self->timerStart = [aDecoder decodeObjectForKey:TIMER_START];
+        }
+        @catch (NSException *e) {}
+    }
 
     return self;
 }
@@ -79,6 +93,8 @@ integerFromValue(NSValue *v)
     [aCoder encodeInt:self->isOn forKey:IS_IN_FLIGHT];
     [aCoder encodeInt:self->startedTank forKey:START_TANK];
     [aCoder encodeObject:self.switchOverPoints forKey:SWITCH_OVER_POINTS];
+    [aCoder encodeInt:self->runningTimer forKey:RUNNING_TIMER];
+    [aCoder encodeObject:self->timerStart forKey:TIMER_START];
 }
 @end
 
@@ -129,6 +145,8 @@ integerFromValue(NSValue *v)
     [aCoder encodeInt:self->valueTabs forKey:TABS_TANK_LEVEL];
     [aCoder encodeInt:self->valueFull forKey:FULL_TANK_LEVEL];
     [aCoder encodeInt:self->targetDiff forKey:TARGET_TANK_DIFF];
+    [aCoder encodeInt:self->initialTimer forKey:INITIAL_TIMER];
+    [aCoder encodeInt:self->subsequentTimer forKey:SUBSEQUENT_TIMER];
 }
 
 @end
@@ -314,6 +332,9 @@ integerFromValue(NSValue *v)
     [self->fuelRuler setStartedTank:self->startTank];
     
     self->ison = sd->isOn;
+    self->runningTimer = sd->runningTimer;
+    self->timerStart = sd.timerStart;
+    
     if (self->ison) {
         self.inFlightSwitch.on = TRUE;
         [self isInFlight];
@@ -410,31 +431,61 @@ integerFromValue(NSValue *v)
 {
     if (self->runningTimer == 1)
         self->runningTimer = 2;
-    self.timerStart = [NSDate date];
-    [self updateTimerText];
+    if (integerFromValue(self.valueSubsequentTimer) == 0) {
+        [self timerStopFlight];
+    } else {
+        self.timerStart = [NSDate date];
+        [self updateTimerText];
+    }
 }
 
+/* timerInFlight
+ 
+   The flight is ongoing and we need to set up timer stuff. This happens on the InFlight switchover
+   and also when we are recovering from a crash.
+*/
 - (void)timerInFlight
 {
+    /* If no timer value, just set it to disabled */
     if (integerFromValue(self.valueInitialTimer) == 0 &&
         integerFromValue(self.valueSubsequentTimer) == 0) {
         [self.timerText setText:[[NSString alloc]initWithFormat:@"Disabled"]];
         self->runningTimer = 0;
     } else {
-        if (integerFromValue(self.valueInitialTimer) != 0) {
-            self->runningTimer = 1;
-        } else if (integerFromValue(self.valueSubsequentTimer) != 0) {
-            self->runningTimer = 2;
-        }
-        /* Don't call resetTimer here - it also flips the timer */
-        self.timerStart = [NSDate date];
+        /* We should alays have a proper start time at this point. Update the text */
         [self updateTimerText];
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                              target:self
-                              selector:@selector(timerSeconds:)
-                              userInfo:nil
-                              repeats:true];
+        
+        if (self.timer == nil) {
+            /* Set up the callback to refresh the text and check for expiry */
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                          target:self
+                                                        selector:@selector(timerSeconds:)
+                                                        userInfo:nil
+                                                         repeats:true];
+        }
     }
+}
+
+/* timerStartFlight
+ 
+   We have flipped from not flying to flying. Do the initialization stuff.
+*/
+- (void)timerStartFlight
+{
+    /* Set which timer we are running */
+    if (integerFromValue(self.valueInitialTimer) != 0) {
+        self->runningTimer = 1;
+    } else if (integerFromValue(self.valueSubsequentTimer) != 0) {
+        self->runningTimer = 2;
+    } else {
+        self->runningTimer = 0;
+    }
+    
+    /* Set what time it started at. Don't call resetTimer here - it also flips the timer */
+    if (self->runningTimer)
+        self.timerStart = [NSDate date];
+    
+    /* Don't call timerInFlight here. It will get called from isInFlight. */
 }
 
 - (void)timerStopFlight
@@ -555,6 +606,9 @@ integerFromValue(NSValue *v)
             self->startTank = 1;
         }
         self->switchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
+        
+        /* Initialize the timer values. isInFlight will take care of the rest */
+        [self timerStartFlight];
         [self isInFlight];
     }
     [self saveLastTankValues];
@@ -629,11 +683,12 @@ integerFromValue(NSValue *v)
     }
     [self->fuelRuler setSwitchOverPoints:self->switchOverPoints];
     [self recalcProjected];
+    [self resetTimer];
+    
     /* Save the new list of points */
     [self saveLastTankValues];
 
     [self->fuelRuler setNeedsDisplay];
-    [self resetTimer];
 }
 
 #pragma mark -
@@ -675,6 +730,8 @@ integerFromValue(NSValue *v)
     sd->isOn = self->ison;
     sd->startedTank = self->startTank;
     sd.switchOverPoints = self->switchOverPoints;
+    sd->runningTimer = self->runningTimer;
+    sd.timerStart = self->timerStart;
     
     NSString *archivePath = [self pathForDataFile];
     [NSKeyedArchiver archiveRootObject:sd toFile:archivePath];
@@ -686,6 +743,8 @@ integerFromValue(NSValue *v)
     ss->valueTabs = [self.valueTabs toValue];
     ss->valueFull = [self.valueFull toValue];
     ss->targetDiff = [self.targetDiff toValue];
+    ss->initialTimer = integerFromValue(self.valueInitialTimer);
+    ss->subsequentTimer = integerFromValue(self.valueSubsequentTimer);
     
     NSString *archivePath = [self pathForSettingsFile];
     [NSKeyedArchiver archiveRootObject:ss toFile:archivePath];
