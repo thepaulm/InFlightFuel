@@ -397,6 +397,7 @@ integerFromValue(NSValue *v)
 
 - (void)updateTimerText
 {
+    Boolean negative = false;
     NSDate *now = [NSDate date];
     NSTimeInterval i = [now timeIntervalSinceDate:self.timerStart];
     int remaining_seconds = 0;
@@ -406,6 +407,10 @@ integerFromValue(NSValue *v)
         remaining_seconds = integerFromValue(self.valueSubsequentTimer) * 60;
     
     remaining_seconds -= (int)i;
+    if (remaining_seconds < 0) {
+        negative = true;
+        remaining_seconds = -remaining_seconds;
+    }
     int hrs = remaining_seconds / 3600;
     remaining_seconds -= 3600 * hrs;
     int mins = remaining_seconds / 60;
@@ -414,10 +419,17 @@ integerFromValue(NSValue *v)
     
     NSString *t;
     if (hrs) {
-        t = [[NSString alloc]initWithFormat:@"%.2d:%.2d:%.2d", hrs, mins, secs];
+        t = [[NSString alloc]initWithFormat:@"%s%.2d:%.2d:%.2d",
+             negative ? "-" : "", hrs, mins, secs];
     } else {
-        t = [[NSString alloc]initWithFormat:@"%.2d:%.2d", mins, secs];
+        t = [[NSString alloc]initWithFormat:@"%s%.2d:%.2d",
+             negative ? "-" : "", mins, secs];
     }
+    if (negative)
+         [self.timerText setTextColor:[UIColor redColor]];
+    else
+         [self.timerText setTextColor:nil];
+         
     [self.timerText setText:t];
     [self.timerText setNeedsDisplay];
 }
@@ -449,6 +461,7 @@ integerFromValue(NSValue *v)
     /* If no timer value, just set it to disabled */
     if (integerFromValue(self.valueInitialTimer) == 0 &&
         integerFromValue(self.valueSubsequentTimer) == 0) {
+        [self.timerText setTextColor:nil];
         [self.timerText setText:[[NSString alloc]initWithFormat:@"Disabled"]];
         self->runningTimer = 0;
     } else {
@@ -490,6 +503,7 @@ integerFromValue(NSValue *v)
 
 - (void)timerStopFlight
 {
+    [self.timerText setTextColor:nil];
     [self.timerText setText:[[NSString alloc]initWithFormat:@"Off"]];
     self->runningTimer = 0;
     if (self.timer) {
