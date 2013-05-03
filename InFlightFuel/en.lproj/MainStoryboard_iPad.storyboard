@@ -248,7 +248,7 @@
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1:20:12" borderStyle="roundedRect" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="17" id="1Ed-I3-NML">
                                 <rect key="frame" x="426" y="69" width="88" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -586,7 +586,6 @@
             <relationships>
                 <relationship kind="action" name="fuelFull:"/>
                 <relationship kind="action" name="fuelTabs:"/>
-                <relationship kind="action" name="onWTFButton:"/>
                 <relationship kind="action" name="sliderBothTanks:"/>
                 <relationship kind="action" name="sliderTouchUpInside:"/>
                 <relationship kind="action" name="sliderTouchUpOutside:"/>

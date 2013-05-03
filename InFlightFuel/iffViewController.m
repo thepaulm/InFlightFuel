@@ -493,6 +493,7 @@ integerFromValue(NSValue *v)
         }
         if (self.notification == nil) {
             UIApplication *theApp = [UIApplication sharedApplication];
+            [theApp cancelAllLocalNotifications];
             /* Set up the alert */
             self.notification = [UILocalNotification alloc];
             self.notification.alertAction = @"Fuel Timer";
