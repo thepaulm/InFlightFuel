@@ -189,6 +189,7 @@ integerFromValue(NSValue *v)
 
 @synthesize timerStart;
 @synthesize timer;
+@synthesize notification;
 
 - (void)updateTankDiffs
 {
@@ -296,8 +297,8 @@ integerFromValue(NSValue *v)
         }
     }
     
-    [self.leftFuelTank setName:[[NSString alloc]initWithFormat:@"Left Tank"]];
-    [self.rightFuelTank setName:[[NSString alloc]initWithFormat:@"Right Tank"]];
+    [self.leftFuelTank setName:@"Left Tank"];
+    [self.rightFuelTank setName:@"Right Tank"];
     
     /* Now we use the data and settings structures. These should be either loaded
        or defaults at this point */
@@ -334,6 +335,7 @@ integerFromValue(NSValue *v)
     self->ison = sd->isOn;
     self->runningTimer = sd->runningTimer;
     self->timerStart = sd.timerStart;
+    self->notification = nil;
     
     if (self->ison) {
         self.inFlightSwitch.on = TRUE;
@@ -378,6 +380,7 @@ integerFromValue(NSValue *v)
     [self setValueSubsequentTimer:nil];
     [self setTimerStart:nil];
     [self setTimer:nil];
+    [self setNotification:nil];
     
     [self setTimerText:nil];
     [super viewDidUnload];
@@ -395,7 +398,7 @@ integerFromValue(NSValue *v)
     return YES;
 }
 
-- (void)updateTimerText
+- (void)updateTimerText :(Boolean *)exp
 {
     Boolean negative = false;
     NSDate *now = [NSDate date];
@@ -425,10 +428,15 @@ integerFromValue(NSValue *v)
         t = [[NSString alloc]initWithFormat:@"%s%.2d:%.2d",
              negative ? "-" : "", mins, secs];
     }
-    if (negative)
-         [self.timerText setTextColor:[UIColor redColor]];
-    else
-         [self.timerText setTextColor:nil];
+    if (negative) {
+        if (exp)
+            *exp = true;
+        [self.timerText setTextColor:[UIColor redColor]];
+    } else {
+        if (exp)
+            *exp = false;
+        [self.timerText setTextColor:nil];
+    }
          
     [self.timerText setText:t];
     [self.timerText setNeedsDisplay];
@@ -436,7 +444,7 @@ integerFromValue(NSValue *v)
 
 - (void)timerSeconds :(NSTimer *)t
 {
-    [self updateTimerText];
+    [self updateTimerText:NULL];
 }
 
 - (void)resetTimer
@@ -447,7 +455,7 @@ integerFromValue(NSValue *v)
         [self timerStopFlight];
     } else {
         self.timerStart = [NSDate date];
-        [self updateTimerText];
+        [self updateTimerText:NULL];
     }
 }
 
@@ -458,15 +466,22 @@ integerFromValue(NSValue *v)
 */
 - (void)timerInFlight
 {
+    NSTimeInterval delta;
     /* If no timer value, just set it to disabled */
     if (integerFromValue(self.valueInitialTimer) == 0 &&
         integerFromValue(self.valueSubsequentTimer) == 0) {
         [self.timerText setTextColor:nil];
-        [self.timerText setText:[[NSString alloc]initWithFormat:@"Disabled"]];
+        [self.timerText setText:@"Disabled"];
         self->runningTimer = 0;
     } else {
+        if (self->runningTimer == 1) {
+            delta = integerFromValue(self.valueInitialTimer) * 60;
+        } else {
+            delta = integerFromValue(self.valueSubsequentTimer) * 60;
+        }
+        Boolean expired = false;
         /* We should alays have a proper start time at this point. Update the text */
-        [self updateTimerText];
+        [self updateTimerText:&expired];
         
         if (self.timer == nil) {
             /* Set up the callback to refresh the text and check for expiry */
@@ -475,6 +490,21 @@ integerFromValue(NSValue *v)
                                                         selector:@selector(timerSeconds:)
                                                         userInfo:nil
                                                          repeats:true];
+        }
+        if (self.notification == nil) {
+            UIApplication *theApp = [UIApplication sharedApplication];
+            /* Set up the alert */
+            self.notification = [UILocalNotification alloc];
+            self.notification.alertAction = @"Fuel Timer";
+            self.notification.alertBody = @"Fuel timer expired";
+            self.notification.fireDate = [[NSDate alloc]initWithTimeInterval:delta
+                                                                   sinceDate:self.timerStart];
+            if (expired) {
+                [theApp presentLocalNotificationNow:self.notification];
+            } else {
+                [theApp scheduleLocalNotification:self.notification];
+            }
+
         }
     }
 }
@@ -504,11 +534,18 @@ integerFromValue(NSValue *v)
 - (void)timerStopFlight
 {
     [self.timerText setTextColor:nil];
-    [self.timerText setText:[[NSString alloc]initWithFormat:@"Off"]];
+    [self.timerText setText:@"Off"];
     self->runningTimer = 0;
     if (self.timer) {
         [self.timer invalidate];
         [self setTimer:nil];
+    }
+    if (self.notification)
+    {
+        UIApplication *theApp = [UIApplication sharedApplication];
+        [theApp cancelLocalNotification:self.notification];
+        [theApp cancelAllLocalNotifications];
+        self.notification = nil;
     }
 }
 

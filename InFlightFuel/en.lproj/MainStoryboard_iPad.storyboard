@@ -586,6 +586,7 @@
             <relationships>
                 <relationship kind="action" name="fuelFull:"/>
                 <relationship kind="action" name="fuelTabs:"/>
+                <relationship kind="action" name="onWTFButton:"/>
                 <relationship kind="action" name="sliderBothTanks:"/>
                 <relationship kind="action" name="sliderTouchUpInside:"/>
                 <relationship kind="action" name="sliderTouchUpOutside:"/>

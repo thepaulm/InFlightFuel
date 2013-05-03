@@ -77,6 +77,7 @@
 
 @property (copy, nonatomic) NSDate *timerStart;
 @property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) UILocalNotification *notification;
 
 /* Save Data */
 - (void)saveLastTankValues;
