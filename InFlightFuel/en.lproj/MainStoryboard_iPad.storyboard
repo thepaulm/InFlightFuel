@@ -421,7 +421,6 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="onInitialTimerText:" destination="HWa-fL-Fj2" eventType="editingDidEnd" id="4SA-vO-s8v"/>
-                                    <action selector="onTabsText:" destination="HWa-fL-Fj2" eventType="editingDidEnd" id="9Xj-S0-O0k"/>
                                     <outlet property="delegate" destination="HWa-fL-Fj2" id="NZa-cB-xfC"/>
                                 </connections>
                             </textField>
@@ -432,7 +431,6 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="onSubsequentTimerText:" destination="HWa-fL-Fj2" eventType="editingDidEnd" id="tf1-vI-otf"/>
-                                    <action selector="onTabsText:" destination="HWa-fL-Fj2" eventType="editingDidEnd" id="r29-oZ-nRX"/>
                                     <outlet property="delegate" destination="HWa-fL-Fj2" id="1sM-50-z1g"/>
                                 </connections>
                             </textField>
