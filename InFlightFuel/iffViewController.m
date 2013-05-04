@@ -339,7 +339,7 @@ integerFromValue(NSValue *v)
     
     if (self->ison) {
         self.inFlightSwitch.on = TRUE;
-        [self isInFlight];
+        [self isInFlight:true];
     } else {
         [self timerStopFlight];
     }
@@ -475,7 +475,7 @@ integerFromValue(NSValue *v)
     }
     self.timerStart = [NSDate date];
     [self invalidateTimer];
-    [self timerInFlight];
+    [self timerInFlight:false];
 }
 
 /* timerInFlight
@@ -483,7 +483,7 @@ integerFromValue(NSValue *v)
    The flight is ongoing and we need to set up timer stuff. This happens on the InFlight switchover
    and also when we are recovering from a crash.
 */
-- (void)timerInFlight
+- (void)timerInFlight: (Boolean)restart
 {
     NSTimeInterval delta;
     /* If no timer value, just set it to disabled */
@@ -510,7 +510,9 @@ integerFromValue(NSValue *v)
                                                         userInfo:nil
                                                          repeats:true];
         }
-        if (self.notification == nil) {
+        /* If we don't already have a notification (not sure how this could happen anyway),
+           and we aren't expired on a restart, then handle setting up the notification */
+        if (self.notification == nil && !(expired && restart)) {
             UIApplication *theApp = [UIApplication sharedApplication];
             [theApp cancelAllLocalNotifications];
             /* Set up the alert */
@@ -632,7 +634,7 @@ integerFromValue(NSValue *v)
     [self->switchOverPoints addObject:[self.leftFuelTank.level plus:self.rightFuelTank.level]];
 }
 
-- (void)isInFlight
+- (void)isInFlight: (Boolean)restart
 {
     [self->fuelRuler setStartedTank:self->startTank];
     self->ison = TRUE;
@@ -646,7 +648,7 @@ integerFromValue(NSValue *v)
     [self->fuelRuler setSwitchOverPoints:self->switchOverPoints];
     [self recalcProjected];
     [self->fuelRuler setNeedsDisplay];
-    [self timerInFlight];
+    [self timerInFlight:restart];
 }
 
 - (IBAction)switchOn:(id)sender {
@@ -672,7 +674,7 @@ integerFromValue(NSValue *v)
         
         /* Initialize the timer values. isInFlight will take care of the rest */
         [self timerStartFlight];
-        [self isInFlight];
+        [self isInFlight:false];
     }
     [self saveLastTankValues];
 }
