@@ -11,11 +11,17 @@
 
 @implementation iffAppDelegate
 
-/* This page appears to show how to send background timer alerts:
- http://developer.apple.com/library/ios/#documentation/iphone/conceptual/iphoneosprogrammingguide/ManagingYourApplicationsFlow/ManagingYourApplicationsFlow.html#//apple_ref/doc/uid/TP40007072-CH4-SW3
- */
-
 @synthesize window = _window;
+@synthesize lastFiredLocalEvent;
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.lastFiredLocalEvent = nil;
+    }
+    return self;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -52,12 +58,18 @@
 
 - (void)application:(UIApplication*)app didReceiveLocalNotification:(UILocalNotification *)n
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:n.alertAction
-                                                      message:n.alertBody
-                                                     delegate:nil
-                                            cancelButtonTitle:@"OK"
-                                            otherButtonTitles:nil];
-    [message show];  
+    /* Sadly, sometimes these will get sent twice. There are bugs reports about this happening
+       in the simulator, and some people have reported it happening on devices. I can definitely
+       see it happening on the simulator. Let's be extra preventative here. */
+    if (!self.lastFiredLocalEvent || ![self.lastFiredLocalEvent isEqualToDate:n.fireDate]) {
+        self.lastFiredLocalEvent = n.fireDate;
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:n.alertAction
+                                                          message:n.alertBody
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+    }
 }
 
 #pragma mark - Application's Documents directory

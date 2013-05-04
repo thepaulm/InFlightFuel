@@ -381,7 +381,6 @@ integerFromValue(NSValue *v)
     [self setTimerStart:nil];
     [self setTimer:nil];
     [self setNotification:nil];
-    
     [self setTimerText:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -444,19 +443,39 @@ integerFromValue(NSValue *v)
 
 - (void)timerSeconds :(NSTimer *)t
 {
+    if (t != self.timer) {
+        [t invalidate];
+    }
     [self updateTimerText:NULL];
+}
+
+
+- (void)invalidateTimer
+{
+    if (self.timer) {
+        [self.timer invalidate];
+        [self setTimer:nil];
+    }
+    if (self.notification) {
+        UIApplication *theApp = [UIApplication sharedApplication];
+        [theApp cancelLocalNotification:self.notification];
+        [theApp cancelAllLocalNotifications];
+        self.notification = nil;
+    }
 }
 
 - (void)resetTimer
 {
-    if (self->runningTimer == 1)
+    if (self->runningTimer == 1) {
         self->runningTimer = 2;
-    if (integerFromValue(self.valueSubsequentTimer) == 0) {
-        [self timerStopFlight];
-    } else {
-        self.timerStart = [NSDate date];
-        [self updateTimerText:NULL];
+        if (integerFromValue(self.valueSubsequentTimer) == 0) {
+            [self timerStopFlight];
+            return;
+        }
     }
+    self.timerStart = [NSDate date];
+    [self invalidateTimer];
+    [self timerInFlight];
 }
 
 /* timerInFlight
@@ -480,7 +499,7 @@ integerFromValue(NSValue *v)
             delta = integerFromValue(self.valueSubsequentTimer) * 60;
         }
         Boolean expired = false;
-        /* We should alays have a proper start time at this point. Update the text */
+        /* We should alays have a proper running timer and start time at this point. Update the text */
         [self updateTimerText:&expired];
         
         if (self.timer == nil) {
@@ -500,6 +519,8 @@ integerFromValue(NSValue *v)
             self.notification.alertBody = @"Fuel timer expired";
             self.notification.fireDate = [[NSDate alloc]initWithTimeInterval:delta
                                                                    sinceDate:self.timerStart];
+            self.notification.repeatInterval = 0;
+            self.notification.repeatCalendar = 0;
             if (expired) {
                 [theApp presentLocalNotificationNow:self.notification];
             } else {
@@ -537,17 +558,7 @@ integerFromValue(NSValue *v)
     [self.timerText setTextColor:nil];
     [self.timerText setText:@"Off"];
     self->runningTimer = 0;
-    if (self.timer) {
-        [self.timer invalidate];
-        [self setTimer:nil];
-    }
-    if (self.notification)
-    {
-        UIApplication *theApp = [UIApplication sharedApplication];
-        [theApp cancelLocalNotification:self.notification];
-        [theApp cancelAllLocalNotifications];
-        self.notification = nil;
-    }
+    [self invalidateTimer];
 }
 
 - (void)sliderDoneSliding

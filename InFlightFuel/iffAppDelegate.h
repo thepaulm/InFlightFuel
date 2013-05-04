@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (copy, nonatomic)NSDate *lastFiredLocalEvent;
 - (NSURL *)applicationDocumentsDirectory;
 
 @end
