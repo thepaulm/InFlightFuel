@@ -39,7 +39,9 @@
 "switch the InFlight switch to \"On\" before you begin your flight.\n\n"
 "    With the InFlight switch set to \"On\", InFlightFuel will track your in flight tank switches "
 "as well as make projections about when (in terms of total fuel used) you should switch to "
-"maintain your target tank differential.  The pink line is showing your current tank use segment "
+"maintain your target tank differential.  You can set initial (departure leg) and subsequent "
+"alert timers to remind you in case you forget to check fuel consumption. "
+" The pink line is showing your current tank use segment "
 "and the black lines show historical tank switches.  Don't worry if you switch early or late, "
 "we will recalculate the next switch projection on the fly.\n\n"
 "    Comments, suggestions, or bug reports to pmikesell@gmail.com"];
