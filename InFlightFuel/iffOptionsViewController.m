@@ -59,12 +59,12 @@
 
 - (void)updateTextIT
 {
-    self.textInitialTimer.text = [[NSString alloc]initWithFormat:@"%d", [self initialTimerInt]];
+    self.textInitialTimer.text = [[NSString alloc]initWithFormat:@"%d", (int)[self initialTimerInt]];
 }
 
 - (void)updateTextST
 {
-    self.textSubsequentTimer.text = [[NSString alloc]initWithFormat:@"%d", [self subsequentTimerInt]];
+    self.textSubsequentTimer.text = [[NSString alloc]initWithFormat:@"%d", (int)[self subsequentTimerInt]];
 }
 
 - (NSInteger)initialTimerInt

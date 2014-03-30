@@ -224,13 +224,18 @@ integerFromValue(NSValue *v)
     stepperBothTanks.value = [both toFloat];
 }
 
-#define SLIDER_HEIGHT_PCT 0.95
+#define SLIDER_HEIGHT_PCT 0.80
+#define SLIDER_X_PCT 0.57
+#define SLIDER_Y_PCT 0.11
 
 - (void)setSliderHeightFromBackground
 {
     CGRect src = self.sliderBackground.frame;
-    CGRect frame = self.sliderBothTanks.frame;
-    frame.size.height = SLIDER_HEIGHT_PCT * (src.size.height - 120);
+    CGRect frame = {0, 0, 0, 0};
+    frame.origin.x = src.origin.x + src.size.width * SLIDER_X_PCT;
+    frame.origin.y = src.origin.y + src.size.height * SLIDER_Y_PCT;
+    frame.size.height = SLIDER_HEIGHT_PCT * src.size.height;
+    frame.size.width = sliderBothTanks.frame.size.width;
     self.sliderBothTanks.frame = frame;
 }
 
@@ -286,9 +291,9 @@ integerFromValue(NSValue *v)
     if (ss->targetDiff == 0)
         ss->targetDiff = [self->targetDiff toValue];
     if (ss->initialTimer == BAD_INT)
-        ss->initialTimer = integerFromValue(self->valueInitialTimer);
+        ss->initialTimer = (int)integerFromValue(self->valueInitialTimer);
     if (ss->subsequentTimer == BAD_INT)
-        ss->subsequentTimer = integerFromValue(self->valueSubsequentTimer);
+        ss->subsequentTimer = (int)integerFromValue(self->valueSubsequentTimer);
     
     self->startTank = sd->startedTank;
     if (sd.switchOverPoints != nil) {
@@ -404,9 +409,9 @@ integerFromValue(NSValue *v)
     NSTimeInterval i = [now timeIntervalSinceDate:self.timerStart];
     int remaining_seconds = 0;
     if (self->runningTimer == 1)
-        remaining_seconds = integerFromValue(self.valueInitialTimer) * 60;
+        remaining_seconds = (int)integerFromValue(self.valueInitialTimer) * 60;
     else if (self->runningTimer == 2)
-        remaining_seconds = integerFromValue(self.valueSubsequentTimer) * 60;
+        remaining_seconds = (int)integerFromValue(self.valueSubsequentTimer) * 60;
     
     remaining_seconds -= (int)i;
     if (remaining_seconds < 0) {
@@ -724,7 +729,7 @@ integerFromValue(NSValue *v)
     }
     
     [self sampleSwitchOverPoint];
-    int count = [self->switchOverPoints count];
+    int count = (int)[self->switchOverPoints count];
     /* If we just switched back and forth without changing anything, just
        remove the last two samples, since we didn't actually switch */
     if (count > 1) {
@@ -790,7 +795,7 @@ integerFromValue(NSValue *v)
     
     sd->leftTankLevel = [self.leftFuelTank.level toValue];
     sd->rightTankLevel = [self.rightFuelTank.level toValue];
-    sd->activeTank = self.leftRightTank.selectedSegmentIndex;
+    sd->activeTank = (int)self.leftRightTank.selectedSegmentIndex;
     sd->valueStartedFuel = [self.startedFuel toValue];
     sd->isOn = self->ison;
     sd->startedTank = self->startTank;
@@ -808,8 +813,8 @@ integerFromValue(NSValue *v)
     ss->valueTabs = [self.valueTabs toValue];
     ss->valueFull = [self.valueFull toValue];
     ss->targetDiff = [self.targetDiff toValue];
-    ss->initialTimer = integerFromValue(self.valueInitialTimer);
-    ss->subsequentTimer = integerFromValue(self.valueSubsequentTimer);
+    ss->initialTimer = (int)integerFromValue(self.valueInitialTimer);
+    ss->subsequentTimer = (int)integerFromValue(self.valueSubsequentTimer);
     
     NSString *archivePath = [self pathForSettingsFile];
     [NSKeyedArchiver archiveRootObject:ss toFile:archivePath];
