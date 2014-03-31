@@ -323,6 +323,7 @@ integerFromValue(NSValue *v)
     stepperBothTanks.stepValue = 0.1;
     [self setTankDefaults];
     
+    /* Rotate 90 degress to make vertical */
     [self.sliderBothTanks setTransform:CGAffineTransformRotate(self.sliderBothTanks.transform,270.0/180*M_PI)];
 
     [self setFuelRuler:[[FuelRulerView alloc]init]];
