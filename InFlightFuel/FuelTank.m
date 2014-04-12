@@ -27,8 +27,12 @@
  }
  */
 
-#define TWIDTH 97
-#define THEIGHT 24
+#define TWIDTH_PCT 0.72
+#define THEIGHT_PCT 0.04
+
+#define TXOFF_PCT 0.15
+#define FONT_SIZE_PCT 0.15
+
 #define SLIDER_HORIZ_PCT 0.88
 #define SLIDER_VERT_PCT 0.50
 #define SLIDER_LENGTH_PCT 0.95
@@ -49,16 +53,17 @@
 - (void)layoutSubviews
 {    
     CGRect src = [self frame];
+
     CGRect res = [self transformedSliderFrameFromFrame:src];
     self.slider.frame = res;
     
     res = [self labelFrameFromSliderFrame:res];
     self.label.frame = res;
     
-    res.origin.y += 2 * THEIGHT;
+    res.origin.y += 2 * self->theight;
     self.text.frame = res;
     
-    res.origin.y += 2 * THEIGHT;
+    res.origin.y += 2 * self->theight;
     self.tdiff.frame = res;
 }
 
@@ -69,6 +74,10 @@
     self->min = [[FuelValue alloc]initFromInt:0];
     self->max = [[FuelValue alloc]initFromInt:0];
     self->diff = [[FuelValue alloc]initFromInt:0];
+
+    CGRect src = [self frame];
+    self->theight = src.size.height * THEIGHT_PCT;
+    self->twidth = src.size.width * TWIDTH_PCT;
     [self drawRelativeFrame];
 }
 
@@ -118,9 +127,9 @@
 
 - (CGRect)labelFrameFromSliderFrame:(CGRect)src
 {
-    return CGRectMake(src.origin.x + src.size.width / 2 - TWIDTH - 15,
-                      src.origin.y + src.size.height - THEIGHT - 4 * THEIGHT,
-                      TWIDTH, THEIGHT);    
+    return CGRectMake(src.origin.x + src.size.width / 2 - self->twidth - self->twidth * TXOFF_PCT,
+                      src.origin.y + src.size.height - self->theight - 4 * self->theight,
+                      self->twidth, self->theight);
 }
 
 /*
@@ -154,12 +163,14 @@
     [self.slider setThumbImage:sliderThumb forState:UIControlStateDisabled];
     [self.slider setThumbImage:sliderThumb forState:UIControlStateSelected];
     
+    CGFloat fsize = (int)(FONT_SIZE_PCT * self->twidth);
+
     /* Set up the label */    
     [self setLabel:[[UITextField alloc]init]];
     self.label.borderStyle = UITextBorderStyleRoundedRect;
     self.label.enabled = FALSE;
     self.label.text = self.name;
-    self.label.font = [UIFont systemFontOfSize:14.0];
+    self.label.font = [UIFont systemFontOfSize:fsize];
     self.label.textAlignment = UITextAlignmentLeft;
     [self addSubview:self.label];
     
@@ -168,7 +179,7 @@
     self.text.borderStyle = UITextBorderStyleRoundedRect;
     self.text.adjustsFontSizeToFitWidth = TRUE;
     self.text.enabled = FALSE;
-    self.text.font = [UIFont systemFontOfSize:14.0];
+    self.text.font = [UIFont systemFontOfSize:fsize];
     self.text.textAlignment = UITextAlignmentLeft;
     [self addSubview:self.text];
     
@@ -177,7 +188,7 @@
     self.tdiff.borderStyle = UITextBorderStyleRoundedRect;
     self.tdiff.adjustsFontSizeToFitWidth = TRUE;
     self.tdiff.enabled = FALSE;
-    self.tdiff.font = [UIFont systemFontOfSize:14.0];
+    self.tdiff.font = [UIFont systemFontOfSize:fsize];
     self.tdiff.textAlignment = UITextAlignmentLeft;
     [self addSubview:self.tdiff];
     

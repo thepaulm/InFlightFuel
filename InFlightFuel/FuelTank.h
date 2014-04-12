@@ -8,6 +8,10 @@
 #import "FuelValue.h"
 
 @interface FuelTank : UIImageView //<NSCoding>
+{
+    int theight;
+    int twidth;
+};
 
 @property (copy, nonatomic) FuelValue *level;
 @property (copy, nonatomic) FuelValue *min;
