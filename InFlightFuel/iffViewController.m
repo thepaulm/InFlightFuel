@@ -1,4 +1,4 @@
-    //
+//
 //  iffViewController.m
 //  InFlightFuel
 //
@@ -228,6 +228,8 @@ integerFromValue(NSValue *v)
 #define SLIDER_X_PCT 0.57
 #define SLIDER_Y_PCT 0.11
 
+#define THEIGHT_PCT 0.03
+
 - (void)setSliderHeightFromBackground
 {
     CGRect src = self.sliderBackground.frame;
@@ -250,9 +252,29 @@ integerFromValue(NSValue *v)
     [self layoutRulerFromSlider];
 }
 
+- (void)fixTextRelativeHeight:(UIView*) item :(CGFloat)h
+{
+    CGRect tr;
+    tr = [item frame];
+    tr.size.height = h;
+    item.frame = tr;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    /* Get our frame so we can do relative object sizing */
+    CGFloat text_height;
+    CGRect frame = [[self view] frame];
+    text_height = frame.size.height * THEIGHT_PCT;
+    
+    /* Adjust the relative heights of the full and tabs value fields */
+    [self fixTextRelativeHeight:self.tabsValue :text_height];
+    [self fixTextRelativeHeight:self.fullValue :text_height];
+    [self fixTextRelativeHeight:self.textBothTanks :text_height];
+    [self fixTextRelativeHeight:self.textUsedFuel :text_height];
+    [self fixTextRelativeHeight:self.timerText :text_height];
     
     self->startTank = 0;
     self->switchOverPoints = [[NSMutableArray alloc]initWithCapacity:10];
