@@ -32,6 +32,8 @@
 #define TEXT_USED_OFFSET 2
 #define TEXT_REMAINING_OFFSET 40
 
+#define TEXT_FONT_SIZE_RELATIVE 0.02
+
 - (void)commonInitialize
 {
     self->startedTank = 0;
@@ -75,8 +77,10 @@
  
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetLineWidth(context, 2.0);
+    
+    self->font_size = (int)(rect.size.height * TEXT_FONT_SIZE_RELATIVE);
 
-    CGContextSelectFont(context, "Arial", 12.0, kCGEncodingMacRoman);
+    CGContextSelectFont(context, "Arial", self->font_size, kCGEncodingMacRoman);
     CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
     CGContextShowTextAtPoint(context, TEXT_USED_OFFSET, TEXT_LABEL_HEIGHT, "Used", 4);
     CGContextShowTextAtPoint(context, TEXT_REMAINING_OFFSET, TEXT_LABEL_HEIGHT, "Remaining", 9);
@@ -172,7 +176,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
-    CGContextSelectFont(context, "Arial", 12.0, kCGEncodingMacRoman);
+    CGContextSelectFont(context, "Arial", self->font_size, kCGEncodingMacRoman);
 
     NSArray *v = self.switchOverPoints;
     for (FuelValue *x in v) {
@@ -213,7 +217,8 @@
 
     CGContextSetStrokeColorWithColor(context, [[UIColor alloc]initWithRed:0.8 green:0.0 blue:0.8 alpha:1.0].CGColor);
     CGContextSetFillColorWithColor(context, [[UIColor alloc]initWithRed:0.0 green:1 blue:1 alpha:1.0].CGColor);
-    CGContextSelectFont(context, "Arial", 16.0, kCGEncodingMacRoman);
+    CGFloat big_font = (int)(self->font_size * 1.3);
+    CGContextSelectFont(context, "Arial", big_font, kCGEncodingMacRoman);
     
     if ([self->switchOverPoints count] % 2 != 0) {
         if (current == 0) {

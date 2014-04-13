@@ -10,6 +10,9 @@
 #import "FuelValue.h"
 
 @interface FuelRulerView : UIView
+{
+    CGFloat font_size;
+};
 
 @property (copy, nonatomic) FuelValue *maxFuel;
 @property (copy, nonatomic) FuelValue *startedFuel;
