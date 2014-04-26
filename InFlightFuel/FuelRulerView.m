@@ -17,21 +17,26 @@
 @synthesize startedTank;
 
 
-#define TEXT_AREA_WIDTH 80
+/* Relative values */
 #define TEXT_XOFF_RELATIVE 0.025
 #define TEXT_REMAINING_XOFF_RELATIVE 0.18
 
-#define TEXT_LABEL_HEIGHT 10
+#define SLIDER_X_PCT 0.57
+#define SLIDER_Y_PCT 0.11
 
-#define TRIANGLE_HEIGHT 10
-#define TRIANGLE_WIDTH 20
-
-#define LEFT_TANK_X (TEXT_AREA_WIDTH + 13)
-#define RIGHT_TANK_X (TEXT_AREA_WIDTH + 80)
-#define TRIANGLE_VERTICAL_OFFSET 11
-#define LINE_HORIZ_OFFSET 5
+#define SLIDER_HEIGHT_PCT 0.80
+#define DRAWING_WIDTH_PCT 0.3
 
 #define TEXT_FONT_SIZE_RELATIVE 0.05
+
+/* Absolute values */
+#define TEXT_LABEL_HEIGHT_PCT 0.039
+
+#define TRIANGLE_HEIGHT_PCT 0.039
+#define TRIANGLE_WIDTH_PCT 0.08
+#define TRIANGLE_VERTICAL_OFFSET_PCT 0.043
+
+#define LINE_HORIZ_OFFSET 5
 
 - (void)commonInitialize
 {
@@ -49,24 +54,48 @@
 
 - (void)layoutFromSliderRect:(UISlider*)slider :(CGRect)backgroundFrame
 {
-    CGRect src = slider.frame;
+    /* Set up the frame for the slider */
+    CGRect frame = {0, 0, 0, 0};
+    frame.origin.x = backgroundFrame.origin.x + backgroundFrame.size.width * SLIDER_X_PCT;
+    frame.origin.y = backgroundFrame.origin.y + backgroundFrame.size.height * SLIDER_Y_PCT;
+    frame.size.height = SLIDER_HEIGHT_PCT * backgroundFrame.size.height;
+    frame.size.width = slider.frame.size.width;
+    slider.frame = frame;
+
     self->text_used_offset = backgroundFrame.size.width * TEXT_XOFF_RELATIVE;
     self->text_remaining_offset = backgroundFrame.size.width * TEXT_REMAINING_XOFF_RELATIVE;
     self->font_size = backgroundFrame.size.width * TEXT_FONT_SIZE_RELATIVE;
-    NSInteger total_width = backgroundFrame.size.width;
+    self->triangle_height = backgroundFrame.size.width * TRIANGLE_HEIGHT_PCT;
+    self->triangle_width = backgroundFrame.size.width * TRIANGLE_WIDTH_PCT;
+    self->triangle_vertical_offset = backgroundFrame.size.width * TRIANGLE_VERTICAL_OFFSET_PCT;
+    self->text_label_height = backgroundFrame.size.width * TEXT_LABEL_HEIGHT_PCT;
     
     NSLog(@"The incoming frame is %f, %f, %f, %f", backgroundFrame.origin.x,
                                                    backgroundFrame.origin.y,
                                                    backgroundFrame.size.width,
                                                    backgroundFrame.size.height);
-    float center = src.origin.x + src.size.width / 2.0;
-    src.origin.x = center - total_width / 2;
-    src.size.width = total_width;
-    src.origin.x = backgroundFrame.origin.x;
-    src.size.width += TEXT_AREA_WIDTH;
-    src.origin.y -= TEXT_LABEL_HEIGHT;
-    src.size.height += TEXT_LABEL_HEIGHT;
-    self.frame = src;
+    
+    /* set up our frame for the drawing */
+    
+    /* Total drawing width relative to our background frame */
+    self->draw_width = backgroundFrame.size.width * DRAWING_WIDTH_PCT;
+
+    self->center_x = frame.origin.x + frame.size.width / 2; // take our center from the sliders origin
+    
+    /* Figure out how wide just for the drawing */
+    frame.origin.x = self->center_x - self->draw_width / 2;
+    frame.size.width = self->draw_width;
+    
+    /* Make room for the text */
+    frame.size.width += (frame.origin.x - backgroundFrame.origin.x + self->text_used_offset);
+    frame.origin.x = backgroundFrame.origin.x + self->text_used_offset;
+    frame.origin.y -= self->text_label_height;
+    frame.size.height += self->text_label_height;
+    
+    /* We're about to reset out frame, make center relative */
+    self->center_x -= frame.origin.x;
+    self.frame = frame;
+    
     [self setNeedsDisplay];
 }
 
@@ -78,7 +107,6 @@
     [self setProjectedSwitchOverPoints:nil];
 }
 
-
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -88,15 +116,15 @@
     
     CGContextSelectFont(context, "Arial", self->font_size, kCGEncodingMacRoman);
     CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
-    CGContextShowTextAtPoint(context, self->text_used_offset, TEXT_LABEL_HEIGHT, "Used", 4);
-    CGContextShowTextAtPoint(context, self->text_remaining_offset, TEXT_LABEL_HEIGHT, "Remaining", 9);
+    CGContextShowTextAtPoint(context, self->text_used_offset, self->text_label_height, "Used", 4);
+    CGContextShowTextAtPoint(context, self->text_remaining_offset, self->text_label_height, "Remaining", 9);
     
     /* Make the frame - remove this later */
 #ifdef DO_BORDER
     CGContextMoveToPoint(context, 0,0);
-    CGContextAddLineToPoint(context, rect.size.width, 0);
-    CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
-    CGContextAddLineToPoint(context, 0, rect.size.height);
+    CGContextAddLineToPoint(context, self.frame.size.width, 0);
+    CGContextAddLineToPoint(context, self.frame.size.width, self.frame.size.height);
+    CGContextAddLineToPoint(context, 0, self.frame.size.height);
     CGContextAddLineToPoint(context, 0, 0);
     CGContextStrokePath(context);
 #endif
@@ -108,28 +136,28 @@
 
 -(void)drawLeftTankTriangle:(int)y :(BOOL)fill
 {
-    int x = LEFT_TANK_X;
+    int x = (int)(self->center_x - self->draw_width / 2);
     CGPathDrawingMode mode = fill ? kCGPathFillStroke : kCGPathStroke;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextMoveToPoint(context, x, y - TRIANGLE_HEIGHT / 2);
-    CGContextAddLineToPoint(context, x + TRIANGLE_WIDTH, y);
-    CGContextAddLineToPoint(context, x, y + TRIANGLE_HEIGHT / 2);
-    CGContextAddLineToPoint(context, x, y - TRIANGLE_HEIGHT / 2);
+    CGContextMoveToPoint(context, x, y - self->triangle_height / 2);
+    CGContextAddLineToPoint(context, x + self->triangle_width, y);
+    CGContextAddLineToPoint(context, x, y + self->triangle_height / 2);
+    CGContextAddLineToPoint(context, x, y - self->triangle_height / 2);
     
     CGContextDrawPath(context, mode);
 }
 
 -(void)drawRightTankTriangle:(int)y :(BOOL)fill
 {
-    int x = RIGHT_TANK_X;
+    int x = (int)(self->center_x + self->draw_width / 2);
     CGPathDrawingMode mode = fill ? kCGPathFillStroke : kCGPathStroke;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextMoveToPoint(context, x, y - TRIANGLE_HEIGHT / 2);
-    CGContextAddLineToPoint(context, x - TRIANGLE_WIDTH, y);
-    CGContextAddLineToPoint(context, x, y + TRIANGLE_HEIGHT / 2);
-    CGContextAddLineToPoint(context, x, y - TRIANGLE_HEIGHT / 2);
+    CGContextMoveToPoint(context, x, y - self->triangle_height / 2);
+    CGContextAddLineToPoint(context, x - self->triangle_width, y);
+    CGContextAddLineToPoint(context, x, y + self->triangle_height / 2);
+    CGContextAddLineToPoint(context, x, y - self->triangle_height / 2);
     
     CGContextDrawPath(context, mode);
 }
@@ -141,11 +169,11 @@
     if (x1 < x2) {
         CGContextAddLineToPoint(context, x1 - LINE_HORIZ_OFFSET, y1);
         CGContextAddLineToPoint(context, x1 - LINE_HORIZ_OFFSET, y2);
-        CGContextAddLineToPoint(context, x2 - TRIANGLE_WIDTH, y2);
+        CGContextAddLineToPoint(context, x2 - self->triangle_width, y2);
     } else {
         CGContextAddLineToPoint(context, x1 + LINE_HORIZ_OFFSET, y1);
         CGContextAddLineToPoint(context, x1 + LINE_HORIZ_OFFSET, y2);
-        CGContextAddLineToPoint(context, x2 + TRIANGLE_WIDTH, y2);
+        CGContextAddLineToPoint(context, x2 + self->triangle_width, y2);
     }
     CGContextStrokePath(context);
 }
@@ -157,7 +185,7 @@
     pct = 1.0 - pct;
     CGRect r = self.frame;
     /* Now find the absolute y location */
-    int locy = pct * (r.size.height - TEXT_LABEL_HEIGHT - TRIANGLE_VERTICAL_OFFSET * 2) + TRIANGLE_VERTICAL_OFFSET + TEXT_LABEL_HEIGHT;
+    int locy = pct * (r.size.height - self->text_label_height - self->triangle_vertical_offset * 2) + self->triangle_vertical_offset + self->text_label_height;
     return locy;
 }
 
@@ -198,9 +226,15 @@
         /* Draw connecting lines */
         if (lasty != -1) {
             if (current == 0) {
-                [self drawConnectingLines:LEFT_TANK_X :lasty :RIGHT_TANK_X :locy];
+                [self drawConnectingLines:(int)(self->center_x - self->draw_width / 2)
+                                         :lasty
+                                         :(int)(self->center_x + self->draw_width / 2)
+                                         :locy];
             } else {
-                [self drawConnectingLines:RIGHT_TANK_X :lasty :LEFT_TANK_X :locy];
+                [self drawConnectingLines:(int)(self->center_x + self->draw_width / 2)
+                                         :lasty
+                                         :(int)(self->center_x - self->draw_width / 2)
+                                         :locy];
             }
         }
         /* Keep the NSString around for calls to getCString.  This is how we guarantee
@@ -251,9 +285,15 @@
         }
         
         if (current == 0) {
-            [self drawConnectingLines:LEFT_TANK_X :lasty :RIGHT_TANK_X :locy];
+            [self drawConnectingLines:(int)(self->center_x - self->draw_width / 2)
+                                     :lasty
+                                     :(int)(self->center_x + self->draw_width / 2)
+                                     :locy];
         } else {
-            [self drawConnectingLines:RIGHT_TANK_X :lasty :LEFT_TANK_X :locy];
+            [self drawConnectingLines:(int)(self->center_x + self->draw_width / 2)
+                                     :lasty
+                                     :(int)(self->center_x - self->draw_width / 2)
+                                     :locy];
         }
         NSString *nss = [x toString];
         const char *s = [self getCString:nss];

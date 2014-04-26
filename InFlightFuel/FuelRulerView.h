@@ -14,6 +14,12 @@
     CGFloat font_size;
     NSInteger text_used_offset;
     NSInteger text_remaining_offset;
+    NSInteger center_x;
+    NSInteger draw_width;
+    NSInteger triangle_height;
+    NSInteger triangle_width;
+    NSInteger triangle_vertical_offset;
+    NSInteger text_label_height;
 };
 
 @property (copy, nonatomic) FuelValue *maxFuel;

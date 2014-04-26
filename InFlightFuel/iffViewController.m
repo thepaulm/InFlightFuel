@@ -224,23 +224,6 @@ integerFromValue(NSValue *v)
     stepperBothTanks.value = [both toFloat];
 }
 
-#define SLIDER_HEIGHT_PCT 0.80
-#define SLIDER_X_PCT 0.57
-#define SLIDER_Y_PCT 0.11
-
-#define THEIGHT_PCT 0.03
-
-- (void)setSliderHeightFromBackground
-{
-    CGRect src = self.sliderBackground.frame;
-    CGRect frame = {0, 0, 0, 0};
-    frame.origin.x = src.origin.x + src.size.width * SLIDER_X_PCT;
-    frame.origin.y = src.origin.y + src.size.height * SLIDER_Y_PCT;
-    frame.size.height = SLIDER_HEIGHT_PCT * src.size.height;
-    frame.size.width = sliderBothTanks.frame.size.width;
-    self.sliderBothTanks.frame = frame;
-}
-
 - (void)layoutRulerFromSlider
 {
     [self.fuelRuler layoutFromSliderRect:self->sliderBothTanks :self.sliderBackground.frame];
@@ -248,7 +231,6 @@ integerFromValue(NSValue *v)
 
 - (void)viewWillLayoutSubviews
 {
-    [self setSliderHeightFromBackground];
     [self layoutRulerFromSlider];
 }
 
@@ -259,6 +241,8 @@ integerFromValue(NSValue *v)
     tr.size.height = h;
     item.frame = tr;
 }
+
+#define THEIGHT_PCT 0.03
 
 - (void)viewDidLoad
 {
