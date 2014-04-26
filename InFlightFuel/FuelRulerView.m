@@ -38,6 +38,8 @@
 
 #define LINE_HORIZ_OFFSET 5
 
+#define SLIDER_IMAGE_CHOP 16
+
 - (void)commonInitialize
 {
     self->startedTank = 0;
@@ -61,6 +63,8 @@
     frame.size.height = SLIDER_HEIGHT_PCT * backgroundFrame.size.height;
     frame.size.width = slider.frame.size.width;
     slider.frame = frame;
+    
+    self->slider_image_chop = SLIDER_IMAGE_CHOP;
 
     self->text_used_offset = backgroundFrame.size.width * TEXT_XOFF_RELATIVE;
     self->text_remaining_offset = backgroundFrame.size.width * TEXT_REMAINING_XOFF_RELATIVE;
@@ -88,6 +92,8 @@
     
     /* Make room for the text */
     frame.size.width += (frame.origin.x - backgroundFrame.origin.x + self->text_used_offset);
+    /* Make some extra so we can draw on the right */
+    frame.size.width  *= 1.15;
     frame.origin.x = backgroundFrame.origin.x + self->text_used_offset;
     frame.origin.y -= self->text_label_height;
     frame.size.height += self->text_label_height;
@@ -185,7 +191,8 @@
     pct = 1.0 - pct;
     CGRect r = self.frame;
     /* Now find the absolute y location */
-    int locy = pct * (r.size.height - self->text_label_height - self->triangle_vertical_offset * 2) + self->triangle_vertical_offset + self->text_label_height;
+                      // slider height
+    int locy = pct * (r.size.height - self->text_label_height - self->slider_image_chop * 2) + self->text_label_height + self->slider_image_chop;
     return locy;
 }
 

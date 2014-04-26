@@ -20,6 +20,7 @@
     NSInteger triangle_width;
     NSInteger triangle_vertical_offset;
     NSInteger text_label_height;
+    NSInteger slider_image_chop;
 };
 
 @property (copy, nonatomic) FuelValue *maxFuel;
