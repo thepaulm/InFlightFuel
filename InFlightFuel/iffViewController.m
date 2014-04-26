@@ -243,7 +243,7 @@ integerFromValue(NSValue *v)
 
 - (void)layoutRulerFromSlider
 {
-    [self.fuelRuler layoutFromSliderRect:self->sliderBothTanks];
+    [self.fuelRuler layoutFromSliderRect:self->sliderBothTanks :self.sliderBackground.frame];
 }
 
 - (void)viewWillLayoutSubviews

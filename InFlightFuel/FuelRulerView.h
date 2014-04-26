@@ -12,6 +12,8 @@
 @interface FuelRulerView : UIView
 {
     CGFloat font_size;
+    NSInteger text_used_offset;
+    NSInteger text_remaining_offset;
 };
 
 @property (copy, nonatomic) FuelValue *maxFuel;
@@ -21,7 +23,7 @@
 @property int startedTank;
 
 - (id)init;
-- (void)layoutFromSliderRect:(UISlider*)slider;
+- (void)layoutFromSliderRect:(UISlider*)slider :(CGRect)backgroundFrame;
 - (void)drawRect:(CGRect)rect;
 - (void)drawLeftTankTriangle:(int)y :(BOOL)fill;
 - (void)drawRightTankTriangle:(int)y :(BOOL)fill;

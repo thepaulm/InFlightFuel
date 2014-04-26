@@ -18,21 +18,20 @@
 
 
 #define TEXT_AREA_WIDTH 80
+#define TEXT_XOFF_RELATIVE 0.025
+#define TEXT_REMAINING_XOFF_RELATIVE 0.18
+
 #define TEXT_LABEL_HEIGHT 10
 
 #define TRIANGLE_HEIGHT 10
 #define TRIANGLE_WIDTH 20
-#define TOTAL_WIDTH 94
 
 #define LEFT_TANK_X (TEXT_AREA_WIDTH + 13)
 #define RIGHT_TANK_X (TEXT_AREA_WIDTH + 80)
 #define TRIANGLE_VERTICAL_OFFSET 11
 #define LINE_HORIZ_OFFSET 5
 
-#define TEXT_USED_OFFSET 2
-#define TEXT_REMAINING_OFFSET 40
-
-#define TEXT_FONT_SIZE_RELATIVE 0.02
+#define TEXT_FONT_SIZE_RELATIVE 0.05
 
 - (void)commonInitialize
 {
@@ -48,13 +47,22 @@
     return self;
 }
 
-- (void)layoutFromSliderRect:(UISlider*)slider
+- (void)layoutFromSliderRect:(UISlider*)slider :(CGRect)backgroundFrame
 {
     CGRect src = slider.frame;
+    self->text_used_offset = backgroundFrame.size.width * TEXT_XOFF_RELATIVE;
+    self->text_remaining_offset = backgroundFrame.size.width * TEXT_REMAINING_XOFF_RELATIVE;
+    self->font_size = backgroundFrame.size.width * TEXT_FONT_SIZE_RELATIVE;
+    NSInteger total_width = backgroundFrame.size.width;
+    
+    NSLog(@"The incoming frame is %f, %f, %f, %f", backgroundFrame.origin.x,
+                                                   backgroundFrame.origin.y,
+                                                   backgroundFrame.size.width,
+                                                   backgroundFrame.size.height);
     float center = src.origin.x + src.size.width / 2.0;
-    src.origin.x = center - TOTAL_WIDTH / 2;
-    src.size.width = TOTAL_WIDTH;
-    src.origin.x -= TEXT_AREA_WIDTH;
+    src.origin.x = center - total_width / 2;
+    src.size.width = total_width;
+    src.origin.x = backgroundFrame.origin.x;
     src.size.width += TEXT_AREA_WIDTH;
     src.origin.y -= TEXT_LABEL_HEIGHT;
     src.size.height += TEXT_LABEL_HEIGHT;
@@ -78,12 +86,10 @@
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetLineWidth(context, 2.0);
     
-    self->font_size = (int)(rect.size.height * TEXT_FONT_SIZE_RELATIVE);
-
     CGContextSelectFont(context, "Arial", self->font_size, kCGEncodingMacRoman);
     CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
-    CGContextShowTextAtPoint(context, TEXT_USED_OFFSET, TEXT_LABEL_HEIGHT, "Used", 4);
-    CGContextShowTextAtPoint(context, TEXT_REMAINING_OFFSET, TEXT_LABEL_HEIGHT, "Remaining", 9);
+    CGContextShowTextAtPoint(context, self->text_used_offset, TEXT_LABEL_HEIGHT, "Used", 4);
+    CGContextShowTextAtPoint(context, self->text_remaining_offset, TEXT_LABEL_HEIGHT, "Remaining", 9);
     
     /* Make the frame - remove this later */
 #ifdef DO_BORDER
@@ -201,10 +207,10 @@
            it to be valid */
         NSString *nss = [x toString];
         const char *s = [self getCString:nss];
-        CGContextShowTextAtPoint(context, TEXT_REMAINING_OFFSET, locy + 4, s, strlen(s));
+        CGContextShowTextAtPoint(context, self->text_remaining_offset, locy + 4, s, strlen(s));
         nss = [self getUsedFuelString:x];
         s = [self getCString:nss];
-        CGContextShowTextAtPoint(context, TEXT_USED_OFFSET, locy + 4, s, strlen(s));
+        CGContextShowTextAtPoint(context, self->text_used_offset, locy + 4, s, strlen(s));
         lasty = locy;
     }
 }
@@ -251,10 +257,10 @@
         }
         NSString *nss = [x toString];
         const char *s = [self getCString:nss];
-        CGContextShowTextAtPoint(context, TEXT_REMAINING_OFFSET, locy + 4, s, strlen(s));
+        CGContextShowTextAtPoint(context, self->text_remaining_offset, locy + 4, s, strlen(s));
         nss = [self getUsedFuelString:x];
         s = [self getCString:nss];
-        CGContextShowTextAtPoint(context, TEXT_USED_OFFSET, locy + 4, s, strlen(s));
+        CGContextShowTextAtPoint(context, self->text_used_offset, locy + 4, s, strlen(s));
     }
 }
 
