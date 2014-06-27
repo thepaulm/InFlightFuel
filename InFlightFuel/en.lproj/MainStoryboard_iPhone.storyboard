@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -18,11 +18,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg" id="F13-cS-fHg">
-                                <rect key="frame" x="19" y="23" width="281" height="442"/>
+                                <rect key="frame" x="19" y="23" width="281" height="429"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dark_Brushed_Metal_by_halfthelaw.jpg" id="w8y-0H-a8v">
-                                <rect key="frame" x="175" y="85" width="115" height="372"/>
+                                <rect key="frame" x="175" y="85" width="115" height="359"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                             </imageView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="023-yG-xkv">
@@ -57,7 +57,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="ty8-IA-gZe">
-                                <rect key="frame" x="186" y="97" width="93" height="29"/>
+                                <rect key="frame" x="186" y="89" width="93" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
@@ -78,7 +78,7 @@
                                 </connections>
                             </slider>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="200" stepValue="0.10000000000000001" id="HfM-0X-5j8">
-                                <rect key="frame" x="186" y="420" width="94" height="29"/>
+                                <rect key="frame" x="186" y="417" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -126,11 +126,11 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="wallpaper-cf2-1440x900.png" id="8aY-Qb-f6l" customClass="FuelTank">
-                                <rect key="frame" x="90" y="99" width="59" height="353"/>
+                                <rect key="frame" x="90" y="99" width="59" height="345"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="wallpaper-cf2-1440x900.png" id="4EW-YV-kfd" customClass="FuelTank">
-                                <rect key="frame" x="23" y="99" width="59" height="353"/>
+                                <rect key="frame" x="23" y="99" width="59" height="345"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1:20:12" borderStyle="roundedRect" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="13" id="pTo-0O-33L">
@@ -140,6 +140,16 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="M5G-SI-TYW">
+                                <rect key="frame" x="160" y="454" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="G2t-ET-vUN" kind="modal" identifier="ShowIffOptions" modalTransitionStyle="flipHorizontal" id="pRY-77-OSt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -150,6 +160,7 @@
                         <outlet property="inFlightSwitch" destination="023-yG-xkv" id="rlX-dz-1l2"/>
                         <outlet property="leftFuelTank" destination="4EW-YV-kfd" id="2r6-n2-ehJ"/>
                         <outlet property="leftRightTank" destination="ty8-IA-gZe" id="8Kh-BJ-Ijm"/>
+                        <outlet property="optionsButton" destination="M5G-SI-TYW" id="1NN-ZG-stc"/>
                         <outlet property="rightFuelTank" destination="8aY-Qb-f6l" id="aI2-Wx-33H"/>
                         <outlet property="sliderBackground" destination="w8y-0H-a8v" id="td0-8v-u07"/>
                         <outlet property="sliderBothTanks" destination="Zu1-A4-74y" id="ygO-GW-eWN"/>
@@ -162,6 +173,207 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Iff Options View Controller-->
+        <scene sceneID="dJK-St-YJA">
+            <objects>
+                <viewController id="G2t-ET-vUN" customClass="iffOptionsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jKe-fj-33e">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="Dark_Brushed_Metal_by_halfthelaw.jpg" id="ACc-Yj-nPu">
+                                <rect key="frame" x="-1319" y="-989" width="3000" height="2400"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" id="Lei-vb-UcS">
+                                <rect key="frame" x="12" y="173" width="295" height="255"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fuel At Tabs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D40-mM-jLV">
+                                        <rect key="frame" x="6" y="8" width="284" height="144"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Initial Timer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qUQ-wg-70h">
+                                        <rect key="frame" x="5" y="158" width="75" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mins" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sgm-91-BaR">
+                                        <rect key="frame" x="80" y="185" width="33" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mins" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aXy-ML-pyN">
+                                        <rect key="frame" x="196" y="185" width="33" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subsequent Timers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Doh-qm-5WG">
+                                        <rect key="frame" x="121" y="158" width="108" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="g33-6D-9Fu">
+                                        <rect key="frame" x="5" y="180" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="onInitialTimerText:" destination="G2t-ET-vUN" eventType="editingDidEnd" id="4UI-D7-5C9"/>
+                                            <outlet property="delegate" destination="G2t-ET-vUN" id="Gaz-0y-A4z"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="mmD-xG-hWE">
+                                        <rect key="frame" x="121" y="180" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="onSubsequentTimerText:" destination="G2t-ET-vUN" eventType="editingDidEnd" id="gJB-4t-ehp"/>
+                                            <outlet property="delegate" destination="G2t-ET-vUN" id="MP1-cC-GgI"/>
+                                        </connections>
+                                    </textField>
+                                    <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="900" id="eDf-5f-1es">
+                                        <rect key="frame" x="5" y="217" width="94" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <connections>
+                                            <action selector="onStepperInitialTimer:" destination="G2t-ET-vUN" eventType="valueChanged" id="YW8-V4-Cc3"/>
+                                        </connections>
+                                    </stepper>
+                                    <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" id="leB-xw-Ayz">
+                                        <rect key="frame" x="121" y="217" width="94" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="onStepperSubsequentTimer:" destination="G2t-ET-vUN" eventType="valueChanged" id="YyG-Gg-Q9K"/>
+                                        </connections>
+                                    </stepper>
+                                </subviews>
+                                <color key="backgroundColor" red="0.2174263028" green="0.37809163810000002" blue="0.49178413720000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="tna-iy-Arj">
+                                <rect key="frame" x="12" y="42" width="295" height="107"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="200" stepValue="0.10000000000000001" id="2d9-MS-RVU">
+                                        <rect key="frame" x="1" y="77" width="94" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.49999999999999961" height="1"/>
+                                        <connections>
+                                            <action selector="onStepperTabs:" destination="G2t-ET-vUN" eventType="valueChanged" id="Mz4-1a-bIX"/>
+                                        </connections>
+                                    </stepper>
+                                    <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="200" stepValue="0.10000000000000001" id="9Gh-6I-tKB">
+                                        <rect key="frame" x="99" y="77" width="94" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.49999999999999961" height="1"/>
+                                        <connections>
+                                            <action selector="onStepperFull:" destination="G2t-ET-vUN" eventType="valueChanged" id="UZs-rB-BQC"/>
+                                        </connections>
+                                    </stepper>
+                                    <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="200" stepValue="0.10000000000000001" id="6zx-cU-Hbn">
+                                        <rect key="frame" x="198" y="77" width="94" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="contentStretch" x="0.0" y="0.0" width="0.49999999999999961" height="1"/>
+                                        <connections>
+                                            <action selector="onStepperDiff:" destination="G2t-ET-vUN" eventType="valueChanged" id="SLX-Vv-h9f"/>
+                                        </connections>
+                                    </stepper>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="34y-0A-cDm">
+                                        <rect key="frame" x="12" y="35" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="onTabsText:" destination="G2t-ET-vUN" eventType="editingDidEnd" id="RZo-Hl-e8d"/>
+                                            <outlet property="delegate" destination="G2t-ET-vUN" id="iPX-rh-r6Y"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="yaT-34-KqN">
+                                        <rect key="frame" x="110" y="35" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="onFullText:" destination="G2t-ET-vUN" eventType="editingDidEnd" id="3rG-6k-KU2"/>
+                                            <outlet property="delegate" destination="G2t-ET-vUN" id="fYV-sg-jKY"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ZbU-1g-WFR">
+                                        <rect key="frame" x="209" y="35" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="onDiffText:" destination="G2t-ET-vUN" eventType="editingDidEnd" id="S2E-yb-n5Q"/>
+                                            <outlet property="delegate" destination="G2t-ET-vUN" id="sOZ-oK-INW"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fuel At Tabs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AW9-ZY-kve">
+                                        <rect key="frame" x="11" y="8" width="78" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fuel At Full" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2tO-lN-Qua">
+                                        <rect key="frame" x="113" y="8" width="78" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Differential" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EYk-DL-FTm">
+                                        <rect key="frame" x="216" y="8" width="72" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.2174263028" green="0.37809163810000002" blue="0.49178413720000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0cs-Ib-hkO">
+                                <rect key="frame" x="138" y="437" width="45" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="All Set">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickDone:" destination="G2t-ET-vUN" eventType="touchUpInside" id="ch8-RH-NGm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="stepperDiff" destination="6zx-cU-Hbn" id="dEg-I0-HGN"/>
+                        <outlet property="stepperFull" destination="9Gh-6I-tKB" id="HA4-63-eDX"/>
+                        <outlet property="stepperInitialTimer" destination="eDf-5f-1es" id="6Ve-9l-LPG"/>
+                        <outlet property="stepperSubsequentTimer" destination="leB-xw-Ayz" id="d32-LK-kII"/>
+                        <outlet property="stepperTabs" destination="2d9-MS-RVU" id="9vl-7e-b6q"/>
+                        <outlet property="textDiff" destination="ZbU-1g-WFR" id="Czi-ys-MWw"/>
+                        <outlet property="textFull" destination="yaT-34-KqN" id="2pH-8F-HsZ"/>
+                        <outlet property="textInitialTimer" destination="g33-6D-9Fu" id="ZZ4-Sm-P9A"/>
+                        <outlet property="textSubsequentTimer" destination="mmD-xG-hWE" id="ptZ-iB-zQ8"/>
+                        <outlet property="textTabs" destination="34y-0A-cDm" id="xGy-YR-RaZ"/>
+                        <outlet property="timersText" destination="D40-mM-jLV" id="sv7-tp-bw2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rje-b5-dUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="769" y="127"/>
         </scene>
     </scenes>
     <resources>
