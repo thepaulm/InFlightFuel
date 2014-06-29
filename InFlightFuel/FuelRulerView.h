@@ -30,7 +30,7 @@
 @property int startedTank;
 
 - (id)init;
-- (void)layoutFromSliderRect:(UISlider*)slider :(CGRect)backgroundFrame;
+- (void)layoutFromSliderRect:(UISlider*)slider :(CGRect)backgroundFrame :(int)top :(int)bottom;
 - (void)drawRect:(CGRect)rect;
 - (void)drawLeftTankTriangle:(int)y :(BOOL)fill;
 - (void)drawRightTankTriangle:(int)y :(BOOL)fill;

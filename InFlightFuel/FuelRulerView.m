@@ -22,9 +22,7 @@
 #define TEXT_REMAINING_XOFF_RELATIVE 0.18
 
 #define SLIDER_X_PCT 0.57
-#define SLIDER_Y_PCT 0.11
 
-#define SLIDER_HEIGHT_PCT 0.80
 #define DRAWING_WIDTH_PCT 0.3
 
 #define TEXT_FONT_SIZE_RELATIVE 0.05
@@ -55,17 +53,8 @@
 }
 
 - (void)layoutFromSliderRect:(UISlider*)slider :(CGRect)backgroundFrame
+                            :(int)top :(int)bottom
 {
-    /* Set up the frame for the slider */
-    CGRect frame = {0, 0, 0, 0};
-    frame.origin.x = backgroundFrame.origin.x + backgroundFrame.size.width * SLIDER_X_PCT;
-    frame.origin.y = backgroundFrame.origin.y + backgroundFrame.size.height * SLIDER_Y_PCT;
-    frame.size.height = SLIDER_HEIGHT_PCT * backgroundFrame.size.height;
-    frame.size.width = slider.frame.size.width;
-    slider.frame = frame;
-    
-    self->slider_image_chop = SLIDER_IMAGE_CHOP;
-
     self->text_used_offset = backgroundFrame.size.width * TEXT_XOFF_RELATIVE;
     self->text_remaining_offset = backgroundFrame.size.width * TEXT_REMAINING_XOFF_RELATIVE;
     self->font_size = backgroundFrame.size.width * TEXT_FONT_SIZE_RELATIVE;
@@ -74,10 +63,17 @@
     self->triangle_vertical_offset = backgroundFrame.size.width * TRIANGLE_VERTICAL_OFFSET_PCT;
     self->text_label_height = backgroundFrame.size.width * TEXT_LABEL_HEIGHT_PCT;
     
-    NSLog(@"The incoming frame is %f, %f, %f, %f", backgroundFrame.origin.x,
-                                                   backgroundFrame.origin.y,
-                                                   backgroundFrame.size.width,
-                                                   backgroundFrame.size.height);
+    /* Set up the frame for the slider */
+    CGRect frame = {0, 0, 0, 0};
+    
+    frame.origin.x = backgroundFrame.origin.x + backgroundFrame.size.width * SLIDER_X_PCT;
+    frame.origin.y = top + self->text_label_height * 1.5;
+    frame.size.height = bottom - top;
+    
+    frame.size.width = slider.frame.size.width;
+    slider.frame = frame;
+    
+    self->slider_image_chop = SLIDER_IMAGE_CHOP;
     
     /* set up our frame for the drawing */
     

@@ -226,7 +226,13 @@ integerFromValue(NSValue *v)
 
 - (void)layoutRulerFromSlider
 {
-    [self.fuelRuler layoutFromSliderRect:self->sliderBothTanks :self.sliderBackground.frame];
+    CGRect fs = [self.stepperBothTanks frame];
+    CGRect flr = [self.leftRightTank frame];
+    int top, bottom;
+    
+    top = flr.origin.y + flr.size.height;
+    bottom = fs.origin.y;
+    [self.fuelRuler layoutFromSliderRect:self->sliderBothTanks :self.sliderBackground.frame :top :bottom];
 }
 
 - (void)viewWillLayoutSubviews
