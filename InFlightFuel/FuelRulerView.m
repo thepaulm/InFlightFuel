@@ -67,7 +67,7 @@
     CGRect frame = {0, 0, 0, 0};
     
     frame.origin.x = backgroundFrame.origin.x + backgroundFrame.size.width * SLIDER_X_PCT;
-    frame.origin.y = top + self->text_label_height * 1.5;
+    frame.origin.y = top + self->text_label_height * 2;
     frame.size.height = bottom - top;
     
     frame.size.width = slider.frame.size.width;
