@@ -874,12 +874,14 @@ integerFromValue(NSValue *v)
     [self setValueSubsequentTimer:controller.valueSubsequentTimer];
     [self setValuesDefaults];
     [self saveLastSettings];
-    [controller dismissModalViewControllerAnimated:TRUE];
+    [controller dismissViewControllerAnimated:TRUE
+                                   completion:nil];
 }
 
 - (void)iffInfoViewControllerDidFinish:(iffInfoViewController *)controller
 {
-    [controller dismissModalViewControllerAnimated:TRUE];
+    [controller dismissViewControllerAnimated:TRUE
+                                    completion:nil];
 }
 
 @end

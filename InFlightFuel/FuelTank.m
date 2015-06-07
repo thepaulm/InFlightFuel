@@ -171,7 +171,7 @@
     self.label.enabled = FALSE;
     self.label.text = self.name;
     self.label.font = [UIFont systemFontOfSize:fsize];
-    self.label.textAlignment = UITextAlignmentLeft;
+    self.label.textAlignment = NSTextAlignmentLeft;
     [self addSubview:self.label];
     
     /* Set up the total avail text */
@@ -180,7 +180,7 @@
     self.text.adjustsFontSizeToFitWidth = TRUE;
     self.text.enabled = FALSE;
     self.text.font = [UIFont systemFontOfSize:fsize];
-    self.text.textAlignment = UITextAlignmentLeft;
+    self.text.textAlignment = NSTextAlignmentLeft;
     [self addSubview:self.text];
     
     /* Set up the total diff text */
@@ -189,7 +189,7 @@
     self.tdiff.adjustsFontSizeToFitWidth = TRUE;
     self.tdiff.enabled = FALSE;
     self.tdiff.font = [UIFont systemFontOfSize:fsize];
-    self.tdiff.textAlignment = UITextAlignmentLeft;
+    self.tdiff.textAlignment = NSTextAlignmentLeft;
     [self addSubview:self.tdiff];
     
     [self setMin:self.min];

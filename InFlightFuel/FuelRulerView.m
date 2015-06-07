@@ -115,12 +115,15 @@
  
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetLineWidth(context, 2.0);
-    
-    CGContextSelectFont(context, "Arial", self->font_size, kCGEncodingMacRoman);
+
     CGContextSetTextMatrix(context, CGAffineTransformMakeScale(1.0, -1.0));
-    CGContextShowTextAtPoint(context, self->text_used_offset, self->text_label_height, "Used", 4);
-    CGContextShowTextAtPoint(context, self->text_remaining_offset, self->text_label_height, "Remaining", 9);
-    
+    [@"Used" drawAtPoint:CGPointMake(self->text_used_offset, self->text_label_height)
+          withAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Arial"
+                                                               size:self->font_size]}];
+    [@"Remaining" drawAtPoint:CGPointMake(self->text_remaining_offset, self->text_label_height)
+               withAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Arial"
+                                                                size:self->font_size]}];
+
     /* Make the frame - remove this later */
 #ifdef DO_BORDER
     CGContextMoveToPoint(context, 0,0);
@@ -213,7 +216,6 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
-    CGContextSelectFont(context, "Arial", self->font_size, kCGEncodingMacRoman);
 
     NSArray *v = self.switchOverPoints;
     for (FuelValue *x in v) {
@@ -243,11 +245,12 @@
         /* Keep the NSString around for calls to getCString.  This is how we guarantee
            it to be valid */
         NSString *nss = [x toString];
-        const char *s = [self getCString:nss];
-        CGContextShowTextAtPoint(context, self->text_remaining_offset, locy + 4, s, strlen(s));
+        [nss drawAtPoint:CGPointMake(self->text_remaining_offset, locy + 4)
+                          withAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:self->font_size]}];
+
         nss = [self getUsedFuelString:x];
-        s = [self getCString:nss];
-        CGContextShowTextAtPoint(context, self->text_used_offset, locy + 4, s, strlen(s));
+        [nss drawAtPoint:CGPointMake(self->text_used_offset, locy + 4)
+          withAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:self->font_size]}];
         lasty = locy;
     }
 }
@@ -255,14 +258,13 @@
 -(void)drawProjectedSwitchOverPoints
 {
     int current = self->startedTank;
-    
+
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     CGContextSetStrokeColorWithColor(context, [[UIColor alloc]initWithRed:0.8 green:0.0 blue:0.8 alpha:1.0].CGColor);
     CGContextSetFillColorWithColor(context, [[UIColor alloc]initWithRed:0.0 green:1 blue:1 alpha:1.0].CGColor);
     CGFloat big_font = (int)(self->font_size * 1.3);
-    CGContextSelectFont(context, "Arial", big_font, kCGEncodingMacRoman);
-    
+
     if ([self->switchOverPoints count] % 2 != 0) {
         if (current == 0) {
             current = 1;
@@ -299,11 +301,12 @@
                                      :locy];
         }
         NSString *nss = [x toString];
-        const char *s = [self getCString:nss];
-        CGContextShowTextAtPoint(context, self->text_remaining_offset, locy + 4, s, strlen(s));
+        [nss drawAtPoint:CGPointMake(self->text_remaining_offset, locy + 4)
+          withAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:big_font]}];
+
         nss = [self getUsedFuelString:x];
-        s = [self getCString:nss];
-        CGContextShowTextAtPoint(context, self->text_used_offset, locy + 4, s, strlen(s));
+        [nss drawAtPoint:CGPointMake(self->text_used_offset, locy + 4)
+          withAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:big_font]}];
     }
 }
 
