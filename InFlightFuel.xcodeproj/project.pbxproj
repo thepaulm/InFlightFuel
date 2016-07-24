@@ -11,8 +11,8 @@
 		1A2936501612BFA70079B9E2 /* ifficon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A29364E1612BFA70079B9E2 /* ifficon@2x.png */; };
 		1A2936541612C3E20079B9E2 /* FuelValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A2936531612C3E10079B9E2 /* FuelValue.m */; };
 		1A52F8CB16247A0D00535FAD /* FuelRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A52F8CA16247A0D00535FAD /* FuelRulerView.m */; };
+		1A76710D1D455A360071F0D9 /* wallpaper-cf2-1440x900.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A76710C1D455A360071F0D9 /* wallpaper-cf2-1440x900.png */; };
 		1AA4CB9F163E2C620085B99D /* Iff.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AA4CB9E163E2C620085B99D /* Iff.png */; };
-		1AB51B39160AE6570059953D /* wallpaper-cf2-1440x900.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB51B38160AE6570059953D /* wallpaper-cf2-1440x900.png */; };
 		1AB8438817318BBF0021641C /* FuelSliderLevel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AB8438717318BBF0021641C /* FuelSliderLevel.png */; };
 		1ABEC01F15982B3C00806748 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEC01E15982B3C00806748 /* UIKit.framework */; };
 		1ABEC02115982B3C00806748 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABEC02015982B3C00806748 /* Foundation.framework */; };
@@ -23,7 +23,6 @@
 		1ABEC03215982B3C00806748 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEC03015982B3C00806748 /* MainStoryboard_iPhone.storyboard */; };
 		1ABEC03515982B3C00806748 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEC03315982B3C00806748 /* MainStoryboard_iPad.storyboard */; };
 		1ABEC03815982B3C00806748 /* iffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEC03715982B3C00806748 /* iffViewController.m */; };
-		1AC67019159975B9006939B5 /* DiamondPlate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1AC67018159975B9006939B5 /* DiamondPlate.gif */; };
 		1ACEC46618E792AA002D39D6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEC46518E792A9002D39D6 /* Default-568h@2x.png */; };
 		1AD115BC159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */; };
 		1AD115C1159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */; };
@@ -51,8 +50,8 @@
 		1A2936531612C3E10079B9E2 /* FuelValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuelValue.m; sourceTree = "<group>"; };
 		1A52F8C916247A0D00535FAD /* FuelRulerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuelRulerView.h; sourceTree = "<group>"; };
 		1A52F8CA16247A0D00535FAD /* FuelRulerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuelRulerView.m; sourceTree = "<group>"; };
+		1A76710C1D455A360071F0D9 /* wallpaper-cf2-1440x900.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wallpaper-cf2-1440x900.png"; sourceTree = "<group>"; };
 		1AA4CB9E163E2C620085B99D /* Iff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Iff.png; sourceTree = "<group>"; };
-		1AB51B38160AE6570059953D /* wallpaper-cf2-1440x900.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wallpaper-cf2-1440x900.png"; path = "../../../../Downloads/wallpaper-cf2-1440x900.png"; sourceTree = "<group>"; };
 		1AB8438717318BBF0021641C /* FuelSliderLevel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FuelSliderLevel.png; sourceTree = "<group>"; };
 		1ABEC01A15982B3C00806748 /* InFlightFuel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InFlightFuel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABEC01E15982B3C00806748 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -68,7 +67,6 @@
 		1ABEC03415982B3C00806748 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		1ABEC03615982B3C00806748 /* iffViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iffViewController.h; sourceTree = "<group>"; };
 		1ABEC03715982B3C00806748 /* iffViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iffViewController.m; sourceTree = "<group>"; };
-		1AC67018159975B9006939B5 /* DiamondPlate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = DiamondPlate.gif; sourceTree = "<group>"; };
 		1ACEC46518E792A9002D39D6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg; sourceTree = "<group>"; };
 		1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dark_Brushed_Metal_by_halfthelaw.jpg; sourceTree = "<group>"; };
@@ -148,15 +146,14 @@
 		1ABEC02515982B3C00806748 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1A76710C1D455A360071F0D9 /* wallpaper-cf2-1440x900.png */,
 				1ACEC46518E792A9002D39D6 /* Default-568h@2x.png */,
 				1AB8438717318BBF0021641C /* FuelSliderLevel.png */,
 				1AA4CB9E163E2C620085B99D /* Iff.png */,
 				1A29364D1612BFA70079B9E2 /* ifficon.png */,
 				1A29364E1612BFA70079B9E2 /* ifficon@2x.png */,
-				1AB51B38160AE6570059953D /* wallpaper-cf2-1440x900.png */,
 				1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */,
 				1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */,
-				1AC67018159975B9006939B5 /* DiamondPlate.gif */,
 				1ABEC02615982B3C00806748 /* InFlightFuel-Info.plist */,
 				1ABEC02715982B3C00806748 /* InfoPlist.strings */,
 				1ABEC02A15982B3C00806748 /* main.m */,
@@ -193,8 +190,13 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = iff;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = personal;
+				TargetAttributes = {
+					1ABEC01915982B3C00806748 = {
+						DevelopmentTeam = 5WUWMP3QWB;
+					};
+				};
 			};
 			buildConfigurationList = 1ABEC01415982B3C00806748 /* Build configuration list for PBXProject "InFlightFuel" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -218,13 +220,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A76710D1D455A360071F0D9 /* wallpaper-cf2-1440x900.png in Resources */,
 				1ABEC02915982B3C00806748 /* InfoPlist.strings in Resources */,
 				1ABEC03215982B3C00806748 /* MainStoryboard_iPhone.storyboard in Resources */,
 				1ABEC03515982B3C00806748 /* MainStoryboard_iPad.storyboard in Resources */,
-				1AC67019159975B9006939B5 /* DiamondPlate.gif in Resources */,
 				1AD115BC159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg in Resources */,
 				1AD115C1159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg in Resources */,
-				1AB51B39160AE6570059953D /* wallpaper-cf2-1440x900.png in Resources */,
 				1A29364F1612BFA70079B9E2 /* ifficon.png in Resources */,
 				1A2936501612BFA70079B9E2 /* ifficon@2x.png in Resources */,
 				1AA4CB9F163E2C620085B99D /* Iff.png in Resources */,
@@ -297,6 +298,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Paul MIKESELL (6C725373YU)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -362,11 +364,15 @@
 		1ABEC03C15982B3C00806748 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InFlightFuel/InFlightFuel-Prefix.pch";
 				INFOPLIST_FILE = "InFlightFuel/InFlightFuel-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "paulm.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -376,11 +382,15 @@
 		1ABEC03D15982B3C00806748 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InFlightFuel/InFlightFuel-Prefix.pch";
 				INFOPLIST_FILE = "InFlightFuel/InFlightFuel-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "paulm.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
