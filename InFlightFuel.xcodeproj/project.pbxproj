@@ -23,6 +23,7 @@
 		1ABEC03215982B3C00806748 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEC03015982B3C00806748 /* MainStoryboard_iPhone.storyboard */; };
 		1ABEC03515982B3C00806748 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ABEC03315982B3C00806748 /* MainStoryboard_iPad.storyboard */; };
 		1ABEC03815982B3C00806748 /* iffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABEC03715982B3C00806748 /* iffViewController.m */; };
+		1ACD8F821D4594DD007F88F5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ACD8F811D4594DD007F88F5 /* Images.xcassets */; };
 		1ACEC46618E792AA002D39D6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ACEC46518E792A9002D39D6 /* Default-568h@2x.png */; };
 		1AD115BC159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */; };
 		1AD115C1159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */; };
@@ -67,6 +68,7 @@
 		1ABEC03415982B3C00806748 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		1ABEC03615982B3C00806748 /* iffViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iffViewController.h; sourceTree = "<group>"; };
 		1ABEC03715982B3C00806748 /* iffViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iffViewController.m; sourceTree = "<group>"; };
+		1ACD8F811D4594DD007F88F5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1ACEC46518E792A9002D39D6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		1AD115BB159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg; sourceTree = "<group>"; };
 		1AD115C0159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Dark_Brushed_Metal_by_halfthelaw.jpg; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				1ABEC03715982B3C00806748 /* iffViewController.m */,
 				1ADD4B4115B127A9000A083B /* FuelTank.h */,
 				1ADD4B4215B127A9000A083B /* FuelTank.m */,
+				1ACD8F811D4594DD007F88F5 /* Images.xcassets */,
 				1ABEC02515982B3C00806748 /* Supporting Files */,
 			);
 			path = InFlightFuel;
@@ -225,6 +228,7 @@
 				1ABEC03215982B3C00806748 /* MainStoryboard_iPhone.storyboard in Resources */,
 				1ABEC03515982B3C00806748 /* MainStoryboard_iPad.storyboard in Resources */,
 				1AD115BC159D78B60021347C /* Avanti_Sandalwood_Neutral_Faux_Grained_Leather.jpg in Resources */,
+				1ACD8F821D4594DD007F88F5 /* Images.xcassets in Resources */,
 				1AD115C1159D7B560021347C /* Dark_Brushed_Metal_by_halfthelaw.jpg in Resources */,
 				1A29364F1612BFA70079B9E2 /* ifficon.png in Resources */,
 				1A2936501612BFA70079B9E2 /* ifficon@2x.png in Resources */,
@@ -364,7 +368,9 @@
 		1ABEC03C15982B3C00806748 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InFlightFuel/InFlightFuel-Prefix.pch";
@@ -382,7 +388,9 @@
 		1ABEC03D15982B3C00806748 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InFlightFuel/InFlightFuel-Prefix.pch";
